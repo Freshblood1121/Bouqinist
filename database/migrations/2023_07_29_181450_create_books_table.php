@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\BooksStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,13 +13,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->string('title', 255);
-            $table->text('description')->nullable();
+            $table->uuid('id')->primary();
+            $table->string('title', 191);
+            $table->string('author', 191);
+            $table->text('company');
             $table->integer('age');
-            $table->string('author', 255);
-            $table->text('publishing');
-            $table->integer('category_id');
+            $table->enum('status', BooksStatus::all());
+            $table->text('image');
             $table->timestamps();
         });
     }
