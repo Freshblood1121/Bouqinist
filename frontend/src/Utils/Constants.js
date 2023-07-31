@@ -1,5 +1,5 @@
 export const API_URL = {
-  BOOKS: "http://127.0.0.1:8000/backend/v1/all",
+  BOOKS: "http://bouqinist/backend/v1/all",
 };
 
 export const REQUEST_STATUS = {
