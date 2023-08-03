@@ -17,6 +17,6 @@ class Book extends Model
         'company',
         'description',
         'age',
-        'image'
+        'image',
     ];
 }
