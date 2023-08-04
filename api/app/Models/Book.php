@@ -18,5 +18,8 @@ class Book extends Model
         'description',
         'age',
         'image',
+        'price',
+        'created_at',
+        'updated_at',
     ];
 }
