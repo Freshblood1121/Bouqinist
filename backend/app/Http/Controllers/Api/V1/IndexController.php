@@ -13,13 +13,13 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index(): BookResource
+    public function index()
     {
-        return new BookResource(Book::query()->orderByDesc('updated_at')->first());
+        return BookResource(Book::query()->orderByDesc('updated_at')->first());
     }
 
-    public function all(): BookCollection
+    public function all()
     {
-        return new BookCollection(Book::all());
+        return Book::all();
     }
 }
