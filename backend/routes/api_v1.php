@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\IndexController;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -25,3 +26,9 @@ Route::get('/', [IndexController::class, 'index'])
 Route::get('/all', [IndexController::class, 'all'])
     ->name('all');
 
+
+Route::get('/categories', [CategoryController::class, 'index'])
+    ->name('categories');
+
+Route::get('/categories/{id}', [CategoryController::class, 'oneCategory'])
+    ->name('oneCategory');
