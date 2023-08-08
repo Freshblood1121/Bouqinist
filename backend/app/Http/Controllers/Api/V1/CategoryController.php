@@ -12,14 +12,16 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all()->toJson();
+        $categories = Category::all()
+            ->toJson();
         dd($categories);
     }
 
     public function oneCategory($id) {
         $category = Book::query()
             ->where('category_id', $id)
-            ->get();
+            ->get()
+            ->toJson();
 
         dd($category);
     }
