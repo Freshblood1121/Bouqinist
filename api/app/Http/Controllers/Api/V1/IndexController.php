@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BookCollection;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
+use Illuminate\Database\Eloquent\Collection;
 
 class IndexController extends Controller
 {
@@ -14,8 +15,8 @@ class IndexController extends Controller
         return BookResource(Book::query()->orderByDesc('updated_at')->first());
     }
 
-    public function all()
+    public function all(): string
     {
-        return Book::all();
+        return Book::all()->toJson();
     }
 }
