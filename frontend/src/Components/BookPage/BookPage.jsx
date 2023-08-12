@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 const BookPage = () => {
-  const { bookId } = useParams();
+  const { itemId } = useParams();
   const books = useSelector((store) => store.books.books);
-  const book = books.find((item) => item.id == bookId);
+  const book = books.find((item) => item.id == itemId);
+
+  console.log(book);
 
   return (
     <Grid className="books-item" container padding={2} marginBottom={1}>

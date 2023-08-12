@@ -1,0 +1,31 @@
+.header__nav {
+  display: flex;
+  height: 22px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  align-items: center;
+  column-gap: 25px;
+}
+
+.header__nav-item {
+  list-style: none;
+}
+
+.header__nav-item > img {
+  display: block;
+}
+
+.header__nav-item:last-child {
+  margin-right: 0;
+}
+
+.nav__cart_img {
+  height: 25px;
+}
+
+.nav__user_img {
+  height: 25px;
+}

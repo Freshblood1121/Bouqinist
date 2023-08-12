@@ -9,7 +9,7 @@ import {
 import ErrorPage from "./ErrorPage/ErrorPage";
 import Header from "./Header/Header";
 import Layout from "./Layout";
-import Books from "./Books/Books";
+import MainPage from "./MainPage/MainPage";
 import BookPage from "./BookPage/BookPage";
 
 const Router = createBrowserRouter([
@@ -23,10 +23,10 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Books />,
+        element: <MainPage />,
       },
       {
-        path: "/books/:bookId?",
+        path: "/items/:itemId?",
         element: <BookPage />,
       },
     ],

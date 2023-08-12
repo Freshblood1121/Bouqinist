@@ -1,50 +1,41 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+import Logo from "../Logo/Logo";
+import "./Footer.css";
+import Divider from "../Divider/Divider";
 
-const Copyright = () => {
+const Footer = () => {
   return (
-    <Typography variant="body2" color="white" align="center">
-      {"Copyright © "}
-      <Link color="#fff" underline="none" href="/">
-        Bouqinist
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <footer className="footer">
+      <Divider />
+      <Logo />
+      <div className="footer_center">
+        <div className="footer_social1">
+          <img
+            className="footer_social1_img"
+            src="/img/telegram.svg"
+            alt="telegram"
+          />
+        </div>
+        <div className="footer_social2">
+          <img className="footer_social2_img" src="/img/git.svg" alt="git" />
+        </div>
+        <div className="footer_social3">
+          <img
+            className="footer_social3_img"
+            src="/img/email.svg"
+            alt="email"
+          />
+        </div>
+      </div>
+      <div className="footer_right">
+        <span>by Bouqinist Team</span>
+      </div>
+    </footer>
   );
-};
-
-function Footer(props) {
-  const { description, title } = props;
-
-  return (
-    <Box component="footer" sx={{ bgcolor: "#0c131d", py: 6 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h6" align="center" color="white" gutterBottom>
-          {title}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-          color="white"
-        >
-          {description}
-        </Typography>
-        <Copyright />
-      </Container>
-    </Box>
-  );
-}
-
-Footer.propTypes = {
-  description: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 export default Footer;
