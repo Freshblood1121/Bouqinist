@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\IndexController;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -19,9 +20,15 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::get('/', [IndexController::class, 'index'])
+Route::get('/{id}', [IndexController::class, 'index'])
     ->name('index');
 
 Route::get('/all', [IndexController::class, 'all'])
     ->name('all');
 
+
+Route::get('/categories', [CategoryController::class, 'index'])
+    ->name('categories');
+
+Route::get('/categories/{category_id}', [CategoryController::class, 'oneCategory'])
+    ->name('oneCategory');
