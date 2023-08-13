@@ -13,20 +13,20 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index($id = '	
-2d31dc28-a471-303f-b187-a21bf7ae22bf')
+    public function index($id)
     {
-        $one = Book::query()
+        return Book::query()
             ->where('id', $id)
             ->get()
             ->toJson();
-        dd($one);
+
     }
 
     public function all()
     {
-        $all = Book::all()
+        return Book::all()
+            ->get()
             ->toJson();
-        dd($all);
+
     }
 }
