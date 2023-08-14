@@ -230,6 +230,7 @@
       <path value="$PROJECT_DIR$/backend/vendor/phpunit/php-text-template" />
       <path value="$PROJECT_DIR$/backend/vendor/phpunit/phpunit" />
       <path value="$PROJECT_DIR$/backend/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/api/vendor/laravel/prompts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
