@@ -39,7 +39,3 @@ next-env.d.ts
 .idea
 
 /.idea
-
-/api
-
-/backend
