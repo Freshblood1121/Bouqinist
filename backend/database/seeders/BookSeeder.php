@@ -25,9 +25,10 @@ class BookSeeder extends Seeder
             $data[] = [
                 'id' => fake()->uuid(),
                 'title' => fake()->jobTitle(),
+                'category_id' => 2,
                 'author' => fake()->name(),
                 'company' => fake()->company(),
-                'description'=> fake()->text(100),
+                'description' => fake()->text(100),
                 'age' => fake()->year(),
                 'status' => BooksStatus::MEDIUM->value,
                 'image' => fake()->imageUrl(),
