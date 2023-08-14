@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index(): string
     {
-        $categories = Category::all()->toJson();
-        return $categories;
+        return Category::all()->toJson();
     }
 
     /**
