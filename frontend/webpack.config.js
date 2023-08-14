@@ -21,6 +21,7 @@ const config = {
     open: true,
     host: "localhost",
     historyApiFallback: true,
+    port: 8081,
     client: {
       progress: true,
     },
@@ -61,10 +62,14 @@ const config = {
         use: [stylesHandler, "css-loader"],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+        test: /\.(eot|svg|ttf|woff|woff2|otf|png|jpg|gif)$/i,
         type: "asset",
       },
       { test: /\.md$/i, use: ["html-loader", "markdown-loader"] },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
     ],
   },
 };

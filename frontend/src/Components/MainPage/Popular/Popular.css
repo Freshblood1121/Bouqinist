@@ -1,0 +1,76 @@
+.popular {
+  margin-top: 170px;
+  padding: 0 15px;
+}
+
+.popular_h2 {
+  color: var(--gray-800, #3d3c3c);
+  text-align: center;
+  font-family: "Doloman Pavljenko", "Golos UI", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.popular-cards {
+  margin-top: 43px;
+  border-radius: 20px;
+  border: 2px dashed var(--gray-800, #3d3c3c);
+  padding: 50px 10%;
+  height: calc(max-content + 10%);
+  position: relative;
+}
+
+@media screen and (min-width: 600px) {
+  .popular-cards {
+    padding: 70px 10%;
+  }
+}
+
+.popular-cards__slide-prev,
+.popular-cards__slide-next {
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  bottom: auto;
+  z-index: 10;
+  background: transparent;
+  border: 0;
+  appearance: none;
+}
+
+.popular-cards__slide-prev {
+  left: 5%;
+}
+
+.popular-cards__slide-next {
+  right: 5%;
+}
+
+.popular-cards__slide-prev img,
+.popular-cards__slide-next img {
+  display: block;
+}
+
+.popular_card {
+  min-width: 200px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.popular_cover {
+  height: 100%;
+  width: 193px;
+}
+
+.swiper-button-next {
+  color: red;
+}
+.swiper-button-prev {
+  color: red;
+}

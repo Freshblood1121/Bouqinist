@@ -1,0 +1,98 @@
+.ctl__categ {
+  padding-bottom: 125px;
+}
+
+.ctl__categ_title {
+  padding-left: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+  gap: 12px;
+  padding-bottom: 65px;
+}
+
+.ctl__categ_title > img {
+  width: 26px;
+  height: 22.75px;
+}
+
+.ctl__categ_title > span {
+  color: var(--gray-800, #3d3c3c);
+  font-family: "Doloman Pavljenko", "Golos UI", sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.splide {
+  position: relative;
+  overflow: hidden;
+}
+
+.splide__slide {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .splide_slide {
+    display: block;
+  }
+}
+
+.splide__pagination {
+  display: none !important;
+}
+
+.splide__arrows {
+  padding: 5px 0;
+  display: block;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  /* top: calc(50% - 20px); */
+  bottom: 0;
+}
+
+.splide__arrow {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  outline: none;
+  background-color: white;
+  border: 2px solid #3d3c3c;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.12);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.splide__arrow--prev {
+  left: 5px;
+  top: -170px;
+}
+
+.splide__arrow--next {
+  right: 5px;
+  top: -170px;
+}
+
+.splide__arrow:hover {
+  background-color: var(--yellow-500, rgb(253, 191, 15));
+  box-shadow: 0 1px 8px rgba(253, 191, 15, 0.06),
+    0 2px 4px rgba(253, 191, 15, 0.12);
+}
+
+.splide__arrow:hover {
+  background-color: var(--yellow-500, rgb(253, 191, 15));
+  box-shadow: 0 1px 8px rgba(253, 191, 15, 0.06),
+    0 2px 4px rgba(253, 191, 15, 0.12);
+}

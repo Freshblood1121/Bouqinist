@@ -1,0 +1,10 @@
+.ctl {
+  margin: 0;
+  padding: 0;
+}
+
+.ctl__cards {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 30px;
+}
