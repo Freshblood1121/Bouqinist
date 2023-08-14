@@ -13,22 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
+| be assigned to the "backend" middleware group. Make something great!
 |
 */
 //
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::get('/', [IndexController::class, 'index'])
-    ->name('index');
 
-Route::get('/all', [IndexController::class, 'all'])
-    ->name('all');
+Route::get('/', [IndexController::class, 'all'])
+    ->middleware('api');
+
+Route::get('/{id}', [IndexController::class, 'one'])
+    ->middleware('api');
 
 
 Route::get('/categories', [CategoryController::class, 'index'])
-    ->name('categories');
+    ->middleware('api');
 
-Route::get('/categories/{id}', [CategoryController::class, 'oneCategory'])
-    ->name('oneCategory');
+Route::get('/categories/{category_id}', [CategoryController::class, 'oneCategory'])
+    ->middleware('api');
