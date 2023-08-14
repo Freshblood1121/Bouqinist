@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import GolosUI from "./fonts/Golos-UI_Regular.ttf";
+import { palette } from "./Utils/Constants";
 
 const golosUI = {
   fontFamily: "Golos UI",
@@ -11,8 +12,6 @@ const golosUI = {
     local("Golos UI"),
     url(${GolosUI}) format("truetype")
   `,
-  // unicodeRange:
-  //   "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF",
 };
 
 const theme = createTheme({
@@ -29,7 +28,6 @@ const theme = createTheme({
       dark: "#fc9d09",
     },
     success: { main: "#00A878", light: "#9adbc1", dark: "#076446" },
-    standard: { main: "#3D3C3C" },
   },
   typography: {
     fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
@@ -44,6 +42,11 @@ const theme = createTheme({
         fontSize: 52,
       },
       fontFamily: ["Golos UI", "sans-serif"].join(","),
+    },
+    h2: {
+      fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
+      fontSize: 36,
+      color: `${palette.basic}`,
     },
     subtitle1: {
       fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
@@ -96,7 +99,6 @@ const theme = createTheme({
           borderRadius: "20px",
           border: "2px solid var(--TextField-brandBorderColor)",
           boxShadow: "3px 15px 0px 0px #FDBF0F",
-          // Для соответствия макету нужно брать высоту компонента из макета и добавлять 9px
           height: "57px",
           transition:
             "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
@@ -123,89 +125,6 @@ const theme = createTheme({
           color: "#3D3C3C",
         },
       },
-    },
-    MuiButton: {
-      variants: [
-        {
-          props: { variant: "category" },
-          style: {
-            height: "80px",
-            borderRadius: "10px",
-            border: "2px solid #3d3c3c",
-            background: "#fff",
-            boxShadow: "9px 15px 0px 0px #f9784b",
-            textAlign: "center",
-            padding: "0",
-            color: "#3d3c3c",
-            fontSize: "24px",
-            lineHeight: "normal",
-            width: "calc(100% - 9px)",
-            textTransform: "none",
-            transition:
-              "background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-            "&:hover": {
-              boxShadow: "9px 15px 0px 0px #fdbe0f",
-              backgroundColor: "#fff",
-            },
-          },
-        },
-      ],
-    },
-    MuiIconButton: {
-      variants: [
-        {
-          props: { variant: "favourite", color: "secondary" },
-          style: {
-            width: "57px",
-            height: "46px",
-            borderRadius: "20px",
-            border: "2px solid var(--gray-800, #3d3c3c)",
-            padding: "14px 22px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "#fff",
-            color: "var(--gray-800, #3d3c3c)",
-            transition:
-              "background 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-            "&:hover": {
-              background: "#3AB8EB",
-              color: "#fff",
-            },
-            "&:hover > svg > svg": {
-              stroke: "#fff",
-            },
-            "& > svg > svg": {
-              transition: "stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-            },
-          },
-        },
-        {
-          props: { variant: "buy", color: "secondary" },
-          style: {
-            height: "46px",
-            borderRadius: "20px",
-            border: "2px solid var(--gray-800, #3d3c3c)",
-            padding: "10px 5px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "var(--yellow-500, #fdbf0f)",
-            color: "var(--gray-800, #3d3c3c)",
-            transition: "background 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-            "&:hover": {
-              background: "#3AB8EB",
-              color: "#fff",
-            },
-            "&:hover > svg > svg": {
-              stroke: "#fff",
-            },
-            "& > svg > svg": {
-              transition: "stroke 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-            },
-          },
-        },
-      ],
     },
   },
 });

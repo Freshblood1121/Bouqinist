@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Logo from "../Logo/Logo";
-import Navigation from "./Navigation/Navigation";
+import HeaderNavigation from "./HeaderNavigation/HeaderNavigation";
 import "./Header.css";
 import { Container } from "@mui/material";
 
@@ -11,7 +11,7 @@ const Header = () => {
     <Container maxWidth="lg">
       <header className="header">
         <Logo />
-        <Navigation />
+        <HeaderNavigation />
       </header>
     </Container>
   );

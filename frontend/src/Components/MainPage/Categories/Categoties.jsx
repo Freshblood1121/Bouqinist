@@ -1,7 +1,7 @@
 import React from "react";
 import "./Categories.css";
-import CategoriesButton from "./CategoriesButton/CategoriesButton";
 import { Button, Grid } from "@mui/material";
+import CategoryButton from "../../UI/CategoryButton";
 
 const Categories = () => {
   const categories = [
@@ -25,7 +25,7 @@ const Categories = () => {
           {categories.map((category, index) => {
             return (
               <Grid key={index} item xs={12} sm={6} lg={4}>
-                <CategoriesButton data={category} />
+                <CategoryButton>{category}</CategoryButton>
               </Grid>
             );
           })}

@@ -4,12 +4,12 @@ import "./CatalogSection.css";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
 
-const CatalogSection = ({ books }) => {
+const CatalogSection = ({ books, category }) => {
   return (
     <div className="ctl__categ">
       <div className="ctl__categ_title">
         <img src="./img/path.svg" alt="path" />
-        <span>Художественные</span>
+        <span>{category}</span>
       </div>
       <div className="ctl__cards">
         <Splide

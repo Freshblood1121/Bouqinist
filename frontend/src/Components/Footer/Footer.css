@@ -7,40 +7,11 @@
   padding: 0 0 45px;
 }
 
-.footer_social1,
-.footer_social2,
-.footer_social3 {
-  border-width: 2px;
-  border-style: solid;
-  border-color: #676767;
-  width: 53px;
-  height: 53px;
-  text-align: center;
-  padding-top: 10px;
-  border-radius: 50px 50px 50px 50px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: #676767;
-  width: 53px;
-  height: 53px;
-  text-align: center;
-  padding-top: 10px;
-  border-radius: 50px 50px 50px 50px;
-  box-shadow: 5px 5px 1px 1px #3ab8eb;
-}
-
 .footer_center {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
-}
-
-.footer_social1_img,
-.footer_social2_img,
-.footer_social3_img {
-  width: 25px;
-  height: 25px;
 }
 
 .footer_right {
@@ -50,18 +21,6 @@
   font-weight: 400;
   line-height: normal;
 }
-
-/* .footer__logo {
-  height: 22px;
-  display: flex;
-  flex-direction: row;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-  align-items: center;
-} */
 
 .footer__bookopen_img {
   margin-right: 12px;

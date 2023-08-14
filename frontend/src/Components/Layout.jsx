@@ -25,7 +25,9 @@ const Layout = () => {
           <Outlet />
         </Box>
         <Box sx={{ marginTop: "auto" }}>
-          <Footer />
+          <Container maxWidth="lg">
+            <Footer />
+          </Container>
         </Box>
       </Box>
     </ThemeProvider>

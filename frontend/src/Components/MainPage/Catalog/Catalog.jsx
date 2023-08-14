@@ -24,7 +24,7 @@ const Catalog = () => {
   return (
     <div className="ctl">
       {categories.map((category, index) => (
-        <CatalogSection key={index} books={items} />
+        <CatalogSection key={index} books={items} category={category} />
       ))}
     </div>
   );
