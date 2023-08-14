@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
+
+.header__logo {
+  height: 22px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  align-items: center;
+}
+
+.header__bookopen_img {
+  margin-right: 12px;
+  height: 22px;
+}
+
+.header__logo_text {
+  font-family: "Unica One", "Golos UI", sans-serif;
+  font-size: 20px;
+  color: var(--gray-800, #3d3c3c);
+}
