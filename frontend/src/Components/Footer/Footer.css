@@ -1,0 +1,40 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  row-gap: 45px;
+  padding: 0 0 45px;
+}
+
+.footer_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer_right {
+  color: var(--gray-600, #676767);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.footer__bookopen_img {
+  margin-right: 12px;
+  height: 22px;
+}
+
+.footer__logo_text {
+  font-family: "Unica One", "Golos UI", sans-serif;
+  font-size: 20px;
+  color: var(--gray-800, #3d3c3c);
+}
+
+.footer-divider {
+  height: 0px;
+  border: 1px dashed #767676;
+  width: 100%;
+}
