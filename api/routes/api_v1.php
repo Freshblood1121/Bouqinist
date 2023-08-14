@@ -20,15 +20,16 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::get('/{id}', [IndexController::class, 'index'])
-    ->name('index');
 
-Route::get('/all', [IndexController::class, 'all'])
-    ->name('all');
+Route::get('/', [IndexController::class, 'all'])
+    ->middleware('api');
+
+Route::get('/{id}', [IndexController::class, 'one'])
+    ->middleware('api');
 
 
 Route::get('/categories', [CategoryController::class, 'index'])
-    ->name('categories');
+    ->middleware('api');
 
 Route::get('/categories/{category_id}', [CategoryController::class, 'oneCategory'])
-    ->name('oneCategory');
+    ->middleware('api');

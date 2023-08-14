@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function index($id)
+    public function one($id)
     {
         return Book::query()
             ->where('id', $id)
@@ -25,7 +25,6 @@ class IndexController extends Controller
     public function all()
     {
         return Book::all()
-            ->get()
             ->toJson();
 
     }
