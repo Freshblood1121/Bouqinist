@@ -21,5 +21,6 @@ class Book extends Model
         'price',
         'created_at',
         'updated_at',
+        'category_id'
     ];
 }
