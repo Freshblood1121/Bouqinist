@@ -23,11 +23,8 @@ class CategoryController extends Controller
      * @return void
      */
     public function oneCategory($id) {
-        $category = Book::query()
-            ->where('category_id', $id)
-            ->get()
-            ->toJson();
-
+        return Book::all()
+            ->where('category_id', $id);
     }
 
 }
