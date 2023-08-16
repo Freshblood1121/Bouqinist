@@ -28,13 +28,6 @@ class CategoryController extends Controller
             ->get()
             ->toJson();
 
-        // public function oneCategory(09e83531-1428-3025-8c51-49f6e12503f3) {
-        //        $category = CategoryHasBooks::query()
-        //                       ->where('category_id', 09e83531-1428-3025-8c51-49f6e12503f3)
-        //                       ->get()
-        //                       ->toJson();
-
-        dd($category);
     }
 
 }

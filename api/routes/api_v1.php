@@ -28,8 +28,8 @@ Route::get('/{id}', [IndexController::class, 'one'])
     ->middleware('api');
 
 
-Route::get('/categories', [CategoryController::class, 'index'])
+Route::get('/categories/all', [CategoryController::class, 'index'])
     ->middleware('api');
 
-Route::get('/categories/{category_id}', [CategoryController::class, 'oneCategory'])
+Route::get('/categories/one/{category_id}', [CategoryController::class, 'oneCategory'])
     ->middleware('api');
