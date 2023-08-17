@@ -53,8 +53,9 @@ const CatalogSection = ({ books, category }) => {
           }}
         >
           <SplideTrack>
-            {books.map((book) => (
-              <SplideSlide key={book.id}>
+            {books.map((book, index) => (
+              // <SplideSlide key={book.id}> - После добавления уникальных id поменять значение key на book.id
+              <SplideSlide key={index}>
                 <CatalogCard item={book} />
               </SplideSlide>
             ))}

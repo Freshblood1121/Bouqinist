@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Categories.css";
 import { Button, Grid } from "@mui/material";
 import CategoryButton from "../../UI/CategoryButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../../Store/categories/actions";
 
 const Categories = () => {
-  const categories = [
-    "Художественные",
-    "Научно-популярные",
-    "Научные",
-    "Справочные",
-    "Учебные",
-    "Полиграфия",
-  ];
+  // const categories = [
+  //   "Художественные",
+  //   "Научно-популярные",
+  //   "Научные",
+  //   "Справочные",
+  //   "Учебные",
+  //   "Полиграфия",
+  // ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getCategories(dispatch);
+  }, []);
+
+  const categories = useSelector((store) => store.categories.categories);
 
   return (
     <div className="ctgs">
@@ -25,7 +33,7 @@ const Categories = () => {
           {categories.map((category, index) => {
             return (
               <Grid key={index} item xs={12} sm={6} lg={4}>
-                <CategoryButton>{category}</CategoryButton>
+                <CategoryButton>{category.title}</CategoryButton>
               </Grid>
             );
           })}

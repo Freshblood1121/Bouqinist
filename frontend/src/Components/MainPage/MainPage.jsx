@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getBooksData } from "../../Store/books/actions";
 import { useEffect } from "react";
 import Popular from "./Popular/Popular";
-import Categories from "./Categories/Categoties";
+import Categories from "./Categories/Categories";
 import Catalog from "./Catalog/Catalog";
 import { Box, Container, ThemeProvider } from "@mui/material";
 
