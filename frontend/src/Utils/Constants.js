@@ -1,7 +1,8 @@
 import { useMediaQuery } from "@mui/material";
 
 export const API_URL = {
-  BOOKS: "http://bouqinist/backend/v1/all",
+  BOOKS: "http://bouqinist/api/v1",
+  CATEGORIES: "http://bouqinist/api/v1/categories/all",
 };
 
 export const REQUEST_STATUS = {
