@@ -13,19 +13,17 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function one($id)
-    {
-        return Book::query()
-            ->where('id', $id)
-            ->get()
-            ->toJson();
-
-    }
-
-    public function all()
-    {
-        return Book::all()
-            ->toJson();
-
-    }
+//    public function index($id)
+//    {
+////        return Book::query()
+////            ->where('id', $id)
+////            ->get()
+////            ->toJson();
+//        return Book::find($id);
+//    }
+//
+//    public function all(): string
+//    {
+//        return Book::all()->toJson();
+//    }
 }

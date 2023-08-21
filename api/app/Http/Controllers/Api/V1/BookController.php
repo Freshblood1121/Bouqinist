@@ -7,31 +7,27 @@ use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 
-
-class CategoryController extends Controller
+class BookController extends Controller
 {
-
     /**
      * @param $id
      * @return string
      */
     public function index($id): string
     {
-        return Category::find($id);
+        return Book::find($id);
     }
 
-    /**
-     * @return Collection
-     */
     public function all(): Collection
     {
-        return Category::all();
+        return Book::all();
     }
 
-    public function hasBook($categoryId)
+    public function hasCategory($bookId)
     {
-        $category = Category::find($categoryId);
-        return $category->books;
+        $book = Book::find($bookId);
+        dd($book->categories);
+         //return $book->categories
     }
 
 }
