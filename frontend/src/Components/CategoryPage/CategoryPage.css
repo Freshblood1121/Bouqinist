@@ -1,0 +1,45 @@
+.ctg__controls {
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ctg__main {
+  margin-top: 35px;
+  display: grid;
+  grid-template-areas:
+    "nav"
+    "cards";
+  grid-template-columns: 1fr;
+  column-gap: 25px;
+}
+
+@media screen and (min-width: 600px) {
+  .ctg__controls {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .ctg__main {
+    grid-template-areas: "nav cards";
+    grid-template-columns: 200px 1fr;
+  }
+}
+
+.ctg__filters {
+  grid-area: nav;
+  margin-bottom: 65px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+
+.category__cards {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 200px);
+  grid-area: cards;
+  column-gap: 50px;
+  row-gap: 35px;
+}

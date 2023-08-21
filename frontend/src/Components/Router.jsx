@@ -10,7 +10,8 @@ import ErrorPage from "./ErrorPage/ErrorPage";
 import Header from "./Header/Header";
 import Layout from "./Layout";
 import MainPage from "./MainPage/MainPage";
-import BookPage from "./BookPage/BookPage";
+import AdvertismentPage from "./AdvertismentPage/AdvertismentPage";
+import CategoryPage from "./CategoryPage/CategoryPage";
 
 const Router = createBrowserRouter([
   {
@@ -27,7 +28,11 @@ const Router = createBrowserRouter([
       },
       {
         path: "/items/:itemId?",
-        element: <BookPage />,
+        element: <AdvertismentPage />,
+      },
+      {
+        path: "/category-page",
+        element: <CategoryPage />,
       },
     ],
   },

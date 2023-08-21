@@ -11,8 +11,6 @@ const BookPage = () => {
   const books = useSelector((store) => store.books.books);
   const book = books.find((item) => item.id == itemId);
 
-  console.log(book);
-
   return (
     <Container maxWidth="lg">
       <Grid

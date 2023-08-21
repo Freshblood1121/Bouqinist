@@ -1,0 +1,21 @@
+.publish-period__inputs {
+  display: flex;
+  flex-direction: row;
+}
+
+.price__inputs {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (min-width: 900px) {
+  .publish-period__inputs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price__inputs {
+    display: flex;
+    flex-direction: column;
+  }
+}
