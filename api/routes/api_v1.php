@@ -21,11 +21,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get('/', [IndexController::class, 'all'])
-    ->middleware('api');
-
-Route::get('/{id}', [IndexController::class, 'one'])
-    ->middleware('api');
 
 Route::get('/allbooks', [IndexController::class, 'allbooks'])
     ->middleware('api');
@@ -34,4 +29,10 @@ Route::get('/categories', [CategoryController::class, 'index'])
     ->middleware('api');
 
 Route::get('/categories/{category_id}', [CategoryController::class, 'oneCategory'])
+    ->middleware('api');
+
+Route::get('/', [IndexController::class, 'all'])
+    ->middleware('api');
+
+Route::get('/{id}', [IndexController::class, 'one'])
     ->middleware('api');
