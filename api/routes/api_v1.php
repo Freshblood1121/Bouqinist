@@ -27,6 +27,8 @@ Route::get('/', [IndexController::class, 'all'])
 Route::get('/{id}', [IndexController::class, 'one'])
     ->middleware('api');
 
+Route::get('/allbooks', [IndexController::class, 'allbooks'])
+    ->middleware('api');
 
 Route::get('/categories', [CategoryController::class, 'index'])
     ->middleware('api');
