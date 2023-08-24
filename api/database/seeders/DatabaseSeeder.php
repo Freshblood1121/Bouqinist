@@ -13,10 +13,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            BookSeeder::class,
-            CategorySeeder::class,
-// TODO Доделать посевы связей книг и категорий
-// TODO           BookHasCategorySeeder::class,
+//            BookSeeder::class,
+//            CategorySeeder::class,
+            UserSeeder::class,
+// Доделать посевы связей книг и категорий
+//            BookHasCategorySeeder::class,
         ]);
     }
 }
