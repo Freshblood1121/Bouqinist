@@ -1,21 +1,15 @@
 import { REQUEST_STATUS } from "../../Utils/Constants";
-import {
-  getBook,
-  GET_BOOK,
-  DATA_REQUEST,
-  DATA_SUCCESS,
-  DATA_ERROR,
-} from "./actions";
+import { DATA_REQUEST, DATA_SUCCESS, DATA_ERROR } from "./actions";
 
 const initialState = {
-  books: [],
+  categories: [],
   requestStatus: {
     status: REQUEST_STATUS.IDLE,
     error: "",
   },
 };
 
-export const booksReducer = (state = initialState, action) => {
+export const categoriesReducer = (state = initialState, action) => {
   switch (action.type) {
     case DATA_REQUEST: {
       return {
@@ -29,7 +23,7 @@ export const booksReducer = (state = initialState, action) => {
     case DATA_SUCCESS: {
       return {
         ...state,
-        books: [...action.data],
+        categories: [...action.data],
         requestStatus: {
           status: REQUEST_STATUS.SUCCESS,
           error: "",

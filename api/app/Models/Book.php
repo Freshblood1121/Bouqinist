@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
-    use Uuids;
     use HasFactory;
+    use Uuids;
 
     protected $fillable = [
         'title',
@@ -23,4 +25,10 @@ class Book extends Model
         'updated_at',
         'category_id'
     ];
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'books_has_categories');
+    }
+
 }

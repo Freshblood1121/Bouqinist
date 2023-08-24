@@ -12,9 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(
-            // BookSeeder::class,
-           CategorySeeder::class,
-        );
+        $this->call([
+            BookSeeder::class,
+            CategorySeeder::class,
+// Доделать посевы связей книг и категорий
+//            BookHasCategorySeeder::class,
+        ]);
     }
 }

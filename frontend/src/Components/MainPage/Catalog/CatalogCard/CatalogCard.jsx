@@ -22,7 +22,9 @@ const CatalogCard = ({ item }) => {
       </Link>
       <div className="ctl__card_price_wrap">
         <div className="ctl__card_price">
-          <span>&#8381;100 000.00</span>
+          <span>
+            &#8381;&nbsp;{Intl.NumberFormat("ru-RU").format(item.price)}
+          </span>
         </div>
         <FavourButton></FavourButton>
       </div>

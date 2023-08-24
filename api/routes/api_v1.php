@@ -1,35 +1,33 @@
 <?php
 
+use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
-use App\Http\Controllers\Api\V1\IndexController;
-use App\Models\Book;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "backend" middleware group. Make something great!
-|
-*/
 //
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+//Route::get('/', [IndexController::class, 'all'])
+//    ->middleware('api');
 
-Route::get('/', [IndexController::class, 'all'])
+//Получить все книги
+Route::get('/books', [BookController::class, 'all'])
     ->middleware('api');
 
-Route::get('/{id}', [IndexController::class, 'one'])
+//Получить книгу по id
+Route::get('/books/{book_id}', [BookController::class, 'index'])
     ->middleware('api');
 
-
-Route::get('/categories', [CategoryController::class, 'index'])
+//Получить все категории
+Route::get('/categories', [CategoryController::class, 'all'])
     ->middleware('api');
 
-Route::get('/categories/{category_id}', [CategoryController::class, 'oneCategory'])
+//Получить категорию по id
+Route::get('/categories/{category_id}', [CategoryController::class, 'index'])
+    ->middleware('api');
+
+//Получить категории принадлежащие книгам(BOOK->CATEGORY)
+Route::get('/books/has/{book_id}', [BookController::class, 'hasCategory'])
+    ->middleware('api');
+
+//Получить книги принадлежащие категориям(CATEGORY->BOOK)
+Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook'])
     ->middleware('api');
