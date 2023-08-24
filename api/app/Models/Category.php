@@ -23,14 +23,4 @@ class Category extends Model
     {
         return $this->belongsToMany(Book::class, 'books_has_categories');
     }
-
-    use Uuids;
-    use HasFactory;
-
-    protected $fillable = [
-        'title',
-        'description',
-        'created_at',
-        'updated_at',
-    ];
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,11 @@ Route::get('/books/has/{book_id}', [BookController::class, 'hasCategory'])
 //Получить книги принадлежащие категориям(CATEGORY->BOOK)
 Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook'])
     ->middleware('api');
+
+//Регистрация (http://bouqinist:80/api/v1/register)
+Route::post('/register', [AuthController::class, 'register'])
+    ->middleware('api');
+
+////Авторизация (http://bouqinist:80/api/v1/login)
+//Route::post('/login', [AuthController::class, 'login'])
+//    ->middleware('api');

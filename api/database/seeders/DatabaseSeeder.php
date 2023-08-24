@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
 //            BookSeeder::class,
 //            CategorySeeder::class,
-            UserSeeder::class,
+//            UserSeeder::class,
 // Доделать посевы связей книг и категорий
-//            BookHasCategorySeeder::class,
+            BookHasCategorySeeder::class,
         ]);
     }
 }
