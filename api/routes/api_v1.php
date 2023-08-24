@@ -22,7 +22,12 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
+//Получить все книги. Описание в IndexController
 Route::get('/allbooks', [IndexController::class, 'allbooks'])
+    ->middleware('api');
+
+//Получить последние поступившие книги. Описание в IndexController
+Route::get('/lastbooks/{category_id}/{count}', [IndexController::class, 'lastbooks'])
     ->middleware('api');
 
 Route::get('/categories', [CategoryController::class, 'index'])
