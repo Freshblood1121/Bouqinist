@@ -26,8 +26,7 @@ class BookController extends Controller
     public function hasCategory($bookId)
     {
         $book = Book::find($bookId);
-        dd($book->categories);
-         //return $book->categories
+        return $book->categories;
     }
 
 }
