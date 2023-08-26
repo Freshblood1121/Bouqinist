@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Category;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
 
@@ -23,9 +24,9 @@ class CategoryController extends Controller
     /**
      * @return Collection
      */
-    public function all(): Collection
+    public function all(): LengthAwarePaginator
     {
-        return Category::all();
+        return Category::all()->toQuery()->paginate(1);
     }
 
     public function hasBook($categoryId)
