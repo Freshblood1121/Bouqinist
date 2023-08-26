@@ -21,8 +21,7 @@ class BookController extends Controller
 
     public function all(): LengthAwarePaginator
     {
-
-        return Book::all()->toQuery()->paginate(15);
+        return Book::paginate(15);
     }
 
     public function hasCategory($bookId)

@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function all(): LengthAwarePaginator
     {
-        return Category::all()->toQuery()->paginate(1);
+        return Category::paginate(15);
     }
 
     public function hasBook($categoryId)
