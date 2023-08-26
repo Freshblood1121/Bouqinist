@@ -3,25 +3,27 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Collection;
-use \Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookController extends Controller
 {
 
     /**
      * @param $id
-     * @return string
+     * @return BookResource
      */
-    public function index($id): Collection
+    public function index($id): BookResource
     {
-        return Book::find($id);
+        return new BookResource(Book::with('categories')->findOrFail($id));
     }
 
-    public function all(): LengthAwarePaginator
+    public function all(): AnonymousResourceCollection
     {
-        return Book::paginate(15);
+        return BookResource::collection(Book::all());
+//        return Book::paginate(15);
     }
 
     public function hasCategory($bookId)
