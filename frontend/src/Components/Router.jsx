@@ -12,6 +12,7 @@ import Layout from "./Layout";
 import MainPage from "./MainPage/MainPage";
 import AdvertismentPage from "./AdvertismentPage/AdvertismentPage";
 import CategoryPage from "./CategoryPage/CategoryPage";
+import CategoryCardBox from "./CategoryPage/CategoryCardBox/CategoryCardBox";
 
 const Router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const Router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <MainPage />,
       },
       {
@@ -31,8 +32,18 @@ const Router = createBrowserRouter([
         element: <AdvertismentPage />,
       },
       {
-        path: "/category-page",
+        path: "/categories/*",
         element: <CategoryPage />,
+        children: [
+          {
+            path: "all",
+            element: <CategoryCardBox />,
+          },
+          {
+            path: ":categoryId?",
+            element: <CategoryCardBox />,
+          },
+        ],
       },
     ],
   },

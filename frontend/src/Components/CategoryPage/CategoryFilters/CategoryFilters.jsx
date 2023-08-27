@@ -1,22 +1,24 @@
 import React from "react";
 import { TextField, Typography } from "@mui/material";
 import "./CategoryFilters.css";
+import PeriodFilter from "../../UI/PeriodFilter/PeriodFilter";
+import PriceFilter from "../../UI/PriceFilter/PriceFilter";
 
 const CategoryFilters = () => {
   return (
     <div className="ctg__filters filters">
-      <div className="filters__publish-period filters-publish-period">
-        <Typography variant="h3">Период издания</Typography>
+      <div className="filters__publish-period">
+        <Typography variant="subtitle2">Год издания</Typography>
         <div className="publish-period__inputs">
-          <TextField variant="outlined" />
-          <TextField variant="outlined" />
+          <PeriodFilter />
         </div>
       </div>
-      <div className="filters__price filters-price">
-        <Typography variant="h3">Цена, &#x20bd;</Typography>
+      <div className="filters__price">
+        <Typography variant="subtitle2">Цена, &#x20bd;</Typography>
         <div className="price__inputs">
-          <TextField variant="outlined" sx={{ width: 150 }} />
-          <TextField variant="outlined" />
+          {/* <TextField variant="outlined" sx={{ width: 150 }} />
+          <TextField variant="outlined" /> */}
+          <PriceFilter />
         </div>
       </div>
     </div>

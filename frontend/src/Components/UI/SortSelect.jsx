@@ -6,12 +6,32 @@ import {
   createTheme,
   ThemeProvider,
   FormControl,
+  Divider,
+  InputLabel,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { keyframes } from "@emotion/react";
 import { palette } from "../../Utils/Constants";
+import { CaretDown } from "@phosphor-icons/react";
+import DropdownIcon from "./DropdownIcon";
+
+const breakpointsTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
 
 const theme = createTheme({
+  typography: {
+    fontFamily: ["Golos UI", "Arial", "sans-serif"].join(","),
+    fontSize: 16,
+  },
   components: {
     MuiSelect: {
       styleOverrides: {
@@ -20,22 +40,14 @@ const theme = createTheme({
           "--Select-brandBorderHoverColor": `${palette.hover}`,
           "--Select-brandBorderFocusedColor": `${palette.basic}`,
           transition: "0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-          width: "300px",
+          width: "165px",
           height: "50px",
           borderRadius: "20px",
           boxShadow: `6px 7px 0px 0px ${palette.warning}`,
-          // "&:before": {
-          //   content: '""',
-          //   display: "block",
-          //   position: "absolute",
-          //   width: "100%",
-          //   height: "40px",
-          //   bottom: "-20px",
-          //   backgroundColor: "white",
-          //   borderLeft: `2px solid ${palette.basic}`,
-          //   borderRight: `2px solid ${palette.basic}`,
-          //   transform: "translateZ(-1px)",
-          // },
+          fontSize: "16px",
+          "& .MuiSelect-select": {
+            paddingLeft: "30px",
+          },
           "&:hover": {
             backgroundColor: `${palette.hover}`,
             boxShadow: "none",
@@ -44,19 +56,20 @@ const theme = createTheme({
             color: "var(--Select-brandBorderFocusedColor)",
             boxShadow: "none",
           },
-          // "&.Mui-focused:before": {
-          //   // Подобрать селектор для псевдоэлемента, когда Select в состоянии focused и его аттрибут aria-expanded равен "true"
-          //   content: '""',
-          //   display: "block",
-          //   position: "absolute",
-          //   width: "100%",
-          //   height: "40px",
-          //   bottom: "-20px",
-          //   backgroundColor: "white",
-          //   borderLeft: `2px solid ${palette.basic}`,
-          //   borderRight: `2px solid ${palette.basic}`,
-          //   transform: "translateZ(-1px)",
-          // },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          left: "5px",
+          top: "-4px",
+          color: `${palette.basic}`,
+          fontSize: "16px",
+          "&.Mui-focused": {
+            zIndex: 6,
+            color: `${palette.basic}`,
+          },
         },
       },
     },
@@ -68,6 +81,7 @@ const theme = createTheme({
           transition: "0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
         },
         root: {
+          color: `${palette.basic}`,
           [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
             // borderColor: "var(--Select-brandBorderHoverColor)",
           },
@@ -91,8 +105,6 @@ const theme = createTheme({
           boxShadow: "none",
           border: "2px solid var(--Select-brandBorderColor)",
           borderRadius: "20px",
-          // borderTop: "0",
-          // borderRadius: "0 0 20px 20px",
         },
       },
     },
@@ -103,47 +115,32 @@ const theme = createTheme({
         },
       },
     },
-    // MuiFilledInput: {
-    //   styleOverrides: {
-    //     root: {
-    //       "&:before, &:after": {
-    //         borderBottom: "2px solid var(--Select-brandBorderColor)",
-    //       },
-    //       "&:hover:not(.Mui-disabled, .Mui-error):before": {
-    //         borderBottom: "2px solid var(--Select-brandBorderHoverColor)",
-    //       },
-    //       "&.Mui-focused:after": {
-    //         borderBottom: "2px solid var(--Select-brandBorderFocusedColor)",
-    //       },
-    //     },
-    //   },
-    // },
-    // MuiInput: {
-    //   styleOverrides: {
-    //     root: {
-    //       "&:before": {
-    //         borderBottom: "2px solid var(--Select-brandBorderColor)",
-    //       },
-    //       "&:hover:not(.Mui-disabled, .Mui-error):before": {
-    //         borderBottom: "2px solid var(--Select-brandBorderHoverColor)",
-    //       },
-    //       "&.Mui-focused:after": {
-    //         borderBottom: "2px solid var(--Select-brandBorderFocusedColor)",
-    //       },
-    //     },
-    //   },
-    // },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          color: `${palette.basic}`,
+          paddingLeft: "30px",
+          fontSize: "16px",
+          [`&.Mui-selected`]: {
+            backgroundColor: `${palette.active} !important`,
+            borderTop: `2px solid ${palette.basic}`,
+            borderBottom: `2px solid ${palette.basic}`,
+            color: `${palette.basic}`,
+          },
+        },
+      },
+    },
   },
 });
 
 const SortSelect = () => {
-  const [category, setCategory] = useState("");
+  const [sort, setSort] = useState("");
 
   const handleChange = (event) => {
-    setCategory(event.target.value);
+    setSort(event.target.value);
   };
 
-  // Динамически определяем позицию dropdown-меню и меняем его позицию.
+  // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
 
   const inputComponent = useRef(null);
   const [position, setPosition] = useState(0);
@@ -156,27 +153,29 @@ const SortSelect = () => {
     );
   }, [inputComponent]);
 
-  console.log(inputComponent);
-  console.log(inputComponent.current);
-
-  // useEffect(() => {}, [inputComponent.])
+  const IconComponent = (props) => {
+    return <DropdownIcon inheritViewBox {...props} />;
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <FormControl variant="outlined">
+        {sort == "" ? (
+          <InputLabel shrink={false}>Сортировать</InputLabel>
+        ) : null}
         <Select
           ref={inputComponent}
           MenuProps={{
             PaperProps: { sx: { top: `${position}px !important` } },
           }}
           id="simple-select"
-          value={category}
-          inputProps={{ "aria-label": "Without label" }}
+          value={sort}
           onChange={handleChange}
           fullWidth
+          IconComponent={IconComponent}
         >
-          <MenuItem value={"Художественные"}>Дороже</MenuItem>
-          <MenuItem value={"Научные"}>Дешевле</MenuItem>
+          <MenuItem value={"Дороже"}>Дороже</MenuItem>
+          <MenuItem value={"Дешевле"}>Дешевле</MenuItem>
         </Select>
       </FormControl>
     </ThemeProvider>

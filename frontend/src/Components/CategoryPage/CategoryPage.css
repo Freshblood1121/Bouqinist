@@ -5,7 +5,7 @@
 }
 
 .ctg__main {
-  margin-top: 35px;
+  margin-top: 10px;
   display: grid;
   grid-template-areas:
     "nav"
@@ -18,6 +18,10 @@
   .ctg__controls {
     flex-direction: row;
   }
+
+  .ctg__main {
+    margin-top: 35px;
+  }
 }
 
 @media screen and (min-width: 900px) {
@@ -29,10 +33,10 @@
 
 .ctg__filters {
   grid-area: nav;
-  margin-bottom: 65px;
+  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 10px;
 }
 
 .category__cards {
@@ -40,6 +44,24 @@
   justify-content: center;
   grid-template-columns: repeat(auto-fill, 200px);
   grid-area: cards;
-  column-gap: 50px;
+  column-gap: 40px;
   row-gap: 35px;
+}
+
+.controls__select-box {
+  display: flex;
+  flex-direction: column;
+  row-gap: 17px;
+  align-items: end;
+}
+
+/* .controls__select-box div:last-child {
+  align-self: end;
+} */
+
+@media screen and (min-width: 600px) {
+  .controls__select-box {
+    flex-direction: row;
+    column-gap: 20px;
+  }
 }

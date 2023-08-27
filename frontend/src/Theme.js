@@ -67,6 +67,11 @@ const theme = createTheme({
       fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
       fontSize: 20,
     },
+    subtitle2: {
+      fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+      fontSize: 16,
+      color: "black",
+    },
     itemProp: {
       fontSize: "0.875rem",
       color: "rgb(99, 115, 129)",

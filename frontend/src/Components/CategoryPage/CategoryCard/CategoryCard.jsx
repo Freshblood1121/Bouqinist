@@ -24,7 +24,10 @@ const CategoryCard = ({ item }) => {
       <div className="ctg__card_price_wrap">
         <div className="ctg__card_price">
           <span>
-            &#8381;&nbsp;{Intl.NumberFormat("ru-RU").format(item.price)}
+            &#8381;&nbsp;
+            {Intl.NumberFormat("ru-RU", { minimumFractionDigits: 2 }).format(
+              item.price
+            )}
           </span>
         </div>
         <FavourButton />
