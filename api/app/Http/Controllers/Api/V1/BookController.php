@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookHasCategoryResource;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,17 +14,16 @@ class BookController extends Controller
 
     /**
      * @param $id
-     * @return BookResource
+     * @return BookHasCategoryResource
      */
-    public function index($id): BookResource
+    public function index($id): BookHasCategoryResource
     {
-        return new BookResource(Book::with('categories')->findOrFail($id));
+        return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
 
-    public function all(): AnonymousResourceCollection
+    public function all()
     {
-        return BookResource::collection(Book::all());
-//        return Book::paginate(15);
+        return BookHasCategoryResource::collection(Book::with('categories')->get());
     }
 
     public function hasCategory($bookId)

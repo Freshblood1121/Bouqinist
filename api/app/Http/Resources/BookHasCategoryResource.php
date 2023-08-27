@@ -5,9 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookResource extends JsonResource
+class BookHasCategoryResource extends JsonResource
 {
-    public static $wrap = 'dataBook';
     /**
      * Transform the resource into an array.
      *
@@ -25,6 +24,7 @@ class BookResource extends JsonResource
             'status' => $this->status,
             'image' => $this->image,
             'price' => $this->price,
+            'categories' => CategoryResource::collection($this->categories)
         ];
     }
 }

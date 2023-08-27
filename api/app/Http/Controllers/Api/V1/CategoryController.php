@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
+use App\Http\Resources\CategoryResource;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -15,11 +16,11 @@ class CategoryController extends Controller
 
     /**
      * @param $id
-     * @return string
+     * @return CategoryResource
      */
-    public function index($id): string
+    public function index($id): CategoryResource
     {
-        return Category::find($id);
+        return new CategoryResource(Category::find($id));
     }
 
     /**
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function all()
     {
-        return Category::paginate(15);
+        return CategoryResource::collection(Category::with('books')->get());
     }
 
     public function hasBook($categoryId)
