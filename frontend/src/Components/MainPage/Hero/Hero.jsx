@@ -13,6 +13,7 @@ import {
 import Search from "../../../img/search.svg";
 import SearchIconComponent from "../../Icons/SearchIconComponent";
 import FindIconComponent from "../../Icons/FindIconComponent";
+import SearchField from "../../UI/SearchField";
 
 const Hero = () => {
   return (
@@ -54,21 +55,7 @@ const Hero = () => {
 
               <div className="hero_search">
                 <form className="hero_search_form">
-                  <TextField
-                    variant="outlined"
-                    placeholder="Введите название книги или ее автора"
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <SearchIconComponent />
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{
-                      width: "calc(100% - 3px)",
-                      marginBottom: "35px",
-                    }}
-                  ></TextField>
+                  <SearchField />
                 </form>
               </div>
               <div className="hero_explorer">

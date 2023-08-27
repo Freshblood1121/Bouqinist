@@ -1,8 +1,8 @@
 import { useMediaQuery } from "@mui/material";
 
 export const API_URL = {
-  BOOKS: "http://bouqinist/api/v1",
-  CATEGORIES: "http://bouqinist/api/v1/categories/all",
+  BOOKS: "http://bouqinist/api/v1/books",
+  CATEGORIES: "http://bouqinist/api/v1/categories",
 };
 
 export const REQUEST_STATUS = {
@@ -15,7 +15,7 @@ export const REQUEST_STATUS = {
 export const palette = {
   basic: "#3D3C3C",
   light: "#676767",
-  ligher: "#C5C5C5",
+  lighter: "#C5C5C5",
   hover: "#FDBF0F",
   active: "#3AB8EB",
   success: "#00A878",

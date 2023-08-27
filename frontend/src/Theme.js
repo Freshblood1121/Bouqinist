@@ -29,6 +29,15 @@ const theme = createTheme({
     },
     success: { main: "#00A878", light: "#9adbc1", dark: "#076446" },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1300,
+    },
+  },
   typography: {
     fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
     fontSize: 16,
@@ -48,9 +57,20 @@ const theme = createTheme({
       fontSize: 36,
       color: `${palette.basic}`,
     },
+    h3: {
+      fontSize: 24,
+      color: `${palette.basic}`,
+      height: "auto",
+      marginBottom: 15,
+    },
     subtitle1: {
       fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
       fontSize: 20,
+    },
+    subtitle2: {
+      fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+      fontSize: 16,
+      color: "black",
     },
     itemProp: {
       fontSize: "0.875rem",
@@ -73,58 +93,6 @@ const theme = createTheme({
       }
       * {box-sizing: border-box}
       `,
-    },
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          height: "48px",
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          "--TextField-brandBorderColor": "#3D3C3C",
-          "--TextField-brandBorderHoverColor": "#FDBF0F",
-          "--TextField-brandBorderFocusedColor": "#3AB8EB",
-          "& label.Mui-focused": {
-            color: "var(--TextField-brandBorderFocusedColor)",
-          },
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          borderRadius: "20px",
-          border: "2px solid var(--TextField-brandBorderColor)",
-          boxShadow: "3px 15px 0px 0px #FDBF0F",
-          height: "57px",
-          transition:
-            "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-        },
-        root: {
-          [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
-            boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderHoverColor)",
-            transition:
-              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-          },
-          [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderFocusedColor)",
-            boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderFocusedColor)",
-            transition:
-              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-          },
-        },
-        input: {
-          padding: "13px 0 13px 25px",
-          fontSize: "16px",
-          color: "#3D3C3C",
-        },
-      },
     },
   },
 });
