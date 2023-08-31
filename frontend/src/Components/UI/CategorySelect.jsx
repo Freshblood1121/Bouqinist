@@ -13,7 +13,9 @@ import { keyframes } from "@emotion/react";
 import { palette } from "../../Utils/Constants";
 import { CaretDown } from "@phosphor-icons/react";
 import DropdownIcon from "./DropdownIcon";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../Store/categories/actions";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -111,6 +113,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           paddingTop: "6px",
+          maxHeight: `${36 * 5}px`,
         },
       },
     },
@@ -125,26 +128,36 @@ const theme = createTheme({
             borderTop: `2px solid ${palette.basic}`,
             borderBottom: `2px solid ${palette.basic}`,
           },
+          [`& a`]: {
+            width: "100%",
+          },
         },
       },
     },
   },
 });
 
-const CategorySelect = ({ categories }) => {
-  console.log(categories);
+const CategorySelect = () => {
   const [category, setCategory] = useState("");
+  const categories = useSelector((store) => store.categories.categories);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getCategories(dispatch);
+  }, []);
 
   const handleChange = (event) => {
+    // event.preventDefault();
     setCategory(event.target.value);
   };
 
   // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
-
   const inputComponent = useRef(null);
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
+    console.log(inputComponent.current.getBoundingClientRect());
     setPosition(
       inputComponent.current
         ? inputComponent.current.getBoundingClientRect().bottom + 2
@@ -165,7 +178,19 @@ const CategorySelect = ({ categories }) => {
         <Select
           ref={inputComponent}
           MenuProps={{
-            PaperProps: { sx: { top: `${position}px !important` } },
+            anchorOrigin: {
+              vertical: "bottom",
+              horizontal: "left",
+            },
+            transformOrigin: {
+              vertical: "top",
+              horizontal: "left",
+            },
+            PaperProps: {
+              // sx: {
+              //   top: `${position}px !important`
+              //  },
+            },
           }}
           id="simple-select"
           value={category}
@@ -173,16 +198,10 @@ const CategorySelect = ({ categories }) => {
           IconComponent={IconComponent}
           fullWidth
         >
-          {/* <MenuItem value={"Все"}>Все</MenuItem>
-          <MenuItem value={"Художественные"}>Художественные</MenuItem>
-          <MenuItem value={"Научные"}>Научные</MenuItem>
-          <MenuItem value={"Научно-популярные"}>Научно-популярные</MenuItem>
-          <MenuItem value={"Учебные"}>Учебные</MenuItem>
-          <MenuItem value={"Справочные"}>Справочные</MenuItem>
-          <MenuItem value={"Полиграфия"}>Полиграфия</MenuItem> */}
           <MenuItem value={"Все"}>
             <Link to={"all"}>Все</Link>
           </MenuItem>
+
           {categories.map((categoryItem) => (
             <MenuItem key={categoryItem.id} value={categoryItem.title}>
               <Link to={`${categoryItem.id}`}>{categoryItem.title}</Link>

@@ -9,10 +9,14 @@ import {
   createTheme,
   outlinedInputClasses,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { palette } from "../../../Utils/Constants";
 import "./PeriodFilter.css";
 import ClearIcon from "../ClearIcon";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { booksSelectors } from "../../../Store";
+import { setFilters } from "../../../Store/books/actions";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -58,6 +62,28 @@ const theme = createTheme({
 });
 
 const PeriodFilter = () => {
+  // const periods = useSelector(booksSelectors.validPublishPeriod);
+  const periods = useSelector(booksSelectors.filteredPublishPeriod);
+
+  const [values, setValues] = useState(periods);
+
+  const handleChange = (e) => {
+    if (e.target.name == "min") {
+      setValues([Number(e.target.value), values[1]]);
+    } else {
+      setValues([values[0], Number(e.target.value)]);
+    }
+  };
+
+  const dispatch = useDispatch();
+  const handleBlur = (event) => {
+    dispatch(
+      setFilters({
+        publishPeriod: values,
+      })
+    );
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div className="period-filter">
@@ -68,8 +94,11 @@ const PeriodFilter = () => {
               pattern: "[0-9]*",
               maxLength: 4,
             }}
-            placeholder="1990"
             notched={false}
+            value={values[0]}
+            name="min"
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
         </FormControl>
         <FormControl variant="outlined">
@@ -79,8 +108,11 @@ const PeriodFilter = () => {
               pattern: "[0-9]*",
               maxLength: 4,
             }}
-            placeholder="1990"
             notched={false}
+            value={values[1]}
+            name="max"
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
         </FormControl>
       </div>

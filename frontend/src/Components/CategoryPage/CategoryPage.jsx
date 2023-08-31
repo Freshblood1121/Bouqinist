@@ -7,34 +7,38 @@ import Divider from "../Divider/Divider";
 import { Container, Grid } from "@mui/material";
 import CategoryFilters from "./CategoryFilters/CategoryFilters";
 import "./CategoryPage.css";
-import { API_URL } from "../../Utils/Constants";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { booksSelectors } from "../../Store";
+import { REQUEST_STATUS } from "../../Utils/Constants";
+import {
+  getAllBooksData,
+  getBooksDataByCategory,
+} from "../../Store/books/actions";
 
 const CategoryPage = () => {
-  const item = {
-    id: 1505,
-    title: "Production Manager",
-    category_id: "413f8def-7a46-3467-b17d-bf0cd1fb1441",
-    author: "Olga Hill",
-    company: "Kris, Kub and Howell",
-    description:
-      "Quisquam possimus vel aperiam nemo natus. Quis et maxime in sint.",
-    age: 2006,
-    status: "Medium",
-    image: "https://via.placeholder.com/640x480.png/0022ff?text=molestias",
-    price: 12980,
-    created_at: "2023-08-17T12:44:16.000000Z",
-    updated_at: "2023-08-17T12:44:16.000000Z",
-  };
-
-  const [items, setItems] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const dispatch = useDispatch();
+  let { categoryId } = useParams();
+  const requestStatus = useSelector(booksSelectors.requestStatus);
+  const error = useSelector(booksSelectors.error);
 
   useEffect(() => {
-    fetch(`${API_URL.CATEGORIES}`)
-      .then((data) => data.json())
-      .then((data) => setCategories(data));
-  }, []);
+    if (requestStatus === `${REQUEST_STATUS.IDLE}`) {
+      if (categoryId == "all") {
+        getAllBooksData(dispatch);
+      } else {
+        getBooksDataByCategory(dispatch, categoryId);
+      }
+    }
+  }, [requestStatus, dispatch]);
+
+  useEffect(() => {
+    if (categoryId == "all") {
+      getAllBooksData(dispatch);
+    } else {
+      getBooksDataByCategory(dispatch, categoryId);
+    }
+  }, [categoryId]);
 
   return (
     <Container maxWidth="lg">
@@ -50,7 +54,7 @@ const CategoryPage = () => {
         </Grid> */}
         <Grid item>
           <div className="controls__select-box">
-            <CategorySelect categories={categories} />
+            <CategorySelect />
             <SortSelect />
           </div>
         </Grid>

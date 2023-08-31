@@ -14,6 +14,14 @@ import { keyframes } from "@emotion/react";
 import { palette } from "../../Utils/Constants";
 import { CaretDown } from "@phosphor-icons/react";
 import DropdownIcon from "./DropdownIcon";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  SORT_BY_PRICE_ASC,
+  setSorting,
+  sortBooksByPriceAsc,
+  sortBooksByPriceDesc,
+} from "../../Store/books/actions";
+import { booksSelectors } from "../../Store";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -136,8 +144,29 @@ const theme = createTheme({
 const SortSelect = () => {
   const [sort, setSort] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
+    console.log(event.target.value);
     setSort(event.target.value);
+    if (event.target.value == "Дешевле") {
+      dispatch(
+        setSorting({
+          sortKey: "price",
+          sortType: "ASC",
+          sortName: event.target.value,
+        })
+      );
+    } else if (event.target.value == "Дороже") {
+      dispatch(
+        setSorting({
+          sortKey: "price",
+          sortType: "DESC",
+          sortName: event.target.value,
+        })
+      );
+    }
+    // setSort(event.target.value);
   };
 
   // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
@@ -157,11 +186,15 @@ const SortSelect = () => {
     return <DropdownIcon inheritViewBox {...props} />;
   };
 
+  const sortName = useSelector(booksSelectors.sortName);
+  console.log(sortName);
+
   return (
     <ThemeProvider theme={theme}>
       <FormControl variant="outlined">
         {sort == "" ? (
-          <InputLabel shrink={false}>Сортировать</InputLabel>
+          // <InputLabel shrink={false}>Сортировать</InputLabel>
+          <InputLabel shrink={false}>{sortName}</InputLabel>
         ) : null}
         <Select
           ref={inputComponent}
@@ -174,8 +207,8 @@ const SortSelect = () => {
           fullWidth
           IconComponent={IconComponent}
         >
-          <MenuItem value={"Дороже"}>Дороже</MenuItem>
           <MenuItem value={"Дешевле"}>Дешевле</MenuItem>
+          <MenuItem value={"Дороже"}>Дороже</MenuItem>
         </Select>
       </FormControl>
     </ThemeProvider>
