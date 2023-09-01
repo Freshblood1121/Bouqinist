@@ -7,7 +7,7 @@ import {
   outlinedInputClasses,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { palette } from "../../../Utils/Constants";
+import { REQUEST_STATUS, palette } from "../../../Utils/Constants";
 import Slider from "@mui/material/Slider";
 import "./PriceFilter.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,28 +78,24 @@ const PriceFilter = () => {
 
   const filteredPriceRange = useSelector(booksSelectors.filteredPriceRange);
 
-  console.log(filteredPriceRange);
-
   const minPrice = inititalPriceRange[0];
   const maxPrice = inititalPriceRange[1];
 
   const [values, setValues] = useState(filteredPriceRange);
 
+  useEffect(() => {
+    setValues(filteredPriceRange);
+  }, [filteredPriceRange]);
+
+  const requestStatus = useSelector(booksSelectors.requestStatus);
+
   const dispatch = useDispatch();
 
   const handlePriceChange = (event, newValue) => {
     setValues(newValue);
-    dispatch(
-      setFilters({
-        priceRange: {
-          initial: [...inititalPriceRange],
-          filtered: values,
-        },
-      })
-    );
   };
 
-  const handleChangeCommitted = (event) => {
+  const handleChangeCommitted = (event, newValue) => {
     dispatch(
       setFilters({
         priceRange: {
@@ -112,25 +108,29 @@ const PriceFilter = () => {
 
   const handleMinPriceChange = (event) => {
     event.preventDefault();
-    setValues([Number(event.target.value), priceRange[1]]);
+    setValues([Number(event.target.value), values[1]]);
     dispatch(
       setFilters({
-        priceRange: values,
+        priceRange: {
+          initial: [...inititalPriceRange],
+          filtered: values,
+        },
       })
     );
-    console.log(priceRange);
   };
 
   const handleMaxPriceChange = (event) => {
     event.preventDefault();
-    setValues([priceRange[0], Number(event.target.value)]);
-    console.log(priceRange);
+    setValues([values[0], Number(event.target.value)]);
   };
 
   const handleBlur = (event) => {
     dispatch(
       setFilters({
-        priceRange: values,
+        priceRange: {
+          initial: [...inititalPriceRange],
+          filtered: values,
+        },
       })
     );
   };

@@ -15,13 +15,11 @@ const initialState = {
   books: [],
   sorting: { sortKey: "price", sortType: "ASC", sortName: "Дешевле" },
   filters: {
-    // publishPeriod: [1970, new Date().getFullYear()],
     publishPeriod: [1970, new Date().getFullYear()],
     priceRange: {
-      initial: [0, 9999999],
-      filtered: [0, 9999999],
+      initial: [0, 0],
+      filtered: [0, 0],
     },
-    // priceRange: [],
   },
   requestStatus: {
     status: REQUEST_STATUS.IDLE,
@@ -62,25 +60,51 @@ export const booksReducer = (state = initialState, action) => {
       };
     }
     case DATA_SUCCESS: {
-      console.log(action.data);
-      console.log("sortByAscPrice(action.data)", sortByAscPrice(action.data));
       return {
         ...state,
         books: [...action.data],
-        // filters: {
-        //   ...state.filters,
-        //   priceRange: {
-        //     ...state.filters.priceRange,
-        //     initial: [
-        //       sortByAscPrice(action.data)[0].price,
-        //       sortByAscPrice(action.data)[action.data.length - 1].price,
-        //     ],
-        //     filtered: [
-        //       sortByAscPrice(action.data)[0].price,
-        //       sortByAscPrice(action.data)[action.data.length - 1].price,
-        //     ],
-        //   },
-        // },
+        filters: {
+          ...state.filters,
+          publishPeriod: [
+            Math.min(
+              ...action.data.map((item) => {
+                return item.age;
+              })
+            ),
+            Math.max(
+              ...action.data.map((item) => {
+                return item.age;
+              })
+            ),
+          ],
+          priceRange: {
+            ...state.filters.priceRange,
+            initial: [
+              Math.min(
+                ...action.data.map((item) => {
+                  return item.price;
+                })
+              ),
+              Math.max(
+                ...action.data.map((item) => {
+                  return item.price;
+                })
+              ),
+            ],
+            filtered: [
+              Math.min(
+                ...action.data.map((item) => {
+                  return item.price;
+                })
+              ),
+              Math.max(
+                ...action.data.map((item) => {
+                  return item.price;
+                })
+              ),
+            ],
+          },
+        },
         requestStatus: {
           status: REQUEST_STATUS.SUCCESS,
           error: "",
@@ -112,32 +136,6 @@ export const booksReducer = (state = initialState, action) => {
         filters: { ...state.filters, ...action.payload },
       };
     }
-    // case SORT_BY_PRICE_ASC: {
-    //   return {
-    //     ...state,
-    //     providedBooks: [...sortBooksByAscPrice(state.books)],
-    //   };
-    // }
-    // case SORT_BY_PRICE_DESC: {
-    //   return {
-    //     ...state,
-    //     providedBooks: [...sortBooksByDescPrice(state.books)],
-    //   };
-    // }
-    // case FILTER_BY_PUBLISH_PERIOD: {
-    //   return {
-    //     ...state,
-    //     filters: { ...state.filters, publishPeriod: action.payload },
-    //     providedBooks: [...filterBooks(state.books, state.filters)],
-    //   };
-    // }
-    // case FILTER_BY_PRICE_RANGE: {
-    //   return {
-    //     ...state,
-    //     filters: { ...state.filters, priceRange: action.payload },
-    //     providedBooks: [...filterBooks(state.books, state.filters)],
-    //   };
-    // }
     default:
       return state;
   }

@@ -15,7 +15,7 @@ import { CaretDown } from "@phosphor-icons/react";
 import DropdownIcon from "./DropdownIcon";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../Store/categories/actions";
+import { getCategories, selectCategory } from "../../Store/categories/actions";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -138,8 +138,12 @@ const theme = createTheme({
 });
 
 const CategorySelect = () => {
-  const [category, setCategory] = useState("");
   const categories = useSelector((store) => store.categories.categories);
+  const chosenCategory = useSelector(
+    (store) => store.categories.chosenCategory
+  );
+
+  const [category, setCategory] = useState(chosenCategory);
 
   const dispatch = useDispatch();
 
@@ -150,6 +154,16 @@ const CategorySelect = () => {
   const handleChange = (event) => {
     // event.preventDefault();
     setCategory(event.target.value);
+    console.log(
+      categories.find((element) => element.title === `${event.target.value}`)
+    );
+    dispatch(
+      selectCategory(
+        // categories.find((element) => element.title === `${
+        event.target.value
+        // }`)
+      )
+    );
   };
 
   // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
@@ -172,7 +186,7 @@ const CategorySelect = () => {
   return (
     <ThemeProvider theme={theme}>
       <FormControl variant="outlined">
-        {category == "" ? (
+        {chosenCategory == "" ? (
           <InputLabel shrink={false}>Категории</InputLabel>
         ) : null}
         <Select

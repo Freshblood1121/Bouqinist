@@ -9,14 +9,15 @@ import {
   createTheme,
   outlinedInputClasses,
 } from "@mui/material";
-import React, { useState } from "react";
-import { palette } from "../../../Utils/Constants";
+import React, { useEffect, useState } from "react";
+import { REQUEST_STATUS, palette } from "../../../Utils/Constants";
 import "./PeriodFilter.css";
 import ClearIcon from "../ClearIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { booksSelectors } from "../../../Store";
 import { setFilters } from "../../../Store/books/actions";
+import { requestStatus } from "../../../Store/selectors";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -64,12 +65,24 @@ const theme = createTheme({
 const PeriodFilter = () => {
   // const periods = useSelector(booksSelectors.validPublishPeriod);
   const periods = useSelector(booksSelectors.filteredPublishPeriod);
+  // console.log(periods);
+  // const defaultValues = [0, new Date().getFullYear()];
 
   const [values, setValues] = useState(periods);
 
+  console.log("values", values);
+
+  const requestStatus = booksSelectors.requestStatus;
+
+  useEffect(() => {
+    setValues(periods);
+  }, [periods]);
+
   const handleChange = (e) => {
     if (e.target.name == "min") {
-      setValues([Number(e.target.value), values[1]]);
+      setValues((values) => {
+        return [Number(e.target.value), values[1]];
+      });
     } else {
       setValues([values[0], Number(e.target.value)]);
     }
