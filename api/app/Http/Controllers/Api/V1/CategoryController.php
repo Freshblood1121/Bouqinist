@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 
 
 class CategoryController extends Controller
@@ -17,21 +18,21 @@ class CategoryController extends Controller
      */
     public function index($id): string
     {
-        return Category::find($id);
+        return Category::find($id)->toJson();
     }
 
     /**
-     * @return Collection
+     * @return string|Collection
      */
-    public function all(): Collection
+    public function all(): string | Collection
     {
-        return Category::all();
+        return Category::all()->toJson();
     }
 
     public function hasBook($categoryId)
     {
         $category = Category::find($categoryId);
-        return $category->books;
+        return $category->books->toJson();
     }
 
 }

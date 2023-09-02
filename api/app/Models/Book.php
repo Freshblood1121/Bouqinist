@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
-    use HasFactory;
     use Uuids;
+    use HasFactory;
 
     protected $fillable = [
         'title',

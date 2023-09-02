@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 
 class BookController extends Controller
@@ -20,14 +19,13 @@ class BookController extends Controller
 
     public function all(): Collection
     {
-        return Book::all();
+        return Book::all(); //->getDictionary(); если нужен только json вне массива
     }
 
     public function hasCategory($bookId)
     {
         $book = Book::find($bookId);
-        dd($book->categories);
-         //return $book->categories
+        return $book->categories;
     }
 
 }

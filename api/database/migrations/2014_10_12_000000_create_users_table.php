@@ -16,15 +16,18 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('first_name', 191);
             $table->string('last_name', 191);
-            $table->enum('gender', UsersGender::all());
-            $table->integer('yo');
+            $table->enum('gender', UsersGender::all())->nullable();
+            $table->integer('yo')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('country',191)->nullable();
+            $table->string('city',191)->nullable();
             $table->string('avatar')->nullable();
-            $table->string('email')->unique();
-            $table->nullableTimestamps();
-            $table->rememberToken();
-            $table->string('email_verified_at');
+            $table->string('email',191)->unique();
+            $table->string('email_verified_at',191)->default(false);
             $table->string('password');
-            $table->boolean('is_admin');
+            $table->rememberToken();
+            $table->boolean('is_admin')->default(false);
+            $table->nullableTimestamps();
         });
     }
 
