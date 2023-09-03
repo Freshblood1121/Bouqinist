@@ -106,6 +106,23 @@ const theme = createTheme({
           boxShadow: "none",
           border: "2px solid var(--Select-brandBorderColor)",
           borderRadius: "20px",
+          scrollbarWidth: "thin",
+          scrollbarColor: `${palette.hover} transparent`,
+          [`&::-webkit-scrollbar`]: {
+            width: "5px",
+          },
+          [`&::-webkit-scrollbar-track`]: {
+            backgroundColor: "transparent",
+            marginTop: "10px",
+            marginBottom: "10px",
+          },
+          [`&::-webkit-scrollbar-track-piece`]: {
+            backgroundColor: "transparent",
+          },
+          [`&::-webkit-scrollbar-thumb`]: {
+            borderRadius: "10px",
+            backgroundColor: `${palette.light}`,
+          },
         },
       },
     },
@@ -191,18 +208,18 @@ const CategorySelect = () => {
         <Select
           ref={inputComponent}
           MenuProps={{
-            anchorOrigin: {
-              vertical: "bottom",
-              horizontal: "left",
-            },
-            transformOrigin: {
-              vertical: "top",
-              horizontal: "left",
-            },
+            // anchorOrigin: {
+            //   vertical: "bottom",
+            //   horizontal: "left",
+            // },
+            // transformOrigin: {
+            //   vertical: "top",
+            //   horizontal: "left",
+            // },
             PaperProps: {
-              // sx: {
-              //   top: `${position}px !important`
-              //  },
+              sx: {
+                top: `${position}px !important`,
+              },
             },
           }}
           id="simple-select"

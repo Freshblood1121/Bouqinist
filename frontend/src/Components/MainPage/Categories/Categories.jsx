@@ -3,7 +3,10 @@ import "./Categories.css";
 import { Button, Grid } from "@mui/material";
 import CategoryButton from "../../UI/CategoryButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../../Store/categories/actions";
+import {
+  getCategories,
+  selectCategory,
+} from "../../../Store/categories/actions";
 import { Link } from "react-router-dom";
 
 const Categories = () => {
