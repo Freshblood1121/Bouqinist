@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   InputAdornment,
   TextField,
   ThemeProvider,
   createTheme,
   OutlinedInput,
+  IconButton,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import SearchIconComponent from "./Icons/SearchIconComponent";
+import Account from "../Icons/Account";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { palette } from "../../../Utils/Constants";
 
 const theme = createTheme({
   components: {
@@ -15,6 +18,8 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           height: "48px",
+          marginBottom: "45px",
+          width: "calc(100% - 3px)",
         },
       },
     },
@@ -35,7 +40,7 @@ const theme = createTheme({
         notchedOutline: {
           borderRadius: "20px",
           border: "2px solid var(--TextField-brandBorderColor)",
-          boxShadow: "3px 15px 0px 0px #FDBF0F",
+          boxShadow: "3px 10px 0px 0px #FDBF0F",
           height: "57px",
           transition:
             "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
@@ -44,14 +49,14 @@ const theme = createTheme({
           [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
             borderColor: "var(--TextField-brandBorderHoverColor)",
             boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderHoverColor)",
+              "3px 10px 0px 0px var(--TextField-brandBorderHoverColor)",
             transition:
               "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           },
           [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
             borderColor: "var(--TextField-brandBorderFocusedColor)",
             boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderFocusedColor)",
+              "3px 10px 0px 0px var(--TextField-brandBorderFocusedColor)",
             transition:
               "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           },
@@ -63,29 +68,51 @@ const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          marginRight: "-7px",
+        },
+      },
+    },
   },
 });
 
-const SearchField = () => {
+const PasswordInput = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <TextField
         variant="outlined"
-        placeholder="Введите название книги или ее автора"
+        placeholder="Пароль"
+        auto
         InputProps={{
+          inputMode: "text",
+          type: `${showPassword ? "text" : "password"}`,
+          autoComplete: "off",
           endAdornment: (
             <InputAdornment position="end">
-              <SearchIconComponent />
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
             </InputAdornment>
           ),
-        }}
-        sx={{
-          width: "calc(100% - 3px)",
-          marginBottom: "35px",
         }}
       ></TextField>
     </ThemeProvider>
   );
 };
 
-export default SearchField;
+export default PasswordInput;

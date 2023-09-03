@@ -4,7 +4,7 @@ import { array } from "prop-types";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
-import FavourButton from "../UI/FavourButton";
+import FavourButton from "../UI/Buttons/FavourButton";
 
 const BookPage = () => {
   const { itemId } = useParams();

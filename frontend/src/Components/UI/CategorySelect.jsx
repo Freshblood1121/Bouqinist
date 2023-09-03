@@ -171,7 +171,6 @@ const CategorySelect = () => {
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
-    console.log(inputComponent.current.getBoundingClientRect());
     setPosition(
       inputComponent.current
         ? inputComponent.current.getBoundingClientRect().bottom + 2

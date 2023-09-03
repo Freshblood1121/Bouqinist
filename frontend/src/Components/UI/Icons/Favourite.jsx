@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BookmarkSimple } from "@phosphor-icons/react";
-import { palette } from "../../Utils/Constants";
+import { palette } from "../../../Utils/Constants";
 
 const Favourite = () => {
   const [color, setColor] = useState(`${palette.basic}`);

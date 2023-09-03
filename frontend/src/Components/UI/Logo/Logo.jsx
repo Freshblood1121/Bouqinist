@@ -11,13 +11,9 @@ const Logo = () => {
         textDecoration: "inherit",
       }}
     >
-      <div className="header__logo">
-        <img
-          className="header__bookopen_img"
-          src="../img/book_open.svg"
-          alt="BookOpen"
-        />
-        <span className="header__logo_text">BOUQINIST</span>
+      <div className="logo">
+        <img className="logo__img" src="../img/book_open.svg" alt="BookOpen" />
+        <span className="logo__text">BOUQINIST</span>
       </div>
     </Link>
   );

@@ -7,7 +7,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import SearchIconComponent from "./Icons/SearchIconComponent";
+// import SearchIconComponent from "./Icons/SearchIconComponent";
 
 const theme = createTheme({
   components: {
@@ -66,17 +66,15 @@ const theme = createTheme({
   },
 });
 
-const SearchField = () => {
+const BaseInput = ({ text, iconComponent }) => {
   return (
     <ThemeProvider theme={theme}>
       <TextField
         variant="outlined"
-        placeholder="Введите название книги или ее автора"
+        placeholder={text}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <SearchIconComponent />
-            </InputAdornment>
+            <InputAdornment position="end">{iconComponent}</InputAdornment>
           ),
         }}
         sx={{
@@ -88,4 +86,4 @@ const SearchField = () => {
   );
 };
 
-export default SearchField;
+export default BaseInput;

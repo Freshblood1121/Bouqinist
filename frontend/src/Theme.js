@@ -63,6 +63,10 @@ const theme = createTheme({
       height: "auto",
       marginBottom: 15,
     },
+    h4: {
+      fontSize: 16,
+      color: `${palette.basic}`,
+    },
     subtitle1: {
       fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
       fontSize: 20,

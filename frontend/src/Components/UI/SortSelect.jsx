@@ -15,13 +15,7 @@ import { palette } from "../../Utils/Constants";
 import { CaretDown } from "@phosphor-icons/react";
 import DropdownIcon from "./DropdownIcon";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  SORT_BY_PRICE_ASC,
-  setSorting,
-  sortBooksByPriceAsc,
-  sortBooksByPriceDesc,
-} from "../../Store/books/actions";
-import { booksSelectors } from "../../Store";
+import { setSorting } from "../../Store/books/actions";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -113,6 +107,23 @@ const theme = createTheme({
           boxShadow: "none",
           border: "2px solid var(--Select-brandBorderColor)",
           borderRadius: "20px",
+          scrollbarWidth: "thin",
+          scrollbarColor: `${palette.hover} transparent`,
+          [`&::-webkit-scrollbar`]: {
+            width: "5px",
+          },
+          [`&::-webkit-scrollbar-track`]: {
+            backgroundColor: "transparent",
+            marginTop: "10px",
+            marginBottom: "10px",
+          },
+          [`&::-webkit-scrollbar-track-piece`]: {
+            backgroundColor: "transparent",
+          },
+          [`&::-webkit-scrollbar-thumb`]: {
+            borderRadius: "10px",
+            backgroundColor: `${palette.light}`,
+          },
         },
       },
     },
@@ -142,12 +153,13 @@ const theme = createTheme({
 });
 
 const SortSelect = () => {
-  const [sort, setSort] = useState("");
+  const chosenSorting = useSelector((store) => store.books.sorting.sortName);
+
+  const [sort, setSort] = useState(chosenSorting);
 
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     setSort(event.target.value);
     if (event.target.value == "Дешевле") {
       dispatch(
@@ -166,38 +178,33 @@ const SortSelect = () => {
         })
       );
     }
-    // setSort(event.target.value);
   };
 
   // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
 
-  const inputComponent = useRef(null);
+  const inputSortComponent = useRef(null);
   const [position, setPosition] = useState(0);
 
   useEffect(() => {
     setPosition(
-      inputComponent.current
-        ? inputComponent.current.getBoundingClientRect().bottom + 2
+      inputSortComponent.current
+        ? inputSortComponent.current.getBoundingClientRect().bottom + 2
         : 0
     );
-  }, [inputComponent]);
+  }, [inputSortComponent]);
 
   const IconComponent = (props) => {
     return <DropdownIcon inheritViewBox {...props} />;
   };
 
-  const sortName = useSelector(booksSelectors.sortName);
-  console.log(sortName);
-
   return (
     <ThemeProvider theme={theme}>
       <FormControl variant="outlined">
         {sort == "" ? (
-          // <InputLabel shrink={false}>Сортировать</InputLabel>
-          <InputLabel shrink={false}>{sortName}</InputLabel>
+          <InputLabel shrink={false}>Сортировать</InputLabel>
         ) : null}
         <Select
-          ref={inputComponent}
+          ref={inputSortComponent}
           MenuProps={{
             PaperProps: { sx: { top: `${position}px !important` } },
           }}
@@ -207,8 +214,8 @@ const SortSelect = () => {
           fullWidth
           IconComponent={IconComponent}
         >
-          <MenuItem value={"Дешевле"}>Дешевле</MenuItem>
           <MenuItem value={"Дороже"}>Дороже</MenuItem>
+          <MenuItem value={"Дешевле"}>Дешевле</MenuItem>
         </Select>
       </FormControl>
     </ThemeProvider>

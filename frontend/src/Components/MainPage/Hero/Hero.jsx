@@ -11,8 +11,8 @@ import {
   Button,
 } from "@mui/material";
 import Search from "../../../img/search.svg";
-import SearchIconComponent from "../../Icons/SearchIconComponent";
-import FindIconComponent from "../../Icons/FindIconComponent";
+import SearchIconComponent from "../../UI/Icons/SearchIconComponent";
+import FindIconComponent from "../../UI/Icons/FindIconComponent";
 import SearchField from "../../UI/SearchField";
 
 const Hero = () => {

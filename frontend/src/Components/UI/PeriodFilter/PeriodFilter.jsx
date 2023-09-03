@@ -76,6 +76,7 @@ const PeriodFilter = () => {
 
   useEffect(() => {
     setValues(periods);
+    console.log(values);
   }, [periods]);
 
   const handleChange = (e) => {
