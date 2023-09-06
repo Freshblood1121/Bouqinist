@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Logo from "../Logo/Logo";
 import "./Footer.css";
 import Divider from "../Divider/Divider";
-import TelegramButton from "../UI/TelegramButton";
-import GitHubButton from "../UI/GitHubButton";
-import AtButton from "../UI/AtButton";
+import TelegramButton from "../UI/Buttons/TelegramButton";
+import GitHubButton from "../UI/Buttons/GitHubButton";
+import AtButton from "../UI/Buttons/AtButton";
 
 const Footer = () => {
   return (

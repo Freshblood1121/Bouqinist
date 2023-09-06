@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import GolosUI from "./fonts/Golos-UI_Regular.ttf";
+import UnicaOne from "./fonts/UnicaOne-Regular.ttf";
 import { palette } from "./Utils/Constants";
 
 const golosUI = {
@@ -29,8 +30,17 @@ const theme = createTheme({
     },
     success: { main: "#00A878", light: "#9adbc1", dark: "#076446" },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1300,
+    },
+  },
   typography: {
-    fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+    fontFamily: ["Golos UI", "Unica One", "Roboto", "sans-serif"].join(","),
     fontSize: 16,
     h1: {
       fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
@@ -48,9 +58,39 @@ const theme = createTheme({
       fontSize: 36,
       color: `${palette.basic}`,
     },
+    h3: {
+      fontSize: 24,
+      color: `${palette.basic}`,
+      height: "auto",
+      marginBottom: 15,
+    },
+    h4: {
+      fontSize: 16,
+      color: `${palette.basic}`,
+    },
     subtitle1: {
       fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
       fontSize: 20,
+    },
+    subtitle2: {
+      fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+      fontSize: 16,
+      color: "black",
+    },
+    logoBig: {
+      fontFamily: ["Unica One", "Roboto", "cursive"].join(" ,"),
+      fontSize: 64,
+      color: `${palette.basic}`,
+    },
+    signupTitle: {
+      fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
+      fontSize: 32,
+      color: `${palette.basic}`,
+    },
+    signupSubtitle: {
+      fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
+      fontSize: 24,
+      color: `${palette.basic}`,
     },
     itemProp: {
       fontSize: "0.875rem",
@@ -72,57 +112,43 @@ const theme = createTheme({
         unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, 0400—04FF;
       }
       * {box-sizing: border-box}
+      @font-face {
+        font-family: 'Unica One';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src: local('Unica One'), 
+        url(${UnicaOne})
+        /* url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap') */
+         format('truetype');
+        unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, 0400—04FF;
+      }
+      * {box-sizing: border-box}
+      :root {
+        --basic: ${palette.basic};
+      }
       `,
     },
-    MuiFormControl: {
+    MuiInputLabel: {
       styleOverrides: {
         root: {
-          height: "48px",
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          "--TextField-brandBorderColor": "#3D3C3C",
-          "--TextField-brandBorderHoverColor": "#FDBF0F",
-          "--TextField-brandBorderFocusedColor": "#3AB8EB",
-          "& label.Mui-focused": {
-            color: "var(--TextField-brandBorderFocusedColor)",
-          },
-        },
-      },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          borderRadius: "20px",
-          border: "2px solid var(--TextField-brandBorderColor)",
-          boxShadow: "3px 15px 0px 0px #FDBF0F",
-          height: "57px",
-          transition:
-            "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-        },
-        root: {
-          [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
-            boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderHoverColor)",
-            transition:
-              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-          },
-          [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderFocusedColor)",
-            boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderFocusedColor)",
-            transition:
-              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-          },
-        },
-        input: {
-          padding: "13px 0 13px 25px",
           fontSize: "16px",
-          color: "#3D3C3C",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          color: `${palette.basic}`,
+        },
+      },
+    },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          [`& span`]: {
+            fontSize: "16px",
+          },
         },
       },
     },

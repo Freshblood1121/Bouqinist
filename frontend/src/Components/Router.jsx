@@ -10,7 +10,11 @@ import ErrorPage from "./ErrorPage/ErrorPage";
 import Header from "./Header/Header";
 import Layout from "./Layout";
 import MainPage from "./MainPage/MainPage";
-import BookPage from "./BookPage/BookPage";
+// import AdvertismentPage from "./AdvertismentPage/AdvertismentPage";
+// import CategoryPage from "./CategoryPage/CategoryPage";
+// import CategoryCardBox from "./CategoryPage/CategoryCardBox/CategoryCardBox";
+// import ScrollToTop from "./ScrollToTop";
+import SignupPage from "./SignupPage/SignupPage";
 
 const Router = createBrowserRouter([
   {
@@ -25,11 +29,15 @@ const Router = createBrowserRouter([
         path: "/",
         element: <MainPage />,
       },
-      {
-        path: "/items/:itemId?",
-        element: <BookPage />,
-      },
+      // {
+      //   path: "/items/:itemId?",
+      //   element: <BookPage />,
+      // },
     ],
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
   },
 ]);
 
