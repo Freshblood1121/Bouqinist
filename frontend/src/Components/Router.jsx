@@ -10,10 +10,10 @@ import ErrorPage from "./ErrorPage/ErrorPage";
 import Header from "./Header/Header";
 import Layout from "./Layout";
 import MainPage from "./MainPage/MainPage";
-// import AdvertismentPage from "./AdvertismentPage/AdvertismentPage";
-// import CategoryPage from "./CategoryPage/CategoryPage";
-// import CategoryCardBox from "./CategoryPage/CategoryCardBox/CategoryCardBox";
-// import ScrollToTop from "./ScrollToTop";
+import AdvertismentPage from "./AdvertismentPage/AdvertismentPage";
+import CategoryPage from "./CategoryPage/CategoryPage";
+import CategoryCardBox from "./CategoryPage/CategoryCardBox/CategoryCardBox";
+import ScrollToTop from "./ScrollToTop";
 import SignupPage from "./SignupPage/SignupPage";
 
 const Router = createBrowserRouter([
@@ -23,16 +23,30 @@ const Router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <ScrollToTop>
+        <Layout />
+      </ScrollToTop>
+    ),
     children: [
       {
-        path: "/",
+        path: "",
         element: <MainPage />,
       },
-      // {
-      //   path: "/items/:itemId?",
-      //   element: <BookPage />,
-      // },
+      {
+        path: "/items/:itemId?",
+        element: <AdvertismentPage />,
+      },
+      {
+        path: "/categories/",
+        element: <CategoryPage />,
+        children: [
+          {
+            path: ":categoryId?",
+            element: <CategoryCardBox />,
+          },
+        ],
+      },
     ],
   },
   {

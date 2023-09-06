@@ -39,6 +39,15 @@ const theme = createTheme({
       xl: 1300,
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1300,
+    },
+  },
   typography: {
     fontFamily: ["Golos UI", "Unica One", "Roboto", "sans-serif"].join(","),
     fontSize: 16,
@@ -56,6 +65,16 @@ const theme = createTheme({
     h2: {
       fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
       fontSize: 36,
+      color: `${palette.basic}`,
+    },
+    h3: {
+      fontSize: 24,
+      color: `${palette.basic}`,
+      height: "auto",
+      marginBottom: 15,
+    },
+    h4: {
+      fontSize: 16,
       color: `${palette.basic}`,
     },
     h3: {

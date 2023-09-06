@@ -3,22 +3,13 @@ import "./Categories.css";
 import { Button, Grid } from "@mui/material";
 import CategoryButton from "../../UI/CategoryButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../../Store/categories/actions";
+import {
+  getCategories,
+  selectCategory,
+} from "../../../Store/categories/actions";
+import { Link } from "react-router-dom";
 
 const Categories = () => {
-  // const categories = [
-  //   "Художественные",
-  //   "Научно-популярные",
-  //   "Научные",
-  //   "Справочные",
-  //   "Учебные",
-  //   "Полиграфия",
-  // ];
-  const dispatch = useDispatch();
-  useEffect(() => {
-    getCategories(dispatch);
-  }, []);
-
   const categories = useSelector((store) => store.categories.categories);
 
   return (
@@ -33,7 +24,9 @@ const Categories = () => {
           {categories.map((category, index) => {
             return (
               <Grid key={index} item xs={12} sm={6} lg={4}>
-                <CategoryButton>{category.title}</CategoryButton>
+                <Link to={`/categories/${category.id}`}>
+                  <CategoryButton>{category.title}</CategoryButton>
+                </Link>
               </Grid>
             );
           })}

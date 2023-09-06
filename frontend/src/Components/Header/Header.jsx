@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Link from "@mui/material/Link";
-import Logo from "../Logo/Logo";
+import Logo from "../UI/Logo/Logo";
 import HeaderNavigation from "./HeaderNavigation/HeaderNavigation";
 import "./Header.css";
 import { Container } from "@mui/material";
