@@ -13,7 +13,7 @@ const Logo = () => {
       }}
     >
       <div className="logo">
-        <img className="logo__img" src="../img/book_open.svg" alt="BookOpen" />
+        <img className="logo__img" src="/img/book_open.svg" alt="BookOpen" />
         <span className="logo__text">BOUQINIST</span>
       </div>
     </Link>
