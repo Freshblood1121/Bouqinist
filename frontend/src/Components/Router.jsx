@@ -15,6 +15,7 @@ import CategoryPage from "./CategoryPage/CategoryPage";
 import CategoryCardBox from "./CategoryPage/CategoryCardBox/CategoryCardBox";
 import ScrollToTop from "./ScrollToTop";
 import SignupPage from "./SignupPage/SignupPage";
+import VerificationPage from "./VerificationPage/VerificationPage";
 
 const Router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const Router = createBrowserRouter([
             element: <CategoryCardBox />,
           },
         ],
+      },
+      {
+        path: "/account/confirm/:params",
+        element: <VerificationPage />,
       },
     ],
   },
