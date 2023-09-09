@@ -21,7 +21,6 @@ class BookFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'title' => fake()->jobTitle(),
-            'category_id' => fake()->uuid(),
             'author' => fake()->name(),
             'company' => fake()->company(),
             'description'=> fake()->text(100),
