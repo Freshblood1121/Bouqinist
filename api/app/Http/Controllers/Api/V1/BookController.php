@@ -21,9 +21,9 @@ class BookController extends Controller
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
 
-    public function all()
+    public function all(): AnonymousResourceCollection
     {
-        return BookHasCategoryResource::collection(Book::with('categories')->get());
+        return BookHasCategoryResource::collection(Book::with('categories')->get()->toQuery()->paginate(20));
     }
 
     public function hasCategory($bookId)
