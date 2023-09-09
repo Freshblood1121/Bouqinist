@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Unica+One&display=swap");
 
-.header__logo {
+.logo {
   height: 22px;
   display: flex;
   flex-direction: row;
@@ -12,12 +12,12 @@
   align-items: center;
 }
 
-.header__bookopen_img {
+.logo__img {
   margin-right: 12px;
   height: 22px;
 }
 
-.header__logo_text {
+.logo__text {
   font-family: "Unica One", "Golos UI", sans-serif;
   font-size: 20px;
   color: var(--gray-800, #3d3c3c);

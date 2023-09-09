@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { User } from "@phosphor-icons/react";
-import { palette } from "../../Utils/Constants";
+import { palette } from "../../../Utils/Constants";
 
 const Account = () => {
   const [color, setColor] = useState(`${palette.basic}`);

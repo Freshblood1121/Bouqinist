@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ShoppingCartSimple } from "@phosphor-icons/react";
-import { palette } from "../../Utils/Constants";
+import { ListBullets, SquaresFour } from "@phosphor-icons/react";
+import { palette } from "../../../Utils/Constants";
 
-const Cart = () => {
+const RowButton = () => {
   const [color, setColor] = useState(`${palette.basic}`);
 
   const handleMouseEnter = (e) => {
@@ -16,8 +16,8 @@ const Cart = () => {
   };
 
   return (
-    <ShoppingCartSimple
-      size={25}
+    <ListBullets
+      size={40}
       color={color}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -28,4 +28,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default RowButton;

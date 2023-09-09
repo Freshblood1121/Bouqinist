@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { BookmarkSimple } from "@phosphor-icons/react";
-import { palette } from "../../Utils/Constants";
+import { SquaresFour } from "@phosphor-icons/react";
+import { palette } from "../../../Utils/Constants";
 
-const Favourite = () => {
+const ColumnButton = () => {
   const [color, setColor] = useState(`${palette.basic}`);
 
   const handleMouseEnter = (e) => {
@@ -16,8 +16,8 @@ const Favourite = () => {
   };
 
   return (
-    <BookmarkSimple
-      size={25}
+    <SquaresFour
+      size={40}
       color={color}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -28,4 +28,4 @@ const Favourite = () => {
   );
 };
 
-export default Favourite;
+export default ColumnButton;

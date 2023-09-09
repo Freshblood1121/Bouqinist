@@ -3,6 +3,7 @@ import { API_URL } from "../../Utils/Constants";
 export const DATA_REQUEST = "CATEGORIES::DATA_REQUEST";
 export const DATA_SUCCESS = "CATEGORIES::DATA_SUCCESS";
 export const DATA_ERROR = "CATEGORIES::DATA_ERROR";
+export const SELECT_CATEGORY = "CATEGORIES::SELECT_CATEGORY";
 
 export const categoriesDataRequest = () => ({
   type: DATA_REQUEST,
@@ -44,3 +45,8 @@ export const getCategories = (dispatch) => {
       console.log(error);
     });
 };
+
+export const selectCategory = (category) => ({
+  type: SELECT_CATEGORY,
+  payload: category,
+});

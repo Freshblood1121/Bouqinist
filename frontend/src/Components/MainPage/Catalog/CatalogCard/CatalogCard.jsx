@@ -2,8 +2,8 @@ import React from "react";
 import "./CatalogCard.css";
 import { Link } from "react-router-dom";
 import { Button, IconButton, SvgIcon } from "@mui/material";
-import CartButton from "../../../UI/CartButton";
-import FavourButton from "../../../UI/FavourButton";
+import CartButton from "../../../UI/Buttons/CartButton";
+import FavourButton from "../../../UI/Buttons/FavourButton";
 
 const CatalogCard = ({ item }) => {
   return (
