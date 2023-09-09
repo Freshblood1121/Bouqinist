@@ -6,7 +6,7 @@ import {
   compose,
 } from "@reduxjs/toolkit";
 import { booksReducer } from "./books/reducer";
-// import { messagesReducer } from "./messages/reducer";
+// import { messagesReducer } from "./messages.php/reducer";
 // import { profileReducer } from "./profile/reducer";
 // Логгер для отслеживания отправленных action'ов и измененного ими state'а
 import logger from "./middleWare/logger";

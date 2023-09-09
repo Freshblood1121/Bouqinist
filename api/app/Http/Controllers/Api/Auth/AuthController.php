@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Psy\Util\Str;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Validation\Rules\Password;
+use App\Notifications\EmailVerificationNotification;
 
 class AuthController extends Controller
 {
@@ -25,10 +26,10 @@ class AuthController extends Controller
             //Validated
             $validateUser = Validator::make($request->all(),
                 [
-                    'first_name' => 'required',
-                    'last_name' => 'required',
-                    'email' => 'required|email|unique:users,email',
-                    'password' => 'required'
+                    'first_name' => ['required', 'string',  'max:255'],
+                    'last_name' => ['required', 'string',  'max:255'],
+                    'email' => ['required', 'string', 'email',  'max:255', 'unique:users'],
+                    'password' => ['required', 'confirmed', Password::default()]
                 ]);
 
             if($validateUser->fails()){
@@ -48,12 +49,18 @@ class AuthController extends Controller
                 'country' => $request->country,
                 'city' => $request->city,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'password_confirmation' => $request->password,
             ]);
+
+            Auth::login($user);
+
+            //Отправка OTP на почту
+            $user->notify(new EmailVerificationNotification());
 
             return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
+                'message' => 'Thanks for signing up! Before getting started, could you verify you email address by clicking on the link we just emailed to you?',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
 
@@ -63,6 +70,7 @@ class AuthController extends Controller
                 'message' => $th->getMessage()
             ], 500);
         }
+
     }
 
     /**
@@ -75,8 +83,8 @@ class AuthController extends Controller
         try {
             $validateUser = Validator::make($request->all(),
                 [
-                    'email' => 'required|email',
-                    'password' => 'required'
+                    'email' => ['required', 'string', 'email'],
+                    'password' => ['required', 'string'],
                 ]);
 
             if($validateUser->fails()){
@@ -88,6 +96,7 @@ class AuthController extends Controller
             }
 
             if(!Auth::attempt($request->only(['email', 'password']))){
+                $request->session()->regenerate();
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
@@ -109,4 +118,5 @@ class AuthController extends Controller
             ], 500);
         }
     }
+
 }

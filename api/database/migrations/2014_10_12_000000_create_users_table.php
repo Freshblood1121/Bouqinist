@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('city',191)->nullable();
             $table->string('avatar')->nullable();
             $table->string('email',191)->unique();
-            $table->string('email_verified_at',191)->default(false);
+            $table->string('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->boolean('is_admin')->default(false);
