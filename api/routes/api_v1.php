@@ -27,20 +27,20 @@ Route::group(['middleware' => ['api']], function (){
     Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook']);
 });
 
-//Гостевые маршруты
-Route::middleware(['guest'])->group(function() {
-
     //Регистрация
     //http://bouqinist:80/api/v1/register
     Route::post('/register', [AuthController::class, 'createUser']);
 
     //Авторизация
     //http://bouqinist:80/api/v1/login
-    Route::post('/login', [AuthController::class, 'loginUser']);
-});
+    Route::post('/login', [AuthController::class, 'login']);
 
 //Защищёные маршруты
 Route::middleware(['auth:sanctum'])->group(function() {
+
+    //Выход из учётной записи
+    //http://bouqinist:80/api/v1/login
+    Route::post("logout",[AuthController::class,"logout"]);
 
     //Верификация почты
     Route::post('email-verification', [EmailVerificationController::class, 'email_verification'])
