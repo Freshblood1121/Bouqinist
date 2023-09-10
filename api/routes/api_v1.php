@@ -7,16 +7,12 @@ use Illuminate\Support\Facades\Route;
 
 
 //Получить все книги
-Route::get('/index', [BookController::class, 'index'])
-    ->middleware('api');
-
-
-Route::get('/books/test', [BookController::class, 'all'])
+Route::get('/books/index', [BookController::class, 'index'])
     ->middleware('api');
 
 
 //Получить книгу по id
-Route::get('/books/{book_id}', [BookController::class, 'index'])
+Route::get('/books/show/{book_id}', [BookController::class, 'index'])
     ->middleware('api');
 
 //Создать книгу
