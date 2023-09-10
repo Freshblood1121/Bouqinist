@@ -19,13 +19,13 @@ class CategoryController extends Controller
      */
     public function index($id): CategoryHasBookResource
     {
-        return new CategoryHasBookResource(Category::find($id));
+        return new CategoryHasBookResource(Category::findOrFail($id));
     }
 
     /**
      * @return AnonymousResourceCollection
      */
-    public function all(): CategoryHasBookResource
+    public function all(): AnonymousResourceCollection
     {
         return CategoryHasBookResource::collection(Category::with('books')->get()->toQuery()->paginate(20));
     }
