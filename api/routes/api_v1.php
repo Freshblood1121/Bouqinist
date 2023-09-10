@@ -38,6 +38,9 @@ Route::group(['middleware' => ['api']], function (){
 //Защищёные маршруты
 Route::middleware(['auth:sanctum'])->group(function() {
 
+    //Данные о себе
+    Route::post('/me', [AuthController::class, 'me']);
+
     //Выход из учётной записи
     //http://bouqinist:80/api/v1/login
     Route::post("logout",[AuthController::class,"logout"]);
