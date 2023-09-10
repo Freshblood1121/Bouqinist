@@ -5,16 +5,22 @@ use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-//
-//Route::get('/', [IndexController::class, 'all'])
-//    ->middleware('api');
 
 //Получить все книги
-Route::get('/books', [BookController::class, 'all'])
+Route::get('/index', [BookController::class, 'index'])
     ->middleware('api');
+
+
+Route::get('/books/test', [BookController::class, 'all'])
+    ->middleware('api');
+
 
 //Получить книгу по id
 Route::get('/books/{book_id}', [BookController::class, 'index'])
+    ->middleware('api');
+
+//Создать книгу
+Route::get('/books/create', [BookController::class, 'create'])
     ->middleware('api');
 
 //Получить все категории

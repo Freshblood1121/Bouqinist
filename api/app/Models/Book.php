@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
-<<<<<<< Updated upstream
+
     use HasFactory;
     use Uuids;
 
@@ -24,7 +24,6 @@ class Book extends Model
         'price',
         'created_at',
         'updated_at',
-        'category_id'
     ];
 
     public function categories(): BelongsToMany
@@ -32,7 +31,7 @@ class Book extends Model
         return $this->belongsToMany(Category::class, 'books_has_categories');
     }
 
-=======
+
   use HasFactory;
->>>>>>> Stashed changes
+
 }

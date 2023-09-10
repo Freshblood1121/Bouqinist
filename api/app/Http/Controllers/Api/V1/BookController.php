@@ -12,18 +12,34 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class BookController extends Controller
 {
 
+
+    public function index(): AnonymousResourceCollection
+    {
+        return BookHasCategoryResource::collection(Book::with('categories')->get());
+    }
+
     /**
      * @param $id
      * @return BookHasCategoryResource
      */
-    public function index($id): BookHasCategoryResource
+    public function show($id): BookHasCategoryResource
     {
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
 
-    public function all()
+
+
+    public function create()
     {
-        return BookHasCategoryResource::collection(Book::with('categories')->get());
+        return Book::create([
+                'title' => 'book name',
+                'author' => 'author name',
+                'company' => 'company name',
+                'description' => 'book description',
+                'age' => 1969,
+                'image' => 'image path',
+                'price' => 5700,
+            ]);
     }
 
     public function hasCategory($bookId)
