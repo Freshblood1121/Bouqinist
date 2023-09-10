@@ -28,18 +28,20 @@ class BookController extends Controller
     }
 
 
-
-    public function create()
+    public function create($book)
     {
-        return Book::create([
-                'title' => 'book name',
-                'author' => 'author name',
-                'company' => 'company name',
-                'description' => 'book description',
-                'age' => 1969,
-                'image' => 'image path',
-                'price' => 5700,
-            ]);
+        $book = [
+            'title' => 'book name 1',
+            'author' => 'author name 1 ',
+            'company' => 'company name 1',
+            'description' => 'book description 1',
+            'age' => 1969,
+            'image' => 'image path 1',
+            'price' => 5700,
+        ];
+
+        Book::create($book);
+
     }
 
     public function hasCategory($bookId)
