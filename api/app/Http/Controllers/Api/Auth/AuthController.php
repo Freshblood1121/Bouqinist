@@ -20,6 +20,7 @@ class AuthController extends Controller
         $this->middleware("auth:sanctum", ['except' => ["createUser", "login"]]);
     }
 
+    //Регистрация пользователя
     public function createUser(Request $request): JsonResponse
     {
 
@@ -43,17 +44,17 @@ class AuthController extends Controller
             'password_confirmation' => $request->password,
         ]);
 
+        //Присваивание токена
         $token = $user->createToken("token-name")->plainTextToken;
 
         //Отправка OTP на почту
         $user->notify(new EmailVerificationNotification());
 
         return response()->json([
-            "success" => true,
+            "message" => "Authenticated",
             "user" => $user,
             "token" => $token,
         ]);
-
     }
 
     /**
@@ -61,6 +62,8 @@ class AuthController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
+
+    //Авторизация пользователя
     public function login(Request $request): JsonResponse
     {
         try {
@@ -79,7 +82,10 @@ class AuthController extends Controller
             }
 
             if (!Auth::attempt($request->only(['email', 'password']))) {
+
+                //Время жизни сессии 120мин в config/session.php
                 $request->session()->regenerate();
+
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
@@ -88,12 +94,10 @@ class AuthController extends Controller
 
             $user=User::where("email",$request["email"])->firstOrFail();
 
-            $token=$user->createToken("API TOKEN")->plainTextToken;
-
             return response()->json([
-                "success"=>true,
-                "user"=>$user,
-                "token"=>$token,
+                "message" => "Authenticated",
+                "user"=> $user,
+                "token"=> $request->bearerToken(),
             ]);
 
         } catch (\Throwable $th) {
@@ -104,16 +108,13 @@ class AuthController extends Controller
         }
     }
 
-
-    public function logout(Request $request): JsonResponse
+    //Информация обо мне
+    public function me(Request $request): JsonResponse
     {
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(["success" => true, "message" => "Logged Out!"]);
+            return response()->json([
+                "message" => "Authenticated",
+                "user" => auth()->user(),
+                "token" => $request->bearerToken(),
+            ]);
     }
-
-    public function me(): JsonResponse
-    {
-        return response()->json(['status' => true, 'user' => auth()->user()]);
-    }
-
 }

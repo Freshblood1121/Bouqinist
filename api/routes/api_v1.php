@@ -39,11 +39,7 @@ Route::group(['middleware' => ['api']], function (){
 Route::middleware(['auth:sanctum'])->group(function() {
 
     //Данные о себе
-    Route::post('/me', [AuthController::class, 'me']);
-
-    //Выход из учётной записи
-    //http://bouqinist:80/api/v1/login
-    Route::post("logout",[AuthController::class,"logout"]);
+    Route::get('/me', [AuthController::class, 'me']);
 
     //Верификация почты
     Route::post('email-verification', [EmailVerificationController::class, 'email_verification'])
