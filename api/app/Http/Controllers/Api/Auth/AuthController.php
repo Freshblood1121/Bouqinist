@@ -83,9 +83,6 @@ class AuthController extends Controller
 
             if (!Auth::attempt($request->only(['email', 'password']))) {
 
-                //Время жизни сессии 120мин в config/session.php
-                $request->session()->regenerate();
-
                 return response()->json([
                     'status' => false,
                     'message' => 'Email & Password does not match with our record.',
@@ -93,6 +90,7 @@ class AuthController extends Controller
             }
 
             $user=User::where("email",$request["email"])->firstOrFail();
+
 
             return response()->json([
                 "message" => "Authenticated",
