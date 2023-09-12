@@ -49,3 +49,8 @@ Route::middleware(['auth:sanctum'])->group(function() {
     Route::get('email-verification', [EmailVerificationController::class, 'sendEmailVerification'])
         ->middleware('throttle:5,1');
 });
+
+
+//@TODO Сделать проверку принадлежности токена к пользователю.
+//Middleware/VerifyTokenMiddleware.php
+//Route::middleware(['auth:sanctum', 'VerifyToken'])->group(function() {
