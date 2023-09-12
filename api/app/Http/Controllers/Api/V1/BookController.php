@@ -3,15 +3,25 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BookCreateRequest;
+use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookHasCategoryResource;
-use App\Http\Resources\BookResource;
+
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Collection;
+
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookController extends Controller
 {
-
+//$book = [
+//'title' => 'book name 1',
+//'author' => 'author name 1 ',
+//'company' => 'company name 1',
+//'description' => 'book description 1',
+//'age' => 1969,
+//'image' => 'image path 1',
+//'price' => 5700,
+//];
 
     public function index(): AnonymousResourceCollection
     {
@@ -28,20 +38,20 @@ class BookController extends Controller
     }
 
 
-    public function create($book)
+    public function create(BookCreateRequest $request)
     {
-        $book = [
-            'title' => 'book name 1',
-            'author' => 'author name 1 ',
-            'company' => 'company name 1',
-            'description' => 'book description 1',
-            'age' => 1969,
-            'image' => 'image path 1',
-            'price' => 5700,
-        ];
+        $book = $request->validated();
 
-        Book::create($book);
+        $book = Book::create($book);
+        return redirect("/api/v1/books/show/{$book->id}");
+    }
 
+    public function update(BookUpdateRequest $request)
+    {
+        $book = Book::update($request->validated());
+
+        $book = Book::update($book);
+        return redirect("/api/v1/books/show/{$book->id}");
     }
 
     public function hasCategory($bookId)
