@@ -22,8 +22,8 @@ class EmailVerificationNotification extends Notification
      */
     public function __construct()
     {
-        $this->message = 'Please use the code below for the verification process.';
-        $this->subject = 'Email verification';
+        $this->message = 'Для подтверждения своей учетной записи, пожалуйста, используйте код, указанный ниже.';
+        $this->subject = 'Подтверждение электронной почты';
         $this->fromEmail = 'test@qmail.cock';
         $this->mailer = 'smtp';
         $this->otp = new Otp();
@@ -49,9 +49,9 @@ class EmailVerificationNotification extends Notification
         return (new MailMessage)
             ->mailer('smtp')
             ->subject($this->subject)
-            ->greeting('Hello, '. $notifiable->first_name)
+            ->greeting('Здравствуйте, '. $notifiable->first_name)
             ->line($this->message)
-            ->line('Your code: ' . $otp->token);
+            ->line('Ваш код: ' . $otp->token);
     }
 
     /**
