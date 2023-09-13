@@ -28,7 +28,8 @@ class AuthController extends Controller
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::default()]
+            'password' => ['required', 'confirmed', Password::default()],
+            'yo' => ['numeric', 'between:1920,'.date('Y')],
         ]);
 
         $user = User::create([
@@ -85,7 +86,7 @@ class AuthController extends Controller
 
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    'message' => 'Пользователь с таким e-mail и паролем не найден.',
                 ], 401);
             }
 
