@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookCreateRequest extends FormRequest
+class CategoryCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,14 +22,8 @@ class BookCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:191',
-            'author' => 'required|string|max:191',
-            'company' => 'required|string',
-            'description' => 'required|string',
-            'age' => 'required|int',
-            'status' =>  'required|string',
-            'image' => 'required|string',
-            'price' => 'required|int',
+            'title' => ['string', 'max:191'],
+            'description' => 'string',
         ];
     }
 }

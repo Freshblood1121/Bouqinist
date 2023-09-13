@@ -22,6 +22,7 @@ class BookUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id' => 'required|string|max:36',
             'title' => 'string|max:191',
             'author' => 'string|max:191',
             'company' => 'string',

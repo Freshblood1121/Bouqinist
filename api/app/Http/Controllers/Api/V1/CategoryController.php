@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryDeleteRequest;
 use App\Http\Resources\BookResource;
 use App\Http\Resources\CategoryResource;
 use App\Models\Book;
@@ -32,12 +33,18 @@ class CategoryController extends Controller
         return CategoryResource::collection(Category::with('books')->get());
     }
 
-    public function create(CategoryUpdateRequest $request)
+    public function create(CategoryCreateRequest $request)
     {
         $category = $request->validated();
 
         Category::create($category);
         return redirect('/');
+    }
+
+    public function delete(CategoryDeleteRequest $request)
+    {
+        Category::find($request->id)->delete();
+        return redirect("/api/v1/categories/");
     }
 
     public function hasBook($categoryId)
