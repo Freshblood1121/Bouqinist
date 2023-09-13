@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\V1\BookController;
+use App\Http\Controllers\Api\V1\BookHasCategoryController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,11 +23,26 @@ Route::middleware('api')->group(function () {
 //Удалить книгу
     Route::get('/books/delete/', [BookController::class, 'delete']);
 
+//Создать связь книги с категорией
+    Route::put("/book-has-category/create/", [BookHasCategoryController::class, 'create']);
+
+//Изменить некоторые поля книги
+    Route::get('/books/update/', [BookController::class, 'update']);
+
+//Удалить книгу
+    Route::get('/books/delete/', [BookController::class, 'delete']);
+
 //Получить все категории
     Route::get('/categories/', [CategoryController::class, 'index']);
 
 //Получить категорию по id
-    Route::get('/categories/{category_id}', [CategoryController::class, 'index']);
+    Route::get('/categories/show/{category_id}', [CategoryController::class, 'show']);
+
+//Создать категорию
+    Route::put('/categories/create', [CategoryController::class, 'create']);
+
+//Удалить категорию
+    Route::delete('/categories/delete', [CategoryController::class, 'delete']);
 
 //Получить категории принадлежащие книгам(BOOK->CATEGORY)
     Route::get('/books/has/{book_id}', [BookController::class, 'hasCategory']);

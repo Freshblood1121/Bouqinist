@@ -10,6 +10,7 @@ use App\Http\Resources\BookHasCategoryResource;
 
 use App\Models\Book;
 
+use App\Models\BookHasCategory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class BookController extends Controller
@@ -32,7 +33,8 @@ class BookController extends Controller
 
     public function create(BookCreateRequest $request)
     {
-        $book = Book::create($request->validated());
+
+        $book = BookHasCategory::create($request->validated());
 
         return redirect("/api/v1/books/show/{$book->id}");
     }
@@ -47,7 +49,8 @@ class BookController extends Controller
 
     public function delete(BookDeleteRequest $request)
     {
-        Book::find($request->id)->delete();
+        Book::query()->find($request->id)->forceDelete();
+//        Book::find($request->id)->delete();
         return redirect("/api/v1/books/");
     }
 
