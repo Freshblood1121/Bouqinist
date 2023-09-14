@@ -41,6 +41,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     //Данные о себе
     Route::get('/me', [AuthController::class, 'me']);
 
+    //Обновление информации о себе
+    Route::put('/me/update', [AuthController::class, 'updateUser']);
+
     //Верификация почты
     Route::post('email-verification', [EmailVerificationController::class, 'email_verification'])
         ->middleware('throttle:5,1');
@@ -50,7 +53,11 @@ Route::middleware(['auth:sanctum'])->group(function() {
         ->middleware('throttle:5,1');
 });
 
-
 //@TODO Сделать проверку принадлежности токена к пользователю.
 //Middleware/VerifyTokenMiddleware.php
 //Route::middleware(['auth:sanctum', 'VerifyToken'])->group(function() {
+
+//email: geekbrains@mail.com
+//password: *********
+
+//token: "171|ByHs31S4LKRqfGJ99eUWiy0w0ogO7KwMySdoyERm7c4aee00"
