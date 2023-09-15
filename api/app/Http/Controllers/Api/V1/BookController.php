@@ -39,7 +39,7 @@ class BookController extends Controller
     }
 
 
-    public function update(BookUpdateRequest $request)
+    public function update(BookUpdateRequest $request): JsonResponse
     {
         $book = Book::find($request->id);
         $book->update($request->validated());

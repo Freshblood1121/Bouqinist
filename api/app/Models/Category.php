@@ -19,6 +19,10 @@ class Category extends Model
         'updated_at',
     ];
 
+    public static function find($id)
+    {
+    }
+
     public function books(): BelongsToMany
     {
         return $this->belongsToMany(Book::class, 'books_has_categories');

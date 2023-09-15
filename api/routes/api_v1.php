@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\BookController;
-use App\Http\Controllers\Api\V1\BookHasCategoryController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,12 +30,6 @@ Route::group(['middleware' => ['api']], function () {
 
     //Получить категорию по id
     Route::get('/categories/show/{category_id}', [CategoryController::class, 'show']);
-
-    //Создать категорию
-    Route::post('/categories/create', [CategoryController::class, 'create']);
-
-    //Удалить категорию
-    Route::delete('/categories/delete', [CategoryController::class, 'delete']);
 
     //Получить категории принадлежащие книгам(BOOK->CATEGORY)
     Route::get('/books/has/{book_id}', [BookController::class, 'hasCategory']);
