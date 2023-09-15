@@ -34,4 +34,5 @@ class BookCreateRequest extends FormRequest
             'categories' => 'required|string',
         ];
     }
+    //@TODO Сделать такую же логику валидации для пользователей
 }

@@ -8,66 +8,57 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
-//Получить все книги
-Route::middleware('api')->group(function () {
-    Route::get('/books/', [BookController::class, 'index']);
 //Публичные маршруты
 Route::group(['middleware' => ['api']], function () {
-    //Получить все книги
-    Route::get('/books', [BookController::class, 'all']);
 
-//Получить книгу по id
+    Route::get('/books/', [BookController::class, 'index']);
+
+    //Получить книгу по id
     Route::get('/books/show/{book_id}', [BookController::class, 'show']);
 
-//Создать книгу
+    //Создать книгу
+    //Надо передавать все ключи/поля таблицы books
     Route::post('/books/create/', [BookController::class, 'create']);
 
-//Изменить некоторые поля книги
-    Route::post('/books/update/', [BookController::class, 'update']);
+    //Изменить некоторые поля книги
+    Route::put('/books/update/', [BookController::class, 'update']);
 
-//Удалить книгу
-    Route::post('/books/delete/', [BookController::class, 'delete']);
+    //Удалить книгу
+    Route::delete('/books/delete/', [BookController::class, 'delete']);
 
-//Изменить некоторые поля книги
-    Route::get('/books/update/', [BookController::class, 'update']);
-
-//Удалить книгу
-    Route::get('/books/delete/', [BookController::class, 'delete']);
-
-//Получить все категории
+    //Получить все категории
     Route::get('/categories/', [CategoryController::class, 'index']);
 
-//Получить категорию по id
+    //Получить категорию по id
     Route::get('/categories/show/{category_id}', [CategoryController::class, 'show']);
 
-//Создать категорию
-    Route::put('/categories/create', [CategoryController::class, 'create']);
+    //Создать категорию
+    Route::post('/categories/create', [CategoryController::class, 'create']);
 
-//Удалить категорию
+    //Удалить категорию
     Route::delete('/categories/delete', [CategoryController::class, 'delete']);
 
-//Получить категории принадлежащие книгам(BOOK->CATEGORY)
+    //Получить категории принадлежащие книгам(BOOK->CATEGORY)
     Route::get('/books/has/{book_id}', [BookController::class, 'hasCategory']);
-});
-//Получить книги принадлежащие категориям(CATEGORY->BOOK)
-    Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook']);
 
-//Регистрация (http://bouqinist:80/api/v1/register)
-    Route::post('/register', [AuthController::class, 'register']);
     //Получить книги принадлежащие категориям(CATEGORY->BOOK)
     Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook']);
+
 });
 
-    //Регистрация
-    //http://bouqinist:80/api/v1/register
-    Route::post('/register', [AuthController::class, 'createUser']);
+//Регистрация (http://bouqinist:80/api/v1/register)
+Route::post('/register', [AuthController::class, 'register']);
 
-    //Авторизация
-    //http://bouqinist:80/api/v1/login
-    Route::post('/login', [AuthController::class, 'login']);
+//Регистрация
+//http://bouqinist:80/api/v1/register
+Route::post('/register', [AuthController::class, 'createUser']);
+
+//Авторизация
+//http://bouqinist:80/api/v1/login
+Route::post('/login', [AuthController::class, 'login']);
 
 //Защищёные маршруты
-Route::middleware(['auth:sanctum'])->group(function() {
+Route::middleware(['auth:sanctum'])->group(function () {
 
     //Данные о себе
     Route::get('/me', [AuthController::class, 'me']);
