@@ -3,32 +3,38 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-
-use App\Http\Resources\CategoryHasBookResource;
-
+use App\Http\Requests\BookHasCategoryRequest;
+use App\Http\Requests\CategoryCreateRequest;
+use App\Http\Requests\CategoryDeleteRequest;
+use App\Http\Resources\BookResource;
+use App\Http\Resources\CategoryResource;
+use App\Models\Book;
 use App\Models\Category;
-
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryController extends Controller
 {
-
-    /**
-     * @param $id
-     * @return CategoryHasBookResource
-     */
-    public function index($id): CategoryHasBookResource
-    {
-        return new CategoryHasBookResource(Category::findOrFail($id));
-    }
-
     /**
      * @return AnonymousResourceCollection
      */
-    public function all(): AnonymousResourceCollection
+    public function index()
     {
-        return CategoryHasBookResource::collection(Category::with('books')->get()->toQuery()->paginate(20));
+        return CategoryResource::collection(Category::with('books')->get());
     }
+
+
+    /**
+     * @param $id
+     * @return CategoryResource
+     */
+    public function show($id)
+    {
+        return new CategoryResource(Category::find($id));
+    }
+
+
 
     public function hasBook($categoryId)
     {

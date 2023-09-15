@@ -30,7 +30,6 @@ class BookFactory extends Factory
             'created_at' => now(),
             'updated_at' => now(),
             'price' => fake()->numberBetween(10, 50000),
-            'category_id' => fake()->uuid(),
         ];
     }
 }
