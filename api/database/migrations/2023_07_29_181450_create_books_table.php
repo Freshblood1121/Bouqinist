@@ -17,9 +17,11 @@ return new class extends Migration
             $table->string('title', 191);
             $table->string('author', 191);
             $table->text('company');
+            $table->string('description');
             $table->integer('age');
             $table->enum('status', BooksStatus::all());
             $table->text('image');
+            $table->integer('price');
             $table->timestamps();
         });
     }

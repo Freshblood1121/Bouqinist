@@ -27,9 +27,9 @@ class BookFactory extends Factory
             'age' => fake()->year(),
             'status' => BooksStatus::MEDIUM->value,
             'image' => fake()->imageUrl(),
+            'price' => fake()->numberBetween(10, 50000),
             'created_at' => now(),
             'updated_at' => now(),
-            'price' => fake()->numberBetween(10, 50000),
         ];
     }
 }

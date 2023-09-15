@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-
 //Публичные маршруты
 Route::group(['middleware' => ['api']], function () {
 
