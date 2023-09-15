@@ -13,6 +13,9 @@ import MainPage from "./MainPage/MainPage";
 import AdvertismentPage from "./AdvertismentPage/AdvertismentPage";
 import CategoryPage from "./CategoryPage/CategoryPage";
 import CategoryCardBox from "./CategoryPage/CategoryCardBox/CategoryCardBox";
+import ScrollToTop from "./ScrollToTop";
+import SignupPage from "./SignupPage/SignupPage";
+import VerificationPage from "./VerificationPage/VerificationPage";
 
 const Router = createBrowserRouter([
   {
@@ -21,7 +24,11 @@ const Router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <ScrollToTop>
+        <Layout />
+      </ScrollToTop>
+    ),
     children: [
       {
         path: "",
@@ -32,20 +39,24 @@ const Router = createBrowserRouter([
         element: <AdvertismentPage />,
       },
       {
-        path: "/categories/*",
+        path: "/categories/",
         element: <CategoryPage />,
         children: [
-          {
-            path: "all",
-            element: <CategoryCardBox />,
-          },
           {
             path: ":categoryId?",
             element: <CategoryCardBox />,
           },
         ],
       },
+      {
+        path: "/account/confirm/:params",
+        element: <VerificationPage />,
+      },
     ],
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
   },
 ]);
 

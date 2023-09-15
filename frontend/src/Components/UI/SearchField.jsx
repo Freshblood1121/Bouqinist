@@ -7,7 +7,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import SearchIconComponent from "../Icons/SearchIconComponent";
+import SearchIconComponent from "./Icons/SearchIconComponent";
 
 const theme = createTheme({
   components: {

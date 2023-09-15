@@ -7,9 +7,8 @@ use App\Http\Requests\BookCreateRequest;
 use App\Http\Requests\BookDeleteRequest;
 use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookHasCategoryResource;
-
 use App\Models\Book;
-
+use Illuminate\Database\Eloquent\Collection;
 use App\Models\BookHasCategory;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -29,7 +28,7 @@ class BookController extends Controller
     {
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
-    
+
     public function create(BookCreateRequest $request)
     {
 

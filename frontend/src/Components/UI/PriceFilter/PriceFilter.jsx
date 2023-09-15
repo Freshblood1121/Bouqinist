@@ -7,9 +7,12 @@ import {
   outlinedInputClasses,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { palette } from "../../../Utils/Constants";
+import { REQUEST_STATUS, palette } from "../../../Utils/Constants";
 import Slider from "@mui/material/Slider";
 import "./PriceFilter.css";
+import { useDispatch, useSelector } from "react-redux";
+import { booksSelectors } from "../../../Store";
+import { setFilters } from "../../../Store/books/actions";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -71,30 +74,65 @@ const theme = createTheme({
 });
 
 const PriceFilter = () => {
-  const minPrice = 1;
-  const maxPrice = 999999;
-  useEffect(() => {
-    const minPrice = 1;
-    const maxPrice = 999999;
-  }, []);
+  const inititalPriceRange = useSelector(booksSelectors.inititalPriceRange);
 
-  const [priceRange, setPriceRange] = useState([0, 50000]);
-  // const [minPriceRangeValue, setMinPriceRangeValue] = useState(minPrice);
+  const filteredPriceRange = useSelector(booksSelectors.filteredPriceRange);
+
+  const minPrice = inititalPriceRange[0];
+  const maxPrice = inititalPriceRange[1];
+
+  const [values, setValues] = useState(filteredPriceRange);
+
+  useEffect(() => {
+    setValues(filteredPriceRange);
+  }, [filteredPriceRange]);
+
+  const requestStatus = useSelector(booksSelectors.requestStatus);
+
+  const dispatch = useDispatch();
 
   const handlePriceChange = (event, newValue) => {
-    setPriceRange(newValue);
+    setValues(newValue);
+  };
+
+  const handleChangeCommitted = (event, newValue) => {
+    dispatch(
+      setFilters({
+        priceRange: {
+          initial: [...inititalPriceRange],
+          filtered: values,
+        },
+      })
+    );
   };
 
   const handleMinPriceChange = (event) => {
     event.preventDefault();
-    setPriceRange([Number(event.target.value), priceRange[1]]);
-    console.log(priceRange);
+    setValues([Number(event.target.value), values[1]]);
+    dispatch(
+      setFilters({
+        priceRange: {
+          initial: [...inititalPriceRange],
+          filtered: values,
+        },
+      })
+    );
   };
 
   const handleMaxPriceChange = (event) => {
     event.preventDefault();
-    setPriceRange([priceRange[0], Number(event.target.value)]);
-    console.log(priceRange);
+    setValues([values[0], Number(event.target.value)]);
+  };
+
+  const handleBlur = (event) => {
+    dispatch(
+      setFilters({
+        priceRange: {
+          initial: [...inititalPriceRange],
+          filtered: values,
+        },
+      })
+    );
   };
 
   const valuetext = (value) => {
@@ -112,8 +150,9 @@ const PriceFilter = () => {
               maxLength: 10,
             }}
             notched={false}
-            value={priceRange[0]}
+            value={values[0]}
             onChange={handleMinPriceChange}
+            onBlur={handleBlur}
           />
         </FormControl>
         <FormControl variant="outlined">
@@ -124,15 +163,17 @@ const PriceFilter = () => {
               maxLength: 10,
             }}
             notched={false}
-            value={priceRange[1]}
+            value={values[1]}
             onChange={handleMaxPriceChange}
+            onBlur={handleBlur}
           />
         </FormControl>
         <Slider
           className="price-slider"
           getAriaLabel={() => "Price range"}
-          value={priceRange}
+          value={values}
           onChange={handlePriceChange}
+          onChangeCommitted={handleChangeCommitted}
           valueLabelDisplay="off"
           getAriaValueText={valuetext}
           color={"primary"}

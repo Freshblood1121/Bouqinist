@@ -13,7 +13,9 @@ import { keyframes } from "@emotion/react";
 import { palette } from "../../Utils/Constants";
 import { CaretDown } from "@phosphor-icons/react";
 import DropdownIcon from "./DropdownIcon";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories, selectCategory } from "../../Store/categories/actions";
 
 const breakpointsTheme = createTheme({
   breakpoints: {
@@ -104,6 +106,23 @@ const theme = createTheme({
           boxShadow: "none",
           border: "2px solid var(--Select-brandBorderColor)",
           borderRadius: "20px",
+          scrollbarWidth: "thin",
+          scrollbarColor: `${palette.hover} transparent`,
+          [`&::-webkit-scrollbar`]: {
+            width: "5px",
+          },
+          [`&::-webkit-scrollbar-track`]: {
+            backgroundColor: "transparent",
+            marginTop: "10px",
+            marginBottom: "10px",
+          },
+          [`&::-webkit-scrollbar-track-piece`]: {
+            backgroundColor: "transparent",
+          },
+          [`&::-webkit-scrollbar-thumb`]: {
+            borderRadius: "10px",
+            backgroundColor: `${palette.light}`,
+          },
         },
       },
     },
@@ -111,6 +130,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           paddingTop: "6px",
+          maxHeight: `${36 * 5}px`,
         },
       },
     },
@@ -125,22 +145,45 @@ const theme = createTheme({
             borderTop: `2px solid ${palette.basic}`,
             borderBottom: `2px solid ${palette.basic}`,
           },
+          [`& a`]: {
+            width: "100%",
+          },
         },
       },
     },
   },
 });
 
-const CategorySelect = ({ categories }) => {
-  console.log(categories);
-  const [category, setCategory] = useState("");
+const CategorySelect = () => {
+  const categories = useSelector((store) => store.categories.categories);
+  const chosenCategory = useSelector(
+    (store) => store.categories.chosenCategory
+  );
+
+  const [category, setCategory] = useState(chosenCategory);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getCategories(dispatch);
+  }, []);
 
   const handleChange = (event) => {
+    // event.preventDefault();
     setCategory(event.target.value);
+    console.log(
+      categories.find((element) => element.title === `${event.target.value}`)
+    );
+    dispatch(
+      selectCategory(
+        // categories.find((element) => element.title === `${
+        event.target.value
+        // }`)
+      )
+    );
   };
 
   // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
-
   const inputComponent = useRef(null);
   const [position, setPosition] = useState(0);
 
@@ -159,13 +202,25 @@ const CategorySelect = ({ categories }) => {
   return (
     <ThemeProvider theme={theme}>
       <FormControl variant="outlined">
-        {category == "" ? (
+        {chosenCategory == "" ? (
           <InputLabel shrink={false}>Категории</InputLabel>
         ) : null}
         <Select
           ref={inputComponent}
           MenuProps={{
-            PaperProps: { sx: { top: `${position}px !important` } },
+            // anchorOrigin: {
+            //   vertical: "bottom",
+            //   horizontal: "left",
+            // },
+            // transformOrigin: {
+            //   vertical: "top",
+            //   horizontal: "left",
+            // },
+            PaperProps: {
+              sx: {
+                top: `${position}px !important`,
+              },
+            },
           }}
           id="simple-select"
           value={category}
@@ -173,16 +228,10 @@ const CategorySelect = ({ categories }) => {
           IconComponent={IconComponent}
           fullWidth
         >
-          {/* <MenuItem value={"Все"}>Все</MenuItem>
-          <MenuItem value={"Художественные"}>Художественные</MenuItem>
-          <MenuItem value={"Научные"}>Научные</MenuItem>
-          <MenuItem value={"Научно-популярные"}>Научно-популярные</MenuItem>
-          <MenuItem value={"Учебные"}>Учебные</MenuItem>
-          <MenuItem value={"Справочные"}>Справочные</MenuItem>
-          <MenuItem value={"Полиграфия"}>Полиграфия</MenuItem> */}
           <MenuItem value={"Все"}>
             <Link to={"all"}>Все</Link>
           </MenuItem>
+
           {categories.map((categoryItem) => (
             <MenuItem key={categoryItem.id} value={categoryItem.title}>
               <Link to={`${categoryItem.id}`}>{categoryItem.title}</Link>

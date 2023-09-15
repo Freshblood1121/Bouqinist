@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Catalog.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooksData } from "../../../Store/books/actions";
+import { getAllBooksData } from "../../../Store/books/actions";
 import CatalogSection from "./CatalogSection/CatalogSection";
 
 const Catalog = () => {
@@ -9,7 +9,7 @@ const Catalog = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getBooksData(dispatch);
+    getAllBooksData(dispatch);
   }, []);
 
   const categories = [
