@@ -32,6 +32,7 @@ class AuthController extends Controller
             'email' => ['required', 'email', 'regex:/@/', 'max:191', 'unique:users'],
             'password' => ['required', 'confirmed', Password::default()],
             'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+            //строка проверяется на формат даты 01.01.1900
             'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
         ]);
 
@@ -141,6 +142,7 @@ class AuthController extends Controller
                 'errors' => $validateData->errors()
             ], 404);
         }
+                //Обновление информации пользователя
                 $request->user()->update($request->all());
 
                 return response()->json([
