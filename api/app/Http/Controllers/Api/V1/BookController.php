@@ -33,7 +33,7 @@ class BookController extends Controller
     public function create(BookCreateRequest $request)
     {
 
-        $book = BookHasCategory::create($request->validated());
+        $book = Book::create($request->validated());
 
         return redirect("/api/v1/books/show/{$book->id}");
     }

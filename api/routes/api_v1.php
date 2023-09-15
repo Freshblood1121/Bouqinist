@@ -18,13 +18,10 @@ Route::middleware('api')->group(function () {
     Route::post('/books/create/', [BookController::class, 'create']);
 
 //Изменить некоторые поля книги
-    Route::get('/books/update/', [BookController::class, 'update']);
+    Route::post('/books/update/', [BookController::class, 'update']);
 
 //Удалить книгу
-    Route::get('/books/delete/', [BookController::class, 'delete']);
-
-//Создать связь книги с категорией
-    Route::put("/book-has-category/create/", [BookHasCategoryController::class, 'create']);
+    Route::post('/books/delete/', [BookController::class, 'delete']);
 
 //Изменить некоторые поля книги
     Route::get('/books/update/', [BookController::class, 'update']);
