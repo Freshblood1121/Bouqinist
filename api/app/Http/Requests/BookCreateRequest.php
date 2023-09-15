@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookCreateRequest extends FormRequest
@@ -30,6 +31,7 @@ class BookCreateRequest extends FormRequest
             'status' =>  'required|string',
             'image' => 'required|string',
             'price' => 'required|int',
+            'categories' => 'required|string',
         ];
     }
 }

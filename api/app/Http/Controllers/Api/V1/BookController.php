@@ -29,8 +29,7 @@ class BookController extends Controller
     {
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
-
-
+    
     public function create(BookCreateRequest $request)
     {
 
@@ -38,6 +37,7 @@ class BookController extends Controller
 
         return redirect("/api/v1/books/show/{$book->id}");
     }
+
 
     public function update(BookUpdateRequest $request)
     {

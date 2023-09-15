@@ -15,7 +15,7 @@ Route::middleware('api')->group(function () {
     Route::get('/books/show/{book_id}', [BookController::class, 'show']);
 
 //Создать книгу
-    Route::put("/books/create/", [BookController::class, 'create']);
+    Route::post('/books/create/', [BookController::class, 'create']);
 
 //Изменить некоторые поля книги
     Route::get('/books/update/', [BookController::class, 'update']);
