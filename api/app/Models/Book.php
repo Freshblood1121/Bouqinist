@@ -10,8 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
-    use Uuids;
+
     use HasFactory;
+    use Uuids;
 
     protected $fillable = [
         'title',
@@ -23,6 +24,7 @@ class Book extends Model
         'price',
         'created_at',
         'updated_at',
+        'category_id'
     ];
 
     public function categories(): BelongsToMany

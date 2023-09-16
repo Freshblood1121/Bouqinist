@@ -21,16 +21,15 @@ class BookFactory extends Factory
         return [
             'id' => fake()->uuid(),
             'title' => fake()->jobTitle(),
-            'category_id' => fake()->uuid(),
             'author' => fake()->name(),
             'company' => fake()->company(),
             'description'=> fake()->text(100),
             'age' => fake()->year(),
             'status' => BooksStatus::MEDIUM->value,
             'image' => fake()->imageUrl(),
+            'price' => fake()->numberBetween(10, 50000),
             'created_at' => now(),
             'updated_at' => now(),
-            'price' => fake()->numberBetween(10, 50000),
         ];
     }
 }

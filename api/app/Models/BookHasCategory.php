@@ -14,6 +14,8 @@ class BookHasCategory extends Model
     protected $table = 'books_has_categories';
 
     protected $fillable = [
+        'category_id',
+        'book_id',
         'created_at',
         'updated_at',
     ];
