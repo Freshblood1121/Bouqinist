@@ -1,0 +1,508 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bouqinist API Documentation",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Регистрация пользователей.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "first_name": {
+                                                "type": "string",
+                                                "example": "Genady"
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Ivanov"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "example": "ivanov@mail.ru"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "12345678"
+                                            },
+                                            "password_confirmation": {
+                                                "type": "string",
+                                                "example": "12345678"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Authenticated"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Genady"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Ivanov"
+                                                },
+                                                "gender": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "yo": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "ivanov@mail.ru"
+                                                },
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "2843968d-2b0e-470f-821d-ec7ca9783bc0"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-16T17:01:28.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-16T17:01:28.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|yMu7HwM4REVBPEuHs6SKh5nOBEhb9p4fODm3KLdy0df06317"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Авторизация пользователей.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "ivanov@mail.ru"
+                                            },
+                                            "password": {
+                                                "type": "string",
+                                                "example": "12345678"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Authenticated"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "2843968d-2b0e-470f-821d-ec7ca9783bc0"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Genady"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Ivanov"
+                                                },
+                                                "gender": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "yo": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "ivanov@mail.ru"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "is_admin": {
+                                                    "type": "string",
+                                                    "example": 0
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-16T17:01:28.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-16T17:01:28.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|yMu7HwM4REVBPEuHs6SKh5nOBEhb9p4fODm3KLdy0df06317"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/me": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Информация о пользователе.",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Authenticated"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "example": "2843968d-2b0e-470f-821d-ec7ca9783bc0"
+                                                },
+                                                "first_name": {
+                                                    "type": "string",
+                                                    "example": "Genady"
+                                                },
+                                                "last_name": {
+                                                    "type": "string",
+                                                    "example": "Ivanov"
+                                                },
+                                                "gender": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "yo": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "phone": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "country": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "city": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "avatar": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "ivanov@mail.ru"
+                                                },
+                                                "email_verified_at": {
+                                                    "type": "string",
+                                                    "example": null
+                                                },
+                                                "is_admin": {
+                                                    "type": "string",
+                                                    "example": 0
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-16T17:01:28.000000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2023-09-16T17:01:28.000000Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|yMu7HwM4REVBPEuHs6SKh5nOBEhb9p4fODm3KLdy0df06317"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/me/update": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Обновление информации о пользователе.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "first_name": {
+                                                "type": "string",
+                                                "example": "Genady"
+                                            },
+                                            "last_name": {
+                                                "type": "string",
+                                                "example": "Ivanov"
+                                            },
+                                            "gender": {
+                                                "type": "string",
+                                                "example": "Мужской"
+                                            },
+                                            "yo": {
+                                                "type": "string",
+                                                "example": "01.03.1998"
+                                            },
+                                            "phone": {
+                                                "type": "string",
+                                                "example": "+79999999999"
+                                            },
+                                            "country": {
+                                                "type": "string",
+                                                "example": "Russia"
+                                            },
+                                            "city": {
+                                                "type": "string",
+                                                "example": "Moscow"
+                                            },
+                                            "avatar": {
+                                                "type": "string",
+                                                "example": "img\\jhvujvuyvuvuvuyv"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User updated successfully."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/email-verification": {
+            "get": {
+                "tags": [
+                    "Mails"
+                ],
+                "summary": "Повторная отправка письма на почту.",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Mails"
+                ],
+                "summary": "Проверка кода для верификации почты.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "email": {
+                                                "type": "string",
+                                                "example": "ivanov@mail.ru"
+                                            },
+                                            "otp": {
+                                                "type": "string",
+                                                "example": "873492"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "string",
+                                            "example": "true"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

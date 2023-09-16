@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 //Публичные маршруты
@@ -57,7 +58,3 @@ Route::middleware(['auth:sanctum'])->group(function() {
 //Middleware/VerifyTokenMiddleware.php
 //Route::middleware(['auth:sanctum', 'VerifyToken'])->group(function() {
 
-//email: geekbrains@mail.com
-//password: *********
-
-//token: "171|ByHs31S4LKRqfGJ99eUWiy0w0ogO7KwMySdoyERm7c4aee00"
