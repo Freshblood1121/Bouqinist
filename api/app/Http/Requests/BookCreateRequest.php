@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BookCreateRequest extends FormRequest
 {
@@ -30,7 +31,8 @@ class BookCreateRequest extends FormRequest
             'status' =>  'required|string',
             'image' => 'required|string',
             'price' => 'required|int',
-            'categories' => 'required|string',
+            'categories' =>'required|string',
+
         ];
     }
     //@TODO Сделать такую же логику валидации для пользователей

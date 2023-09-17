@@ -9,6 +9,7 @@ use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookHasCategoryResource;
 use App\Models\Book;
 use App\Models\BookHasCategory;
+use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -31,12 +32,17 @@ class BookController extends Controller
 
     public function create(BookCreateRequest $request): JsonResponse
     {
+
         $book = Book::create($request->validated());
 
+
+        $category_id = Category::query()
+            ->where('title', $request->categories)->get()[0]->id;
         BookHasCategory::create([
-            'category_id' => $request->categories,
+            'category_id' => $category_id,
             'book_id' => $book->id
         ]);
+
 
         return response()->json([
             'status' => true,
@@ -49,6 +55,7 @@ class BookController extends Controller
     {
         Book::find($request->id)
             ->update($request->validated());
+
 
         return response()->json([
             'status' => true,
