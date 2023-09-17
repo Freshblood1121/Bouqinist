@@ -497,11 +497,30 @@
             }
         },
         "/api/v1/books": {
-            "get": {
+            "post": {
                 "tags": [
                     "Books"
                 ],
                 "summary": "Получить 10 последних добавленных книг из таблицы books.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "page": {
+                                                "type": "integer",
+                                                "example": "3"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Ok",

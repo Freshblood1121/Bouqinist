@@ -196,14 +196,22 @@ use App\Http\Controllers\Controller;
  *     ),
  * ),
  *
- * @OA\Get (
+ * @OA\Post (
  *     path="/api/v1/books",
  *     summary="Получить 10 последних добавленных книг из таблицы books.",
  *     tags={"Books"},
- *
- *     @OA\Response (
+ *     @OA\RequestBody (
  *         @OA\JsonContent(
- *             @OA\Property (property="data", type="object",
+ *             allOf={
+ *                 @OA\Schema(
+ *                     @OA\Property (property="page", type="integer", example="3"),
+ *                 ),
+ *             }
+ *         ),
+ *     ),
+ *         @OA\Response (
+ *             @OA\JsonContent(
+ *                 @OA\Property (property="data", type="object",
  *                 @OA\Property(property="id", type="string", example="0285a4e8-f588-3d0c-9e21-734b834f2f00"),
  *                 @OA\Property(property="title", type="string", example="Usher"),
  *                 @OA\Property(property="author", type="string", example="Orie Schmitt"),

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['api']], function () {
 
     //Выдача последних добавленных 10ти книг
-    Route::get('/books/', [BookController::class, 'index']);
+    Route::post('/books', [BookController::class, 'index']);
 
     //Получить книгу по id
     Route::get('/books/show/{book_id}', [BookController::class, 'show']);
@@ -27,18 +27,13 @@ Route::group(['middleware' => ['api']], function () {
     //Получить книги принадлежащие категориям(CATEGORY->BOOK)
     Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook']);
 
+    //Регистрация
+    Route::post('/register', [AuthController::class, 'createUser']);
+
+    //Авторизация
+    Route::post('/login', [AuthController::class, 'login']);
+
 });
-
-//Регистрация (http://bouqinist:80/api/v1/register)
-Route::post('/register', [AuthController::class, 'register']);
-
-//Регистрация
-//http://bouqinist:80/api/v1/register
-Route::post('/register', [AuthController::class, 'createUser']);
-
-//Авторизация
-//http://bouqinist:80/api/v1/login
-Route::post('/login', [AuthController::class, 'login']);
 
 //Защищёные маршруты
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -52,14 +47,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Удаление пользователя.
     Route::delete('/me/{id}', [AuthController::class, 'deleteUser']);
 
-    //Верификация почты
-    Route::post('email-verification', [EmailVerificationController::class, 'email_verification'])
-        ->middleware('throttle:5,1');
-
-    //Повторная отправка письма на почту
-    Route::get('email-verification', [EmailVerificationController::class, 'sendEmailVerification'])
-        ->middleware('throttle:5,1');
-
     //Создать книгу
     //Надо передавать все ключи/поля таблицы books
     Route::post('/books/create/', [BookController::class, 'create']);
@@ -69,6 +56,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Удалить книгу
     Route::delete('/books/delete/', [BookController::class, 'delete']);
+
+    //Верификация почты
+    Route::post('email-verification', [EmailVerificationController::class, 'email_verification'])
+        ->middleware('throttle:5,1');
+
+    //Повторная отправка письма на почту
+    Route::get('email-verification', [EmailVerificationController::class, 'sendEmailVerification'])
+        ->middleware('throttle:5,1');
 });
 
 //@TODO Сделать проверку принадлежности токена к пользователю.
