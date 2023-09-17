@@ -36,7 +36,7 @@ class BookController extends Controller
     {
         $book = Book::create($request->validated());
 
-        $bookHasCategories = BookHasCategory::create([
+        BookHasCategory::create([
             'category_id' => $request->categories,
             'book_id' => $book->id
         ]);
@@ -50,19 +50,19 @@ class BookController extends Controller
 
     public function update(BookUpdateRequest $request): JsonResponse
     {
-        $book = Book::find($request->id);
-        $book->update($request->validated());
+        Book::find($request->id)
+            ->update($request->validated());
 
         return response()->json([
-        'status' => true,
-        'message' => 'Book updated.',
-    ], 200);
+            'status' => true,
+            'message' => 'Book updated.',
+        ], 200);
     }
 
     public function delete(BookDeleteRequest $request)
     {
-        Book::query()->find($request->id)->forceDelete();
-//        Book::find($request->id)->delete();
+        Book::find($request->id)->forceDelete();
+
         return response()->json([
             'status' => true,
             'message' => 'Book deleted.',
