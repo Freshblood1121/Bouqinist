@@ -32,7 +32,7 @@ class BookController extends Controller
 
     public function getCategoryIdByName($request) {
         return Category::query()
-            ->where('title', $request->categories)->get()[0]->id;
+          ->where('title', $request->categories)->get()->first()->id;
     }
 
     public function create(BookCreateRequest $request): JsonResponse
@@ -78,6 +78,10 @@ class BookController extends Controller
     public function delete(BookDeleteRequest $request)
     {
         Book::find($request->id)->forceDelete();
+
+        $category_id = $this->getCategoryIdByName($request);
+
+        BookHasCategory::query()->delete();
 
         return response()->json([
             'status' => true,
