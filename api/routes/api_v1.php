@@ -68,7 +68,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/books/update/', [BookController::class, 'update']);
 
     //Удалить книгу
-    Route::delete('/books/delete/', [BookController::class, 'delete']);
+    Route::post('/books/delete/', [BookController::class, 'delete']);
+
 });
 
 //@TODO Сделать проверку принадлежности токена к пользователю.

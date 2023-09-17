@@ -12,6 +12,7 @@ use App\Models\BookHasCategory;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -28,11 +29,6 @@ class BookController extends Controller
     public function show($id): BookHasCategoryResource
     {
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
-    }
-
-    public function getCategoryIdByName($request) {
-        return Category::query()
-          ->where('title', $request->categories)->get()->first()->id;
     }
 
     public function create(BookCreateRequest $request): JsonResponse
@@ -56,7 +52,6 @@ class BookController extends Controller
 
     public function update(BookUpdateRequest $request): JsonResponse
     {
-
         Book::find($request->id)
             ->update($request->validated());
 
@@ -68,7 +63,6 @@ class BookController extends Controller
             ]);
         }
 
-
         return response()->json([
             'status' => true,
             'message' => 'Book updated.',
@@ -77,11 +71,24 @@ class BookController extends Controller
 
     public function delete(BookDeleteRequest $request)
     {
-        Book::find($request->id)->forceDelete();
+dd(1);
 
-        $category_id = $this->getCategoryIdByName($request);
+//        BookHasCategory::query()
+//            ->where('book_id', $request->id)
+//            ->get()
+//            ->first()
+//            ->delete();
 
-        BookHasCategory::query()->delete();
+//        $category_id = BookHasCategory::query()
+//            ->where('book_id', $request->validated())
+//            ->get()
+//            ->first()
+//            ->id;
+
+//       DB::select('DELETE FROM books WHERE id="fe0362ed-8722-4cfa-a5b0-9167e61a5db5" CASCADE');
+////
+        Book::query()->find($request->id)->delete();
+
 
         return response()->json([
             'status' => true,
@@ -95,4 +102,8 @@ class BookController extends Controller
         return $book->categories;
     }
 
+    private function getCategoryIdByName($request) {
+        return Category::query()
+            ->where('title', $request->categories)->get()->first()->id;
+    }
 }
