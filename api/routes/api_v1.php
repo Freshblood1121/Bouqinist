@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 //Публичные маршруты
 Route::group(['middleware' => ['api']], function () {
 
-    //Получить все книги из таблицы books
+    //Выдача последних добавленных 10ти книг
     Route::get('/books/', [BookController::class, 'index']);
 
     //Получить книгу по id
