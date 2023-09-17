@@ -23,6 +23,9 @@ use Illuminate\Http\Request;
  * ),
  *
  */
+
+//@TODO Разобрать аннотации по полочкам.
+
 class MainController extends Controller
 {
 
