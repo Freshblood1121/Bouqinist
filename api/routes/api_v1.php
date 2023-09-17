@@ -44,6 +44,9 @@ Route::middleware(['auth:sanctum'])->group(function() {
     //Обновление информации о себе
     Route::put('/me/update', [AuthController::class, 'updateUser']);
 
+    //Удаление пользователя.
+    Route::delete('/me/{id}', [AuthController::class, 'deleteUser']);
+
     //Верификация почты
     Route::post('email-verification', [EmailVerificationController::class, 'email_verification'])
         ->middleware('throttle:5,1');

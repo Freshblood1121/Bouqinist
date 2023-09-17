@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Notifications\EmailVerificationNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -93,13 +94,13 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            $user=User::where("email",$request["email"])->firstOrFail();
+            $user = User::where("email", $request["email"])->firstOrFail();
 
 
             return response()->json([
                 "message" => "Authenticated",
-                "user"=> $user,
-                "token"=> $request->bearerToken(),
+                "user" => $user,
+                "token" => $request->bearerToken(),
             ]);
 
         } catch (\Throwable $th) {
@@ -113,11 +114,11 @@ class AuthController extends Controller
     //Информация обо мне
     public function me(Request $request): JsonResponse
     {
-            return response()->json([
-                "message" => "Authenticated",
-                "user" => auth()->user(),
-                "token" => $request->bearerToken(),
-            ]);
+        return response()->json([
+            "message" => "Authenticated",
+            "user" => auth()->user(),
+            "token" => $request->bearerToken(),
+        ]);
     }
 
     public function updateUser(Request $request): JsonResponse
@@ -141,10 +142,29 @@ class AuthController extends Controller
                 'errors' => $validateData->errors()
             ], 404);
         }
-                $request->user()->update($request->all());
+        $request->user()->update($request->all());
 
-                return response()->json([
-                    'message' => 'User updated successfully'
-                ]);
+        return response()->json([
+            'message' => 'User updated successfully'
+        ], 200);
+    }
+
+    public function deleteUser($id): JsonResponse
+    {
+        try {
+
+            $user = User::findOrFail($id);
+            $user->delete();
+
+        } catch (\Exception) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found.',
+            ], 500);
         }
+        return response()->json([
+            'success' => true,
+            'message' => 'User deleted.'
+        ], 200);
+    }
 }
