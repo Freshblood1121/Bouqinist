@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Requests;
+use App\Enums\BooksStatus;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class BookCreateRequest extends FormRequest
 {
@@ -22,6 +24,7 @@ class BookCreateRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'title' => 'required|string|max:191',
             'author' => 'required|string|max:191',
@@ -31,7 +34,7 @@ class BookCreateRequest extends FormRequest
             'status' =>  'required|string',
             'image' => 'required|string',
             'price' => 'required|int',
-            'categories' =>'required|string',
+            'categories' => 'required|string',
 
         ];
     }

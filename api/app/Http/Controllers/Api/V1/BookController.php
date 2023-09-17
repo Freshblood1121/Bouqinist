@@ -32,7 +32,6 @@ class BookController extends Controller
 
     public function create(BookCreateRequest $request): JsonResponse
     {
-
         $book = Book::create($request->validated());
 
 
@@ -55,6 +54,15 @@ class BookController extends Controller
     {
         Book::find($request->id)
             ->update($request->validated());
+
+        if ($request->categories) {
+            $category_id = Category::query()
+                ->where('title', $request->categories)->get()[0]->id;
+
+            BookHasCategory::query()->update([
+                'category_id' => $category_id,
+            ]);
+        }
 
 
         return response()->json([

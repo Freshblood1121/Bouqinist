@@ -31,6 +31,7 @@ class BookUpdateRequest extends FormRequest
             'status' =>  'string',
             'image' => 'string',
             'price' => 'int',
+            'categories' => 'string',
         ];
     }
 }
