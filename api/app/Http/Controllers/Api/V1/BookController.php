@@ -33,12 +33,10 @@ class BookController extends Controller
     {
         $book = Book::create($request->validated());
 
-        dd($request);
         BookHasCategory::create([
-            'category_id' => '0f228d4b-45fb-3bd4-b822-06a943b912e6',
+            'category_id' => $request->categories,
             'book_id' => $book->id
         ]);
-
 
         return response()->json([
             'status' => true,
