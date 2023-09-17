@@ -17,7 +17,10 @@ class BookController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return BookHasCategoryResource::collection(Book::with('categories')->get());
+        $book = Book::with('categories')
+            ->latest()
+            ->paginate(10);
+        return BookHasCategoryResource::collection($book);
     }
 
     /**

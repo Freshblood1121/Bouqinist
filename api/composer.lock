@@ -1127,16 +1127,16 @@
         },
         {
             "name": "ichtrojan/laravel-otp",
-            "version": "v1.4.1",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ichtrojan/laravel-otp.git",
-                "reference": "3fe67dfca3837c924bf968c019c7662caaab3740"
+                "reference": "ff8353ddfe40ca8ada7a312a7408658197f47105"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ichtrojan/laravel-otp/zipball/3fe67dfca3837c924bf968c019c7662caaab3740",
-                "reference": "3fe67dfca3837c924bf968c019c7662caaab3740",
+                "url": "https://api.github.com/repos/ichtrojan/laravel-otp/zipball/ff8353ddfe40ca8ada7a312a7408658197f47105",
+                "reference": "ff8353ddfe40ca8ada7a312a7408658197f47105",
                 "shasum": ""
             },
             "type": "library",
@@ -1168,9 +1168,9 @@
             "description": "A simple package to generate and validate OTPs",
             "support": {
                 "issues": "https://github.com/ichtrojan/laravel-otp/issues",
-                "source": "https://github.com/ichtrojan/laravel-otp/tree/v1.4.1"
+                "source": "https://github.com/ichtrojan/laravel-otp/tree/v1.4.2"
             },
-            "time": "2021-05-13T09:01:34+00:00"
+            "time": "2023-09-16T14:45:34+00:00"
         },
         {
             "name": "laravel/framework",
