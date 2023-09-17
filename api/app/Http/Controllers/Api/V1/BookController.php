@@ -30,13 +30,17 @@ class BookController extends Controller
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
 
+    public function getCategoryIdByName($request) {
+        return Category::query()
+            ->where('title', $request->categories)->get()[0]->id;
+    }
+
     public function create(BookCreateRequest $request): JsonResponse
     {
         $book = Book::create($request->validated());
 
+        $category_id = $this->getCategoryIdByName($request);
 
-        $category_id = Category::query()
-            ->where('title', $request->categories)->get()[0]->id;
         BookHasCategory::create([
             'category_id' => $category_id,
             'book_id' => $book->id
@@ -52,12 +56,12 @@ class BookController extends Controller
 
     public function update(BookUpdateRequest $request): JsonResponse
     {
+
         Book::find($request->id)
             ->update($request->validated());
 
         if ($request->categories) {
-            $category_id = Category::query()
-                ->where('title', $request->categories)->get()[0]->id;
+            $category_id = $this->getCategoryIdByName($request);
 
             BookHasCategory::query()->update([
                 'category_id' => $category_id,
