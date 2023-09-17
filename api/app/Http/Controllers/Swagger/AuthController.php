@@ -436,6 +436,39 @@ use App\Http\Controllers\Controller;
  *         ),
  *    ),
  *
+ * @OA\Delete (
+ *        path="/api/v1/me/{id}",
+ *        summary="Удаление пользователя.",
+ *        tags={"Users"},
+ *        security={{ "bearerAuth": {} }},
+ *        @OA\Parameter (
+ *            description="ID пользователя",
+ *            in="path",
+ *            name="id",
+ *            required=true,
+ *            example="c9a366d0-ac2e-462f-a66a-a1cbb3b4d464"
+ *        ),
+ *
+ *         @OA\RequestBody (
+ *            @OA\JsonContent(
+ *                allOf={
+ *                     @OA\Schema(
+ *                         @OA\Property (property="id", type="string", example="c9a366d0-ac2e-462f-a66a-a1cbb3b4d464"),
+ *                     ),
+ *                }
+ *            ),
+ *        ),
+ *
+ *        @OA\Response (
+ *            @OA\JsonContent(
+ *                @OA\Property(property="status", type="string", example=true),
+ *                @OA\Property(property="message", type="string", example="User deleted."),
+ *            ),
+ *            description="Ok",
+ *            response=200
+ *        ),
+ *    ),
+ *
  */
 
 class AuthController extends Controller

@@ -546,7 +546,7 @@
                                             "example": "19627"
                                         },
                                         "categories": {
-                                            "type": "string",
+                                            "type": "collection",
                                             "example": "[]"
                                         }
                                     },
@@ -703,7 +703,7 @@
                                             "example": "19627"
                                         },
                                         "categories": {
-                                            "type": "string",
+                                            "type": "collection",
                                             "example": "[]"
                                         }
                                     },
@@ -1058,6 +1058,69 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/me/{id}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Удаление пользователя.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID пользователя",
+                        "required": true,
+                        "example": "c9a366d0-ac2e-462f-a66a-a1cbb3b4d464"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "c9a366d0-ac2e-462f-a66a-a1cbb3b4d464"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User deleted."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },
