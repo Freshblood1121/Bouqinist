@@ -30,8 +30,8 @@ class CategoryController extends Controller
 
     public function hasBook($categoryId)
     {
-//        $category = Category::find($categoryId);
-//        return $category->books;
+        $category = Category::find($categoryId);
+        return $category->books;
     }
 
 }

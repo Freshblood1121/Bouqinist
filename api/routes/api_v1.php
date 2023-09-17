@@ -4,26 +4,16 @@ use App\Http\Controllers\Api\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\Auth\AuthController;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 //Публичные маршруты
 Route::group(['middleware' => ['api']], function () {
 
+    //Получить все книги из таблицы books
     Route::get('/books/', [BookController::class, 'index']);
 
     //Получить книгу по id
     Route::get('/books/show/{book_id}', [BookController::class, 'show']);
-
-    //Создать книгу
-    //Надо передавать все ключи/поля таблицы books
-    Route::post('/books/create/', [BookController::class, 'create']);
-
-    //Изменить некоторые поля книги
-    Route::put('/books/update/', [BookController::class, 'update']);
-
-    //Удалить книгу
-    Route::delete('/books/delete/', [BookController::class, 'delete']);
 
     //Получить все категории
     Route::get('/categories/', [CategoryController::class, 'index']);
@@ -66,6 +56,16 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Повторная отправка письма на почту
     Route::get('email-verification', [EmailVerificationController::class, 'sendEmailVerification'])
         ->middleware('throttle:5,1');
+
+    //Создать книгу
+    //Надо передавать все ключи/поля таблицы books
+    Route::post('/books/create/', [BookController::class, 'create']);
+
+    //Изменить некоторые поля книги
+    Route::put('/books/update/', [BookController::class, 'update']);
+
+    //Удалить книгу
+    Route::delete('/books/delete/', [BookController::class, 'delete']);
 });
 
 //@TODO Сделать проверку принадлежности токена к пользователю.

@@ -340,7 +340,7 @@
                 "tags": [
                     "Users"
                 ],
-                "summary": "Обновление информации о пользователе.",
+                "summary": "Обновление информации пользователя.",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -494,6 +494,570 @@
                         "bearerAuth": []
                     }
                 ]
+            }
+        },
+        "/api/v1/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Получить все книги из таблицы books.",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "0285a4e8-f588-3d0c-9e21-734b834f2f00"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Usher"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Orie Schmitt"
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "example": "Dickinson, Quigley and Wintheiser"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Doloribus iste voluptate facere maxime fugiat. Optio sed eveniet temporibus."
+                                        },
+                                        "age": {
+                                            "type": "string",
+                                            "example": 1982
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Medium"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "img\\kqjfjkqwnfnjqwasnjkwfqwf"
+                                        },
+                                        "price": {
+                                            "type": "string",
+                                            "example": "19627"
+                                        },
+                                        "categories": {
+                                            "type": "string",
+                                            "example": "[]"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/books/create": {
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Создание книги в таблице books.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Hello"
+                                            },
+                                            "author": {
+                                                "type": "string",
+                                                "example": "Genady"
+                                            },
+                                            "company": {
+                                                "type": "string",
+                                                "example": "FontsCompany"
+                                            },
+                                            "description": {
+                                                "type": "string",
+                                                "example": "Ut enim ad minima veniam, qui blanditiis praesentium voluptatum."
+                                            },
+                                            "age": {
+                                                "type": "string",
+                                                "example": 1993
+                                            },
+                                            "status": {
+                                                "type": "string",
+                                                "example": "Medium"
+                                            },
+                                            "image": {
+                                                "type": "string",
+                                                "example": "img\\qqiwofnqwofnqiwfowqno"
+                                            },
+                                            "price": {
+                                                "type": "string",
+                                                "example": 3400
+                                            },
+                                            "cetegories": {
+                                                "type": "string",
+                                                "example": "06c18fb9-b764-365a-a3a7-c7908f31d12f"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book create!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/books/show/{book_id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Получить книгу по id из таблицы books.",
+                "parameters": [
+                    {
+                        "name": "book_id",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": "14581760-b0de-3f5d-bedd-a8581223871e"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "0285a4e8-f588-3d0c-9e21-734b834f2f00"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Usher"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Orie Schmitt"
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "example": "Dickinson, Quigley and Wintheiser"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Doloribus iste voluptate facere maxime fugiat. Optio sed eveniet temporibus."
+                                        },
+                                        "age": {
+                                            "type": "string",
+                                            "example": 1982
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Medium"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "img\\kqjfjkqwnfnjqwasnjkwfqwf"
+                                        },
+                                        "price": {
+                                            "type": "string",
+                                            "example": "19627"
+                                        },
+                                        "categories": {
+                                            "type": "string",
+                                            "example": "[]"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/books/update": {
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Обновление информации книги.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Cool Chef"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/books/delete": {
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Удаление книги.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": true
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Book deleted."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/categories": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Получить все категории.",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "06c18fb9-b764-365a-a3a7-c7908f31d12f"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Fraud Investigator"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Minima ea nihil eaque in. Modi aut nihil quod totam voluptatum sit incidunt. Sequi ea sunt eos."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/categories/show/{category_id}": {
+            "get": {
+                "tags": [
+                    "Categories"
+                ],
+                "summary": "Получить категорию по id из таблицы categories.",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "path",
+                        "description": "ID категории",
+                        "required": true,
+                        "example": "38a2aff4-0980-3ceb-9ccf-f65ac1feda37"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "38a2aff4-0980-3ceb-9ccf-f65ac1feda37"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Fishing OR Forestry Supervisor"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Occaecati corrupti et maxime qui. Cumque dolorem quo sed sed. Velit quae est nam aut."
+                                        },
+                                        "books": {
+                                            "type": "string",
+                                            "example": "[]"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/books/has/{book_id}": {
+            "get": {
+                "tags": [
+                    "Relationships"
+                ],
+                "summary": "Получить категории принадлежащие книгам(BOOK->CATEGORY).",
+                "parameters": [
+                    {
+                        "name": "book_id",
+                        "in": "path",
+                        "description": "ID книги",
+                        "required": true,
+                        "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Host and Hostess"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Excepturi quis labore aut voluptatem eum. Animi repellendus eos ipsam aut et."
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-09-15T14:41:04.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-09-15T14:41:04.000000Z"
+                                        },
+                                        "pivot": {
+                                            "properties": {
+                                                "book_id": {
+                                                    "type": "string",
+                                                    "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                                                },
+                                                "category_id": {
+                                                    "type": "string",
+                                                    "example": "449db4d4-0716-331b-a539-83bf6d3066ad"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/categories/has/{category_id}": {
+            "get": {
+                "tags": [
+                    "Relationships"
+                ],
+                "summary": "Получить книги принадлежащие категориям(CATEGORY->BOOK)",
+                "parameters": [
+                    {
+                        "name": "category_id",
+                        "in": "path",
+                        "description": "ID категории",
+                        "required": true,
+                        "example": "449db4d4-0716-331b-a539-83bf6d3066ad"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Cool Chef"
+                                        },
+                                        "author": {
+                                            "type": "string",
+                                            "example": "Rahsaan Rohan"
+                                        },
+                                        "company": {
+                                            "type": "string",
+                                            "example": "Bartell Ltd"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Repellendus exercitationem vero quo dolore. Porro recusandae dignissimos quod est."
+                                        },
+                                        "age": {
+                                            "type": "string",
+                                            "example": 2010
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Medium"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "img\\jqbwfiqwbfijwqbfiwqbf"
+                                        },
+                                        "price": {
+                                            "type": "string",
+                                            "example": 1942
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-09-15T14:41:04.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-09-15T14:41:04.000000Z"
+                                        },
+                                        "pivot": {
+                                            "properties": {
+                                                "category_id": {
+                                                    "type": "string",
+                                                    "example": "449db4d4-0716-331b-a539-83bf6d3066ad"
+                                                },
+                                                "book_id": {
+                                                    "type": "string",
+                                                    "example": "5daf6745-280f-3059-99b0-7b1499574b88"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
