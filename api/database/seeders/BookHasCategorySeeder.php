@@ -16,13 +16,13 @@ class BookHasCategorySeeder extends Seeder
      */
     public function run(): void
     {
-
         foreach (Book::all() as $book) {
             BookHasCategory::query()
-                ->insert(['book_id' => $book->id,
-                    'category_id' => Category::all()
-                        ->random()->id]);
+                ->insert([
+                    'id' => fake()->uuid(),
+                    'book_id' => $book->id,
+                    'category_id' => Category::query()->inRandomOrder()->latest()->get()[0]->id
+                ]);
         }
-
     }
 }
