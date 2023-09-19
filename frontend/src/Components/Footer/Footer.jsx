@@ -11,16 +11,19 @@ const Footer = () => {
   return (
     <footer className="footer">
       <Divider />
-      <div className="footer-content">
-        <Logo />
+      <div
+        className="footer-content"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        {/* <Logo /> */}
         <div className="footer_center">
           <TelegramButton></TelegramButton>
           <GitHubButton></GitHubButton>
           <AtButton></AtButton>
         </div>
-        <div className="footer_right">
+        {/* <div className="footer_right">
           <span>by Bouqinist Team</span>
-        </div>
+        </div> */}
       </div>
     </footer>
   );

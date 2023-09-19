@@ -20,16 +20,17 @@ const StyledButton = styled(Button)`
   font-size: 20px;
   text-transform: none;
   &:hover {
-    background-color: var(--gray-600, ${palette.lightest});
+    background-color: var(--gray-600, ${palette.gray300});
   }
 `;
 
-const SignupNavButton = ({ text, handleClick, className }) => {
+const SignupNavButton = ({ text, handleClick, className, disabled }) => {
   return (
     <StyledButton
       className={`step-button ${className}`}
       size="small"
       onClick={handleClick}
+      disabled={disabled}
     >
       {text}
     </StyledButton>

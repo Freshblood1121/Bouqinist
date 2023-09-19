@@ -1,7 +1,8 @@
 import React from "react";
-import { styled } from "@mui/material";
+import { CircularProgress, styled } from "@mui/material";
 import { Button } from "@mui/material";
 import { keyframes } from "@emotion/react";
+import { palette } from "../../../Utils/Constants";
 
 const enterKeyframe = keyframes`
   0% {
@@ -49,17 +50,27 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const BaseButton = ({ text, width, type }) => {
-  if (!width) {
-    return <StyledButton>{text}</StyledButton>;
+const BaseButton = (props) => {
+  if (!props.width) {
+    return <StyledButton>{props.text}</StyledButton>;
   } else {
     return (
       <StyledButton
-        type={type}
+        type={props.type}
         className="base-button"
-        sx={{ width: `${width}` }}
+        sx={{ width: `${props.width}` }}
+        onClick={props.handleClick}
       >
-        {text}
+        {props.isLoading ? (
+          <CircularProgress
+            size={20}
+            sx={{
+              color: palette.basic,
+            }}
+          />
+        ) : (
+          props.text
+        )}
       </StyledButton>
     );
   }
