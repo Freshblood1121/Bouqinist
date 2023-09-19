@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum UsersGender: string
 {
-    case MALE = "Male"; //Мужской
-    case FEMALE = "Female"; //Женский
-    case EMPTY = "Empty"; //Пусто
+    case MALE = "Мужской"; //Мужской
+    case FEMALE = "Женский"; //Женский
+    case EMPTY = "Другой"; //Пусто
 
     public static function all(): array
     {

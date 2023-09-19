@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('first_name', 191);
             $table->string('last_name', 191);
             $table->enum('gender', UsersGender::all())->nullable();
-            $table->integer('yo')->nullable();
+            $table->string('yo')->nullable();
             $table->string('phone')->nullable();
             $table->string('country',191)->nullable();
             $table->string('city',191)->nullable();

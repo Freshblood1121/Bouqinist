@@ -25,10 +25,14 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::default()]
+            //'/^[а-яёa-za-яёё]{2,190}$/ui'
+            //строка состоит из русских и английских букв, и ее длина находится в диапазоне от 2 до 190 символов.
+            'first_name' => ['required', 'regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+            'last_name' => ['required', 'regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+            'email' => ['required', 'email', 'regex:/@/', 'max:191', 'unique:users'],
+            'password' => ['required', 'confirmed', Password::default()],
+            'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+            'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
         ]);
 
         $user = User::create([
@@ -85,7 +89,7 @@ class AuthController extends Controller
 
                 return response()->json([
                     'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    'message' => 'Пользователь с таким e-mail и паролем не найден.',
                 ], 401);
             }
 
@@ -114,5 +118,52 @@ class AuthController extends Controller
                 "user" => auth()->user(),
                 "token" => $request->bearerToken(),
             ]);
+    }
+
+    public function updateUser(Request $request): JsonResponse
+    {
+        $validateData = Validator::make($request->all(),
+            [
+                'first_name' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+                'last_name' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+                'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+                'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
+                'phone' => ['string', 'min:3', 'max:191'],
+                'country' => ['string', 'min:2', 'max:191'],
+                'city' => ['string', 'min:2', 'max:191'],
+                'avatar' => ['string'],
+            ]);
+
+        if ($validateData->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User updated fail',
+                'errors' => $validateData->errors()
+            ], 404);
+        }
+                $request->user()->update($request->all());
+
+        return response()->json([
+            'message' => 'User updated successfully'
+        ], 200);
+    }
+
+    public function deleteUser($id): JsonResponse
+    {
+        try {
+
+            $user = User::findOrFail($id);
+            $user->delete();
+
+        } catch (\Exception) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not found.',
+            ], 500);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'User deleted.'
+        ], 200);
     }
 }

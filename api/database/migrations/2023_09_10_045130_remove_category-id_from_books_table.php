@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('code');
-            $table->timestamps();
+        Schema::table('books', function (Blueprint $table) {
+            $table->dropColumn('category_id');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::table('books', function (Blueprint $table) {
+            //
+        });
     }
 };

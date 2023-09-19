@@ -16,12 +16,13 @@ class BookHasCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::factory()
-            ->has(Book::factory()->count(3))
-            ->create();
-
-        Book::factory()
-            ->has(Category::factory()->count(3))
-            ->create();
+        foreach (Book::all() as $book) {
+            BookHasCategory::query()
+                ->insert([
+                    'id' => fake()->uuid(),
+                    'book_id' => $book->id,
+                    'category_id' => Category::query()->inRandomOrder()->latest()->get()[0]->id
+                ]);
+        }
     }
 }
