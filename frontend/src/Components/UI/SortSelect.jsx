@@ -182,16 +182,16 @@ const SortSelect = () => {
 
   // Определяем позицию dropdown-меню и опускаем его на 2px ниже компонента Select
 
-  const inputSortComponent = useRef(null);
-  const [position, setPosition] = useState(0);
+  // const inputSortComponent = useRef(null);
+  // const [position, setPosition] = useState(0);
 
-  useEffect(() => {
-    setPosition(
-      inputSortComponent.current
-        ? inputSortComponent.current.getBoundingClientRect().bottom + 2
-        : 0
-    );
-  }, [inputSortComponent]);
+  // useEffect(() => {
+  //   setPosition(
+  //     inputSortComponent.current
+  //       ? inputSortComponent.current.getBoundingClientRect().bottom + 2
+  //       : 0
+  //   );
+  // }, [inputSortComponent]);
 
   const IconComponent = (props) => {
     return <DropdownIcon inheritViewBox {...props} />;
@@ -204,10 +204,10 @@ const SortSelect = () => {
           <InputLabel shrink={false}>Сортировать</InputLabel>
         ) : null}
         <Select
-          ref={inputSortComponent}
-          MenuProps={{
-            PaperProps: { sx: { top: `${position}px !important` } },
-          }}
+          // ref={inputSortComponent}
+          // MenuProps={{
+          //   PaperProps: { sx: { top: `${position}px !important` } },
+          // }}
           id="simple-select"
           value={sort}
           onChange={handleChange}

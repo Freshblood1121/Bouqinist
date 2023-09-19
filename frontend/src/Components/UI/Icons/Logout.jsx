@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { SignOut } from "@phosphor-icons/react";
 import { palette } from "../../../Utils/Constants";
 
-const Account = () => {
+const Logout = (props) => {
   const [color, setColor] = useState(`${palette.basic}`);
 
   const handleMouseEnter = (e) => {
@@ -16,11 +16,11 @@ const Account = () => {
   };
 
   return (
-    <MagnifyingGlass
-      size={25}
-      color={color}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <SignOut
+      size={props.size ? props.size : 25}
+      color={props.noHover ? null : color}
+      onMouseEnter={props.noHover ? null : handleMouseEnter}
+      onMouseLeave={props.noHover ? null : handleMouseLeave}
       style={{
         transition: "fill 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
         marginTop: "2px",
@@ -29,4 +29,4 @@ const Account = () => {
   );
 };
 
-export default Account;
+export default Logout;

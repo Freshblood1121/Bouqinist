@@ -65,9 +65,9 @@ const GenderSelect = ({
           props.formik.setFieldValue(`${props.name}`, event.target.value);
         }}
       >
-        <MenuItem value="Мужской">Мужской</MenuItem>
-        <MenuItem value="Женский">Женский</MenuItem>
-        <MenuItem value="Другой">Другой</MenuItem>
+        <MenuItem value="Male">Мужской</MenuItem>
+        <MenuItem value="Female">Женский</MenuItem>
+        <MenuItem value="Empty">Другой</MenuItem>
       </TextField>
     </ThemeProvider>
   );

@@ -17,7 +17,7 @@ const theme = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
-          height: "48px",
+          height: "55px",
           width: "100%",
         },
       },
@@ -58,7 +58,13 @@ const BaseSignupInput = ({ ...props }) => {
         inputProps={{
           autoComplete: "off",
           onChange: props.onChange,
+          onBlur: props.onBlur,
+          autoFocus: props.autoFocus ? true : false,
         }}
+        error={props.error ? true : false}
+        // helperText={props.errors ? props.errors : ""}
+        helperText={props.helperText}
+        onChange={props.onChange ? props.onChange : null}
       />
     </ThemeProvider>
   );

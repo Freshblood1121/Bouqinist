@@ -187,13 +187,14 @@ const CategorySelect = () => {
   const inputComponent = useRef(null);
   const [position, setPosition] = useState(0);
 
-  useEffect(() => {
-    setPosition(
-      inputComponent.current
-        ? inputComponent.current.getBoundingClientRect().bottom + 2
-        : 0
-    );
-  }, [inputComponent]);
+  // useEffect(() => {
+  //   console.log(inputComponent.current.getBoundingClientRect().bottom);
+  //   setPosition(
+  //     inputComponent.current
+  //       ? inputComponent.current.getBoundingClientRect().bottom + 2
+  //       : 0
+  //   );
+  // }, [inputComponent]);
 
   const IconComponent = (props) => {
     return <DropdownIcon inheritViewBox {...props} />;
@@ -206,22 +207,24 @@ const CategorySelect = () => {
           <InputLabel shrink={false}>Категории</InputLabel>
         ) : null}
         <Select
-          ref={inputComponent}
-          MenuProps={{
-            // anchorOrigin: {
-            //   vertical: "bottom",
-            //   horizontal: "left",
-            // },
-            // transformOrigin: {
-            //   vertical: "top",
-            //   horizontal: "left",
-            // },
-            PaperProps: {
-              sx: {
-                top: `${position}px !important`,
-              },
-            },
-          }}
+          // ref={inputComponent}
+          MenuProps={
+            {
+              // anchorOrigin: {
+              //   vertical: "bottom",
+              //   horizontal: "left",
+              // },
+              // transformOrigin: {
+              //   vertical: "top",
+              //   horizontal: "left",
+              // },
+              // PaperProps: {
+              //   sx: {
+              //     top: `${position}px !important`,
+              //   },
+              // },
+            }
+          }
           id="simple-select"
           value={category}
           onChange={handleChange}

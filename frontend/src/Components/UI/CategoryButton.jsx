@@ -20,7 +20,7 @@ const CategoryButton = styled(Button)`
   border-radius: 10px;
   border: 2px solid ${palette.basic};
   background: white;
-  box-shadow: 9px 15px 0px 0px ${palette.warning};
+  box-shadow: 9px 15px 0px 0px ${palette.categoryBG};
   text-align: center;
   padding: 0;
   color: ${palette.basic};
