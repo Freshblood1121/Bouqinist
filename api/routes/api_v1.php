@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['api']], function () {
 
     //Выдача последних добавленных 10ти книг
-    Route::post('/books', [BookController::class, 'index']);
+    Route::get('/books', [BookController::class, 'index']);
 
     //Получить книгу по id
     Route::get('/books/show/{book_id}', [BookController::class, 'show']);
