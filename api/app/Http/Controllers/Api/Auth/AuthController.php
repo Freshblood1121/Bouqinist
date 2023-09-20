@@ -99,7 +99,7 @@ class AuthController extends Controller
             return response()->json([
                 "message" => "Authenticated",
                 "user"=> $user,
-                "token"=> $request->bearerToken(),
+                "token"=> $user->createToken("token-name")->plainTextToken,
             ]);
 
         } catch (\Throwable $th) {

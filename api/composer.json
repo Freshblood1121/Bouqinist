@@ -11,7 +11,7 @@
         "ichtrojan/laravel-otp": "^1.4",
         "illuminate/database": "*",
         "laravel/framework": "^10.10",
-        "laravel/sanctum": "^3.2",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8"
     },
     "require-dev": {

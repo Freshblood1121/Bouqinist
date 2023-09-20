@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\EmailVerificationController;
 use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\V1\UploadImageController;
 use Illuminate\Support\Facades\Route;
 
 //Публичные маршруты
@@ -32,6 +33,13 @@ Route::group(['middleware' => ['api']], function () {
 
     //Авторизация
     Route::post('/login', [AuthController::class, 'login']);
+    ///////////////////////////////////////////////////////////////////////////////
+
+    //Загрузка одного изображения
+    Route::post('/uploads/img', [UploadImageController::class, 'one']);
+
+    //Загрузка одного и более изображений
+//    Route::post('/uploads/img/more', [UploadImageController::class, 'more']);
 
 });
 
@@ -64,6 +72,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Повторная отправка письма на почту
     Route::get('email-verification', [EmailVerificationController::class, 'sendEmailVerification'])
         ->middleware('throttle:5,1');
+
 });
 
 //@TODO Сделать проверку принадлежности токена к пользователю.
