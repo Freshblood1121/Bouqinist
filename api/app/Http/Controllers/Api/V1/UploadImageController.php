@@ -11,12 +11,23 @@ class UploadImageController extends Controller
     {
         $img = $request->file('image');
 
-        if ($request->hasFile('image')) {
-            $new_name = rand() . '_' . $img->getClientOriginalExtension();
-            $img->move(public_path('/uploads/images', $new_name));
+        if ($request->hasFile('image'))
+        {
+            $new_name = rand() . '.' . $img->getClientOriginalExtension();
+
+            $img->move(public_path('/uploads/img'), $new_name);
+
+            return response()->json([
+                "status" => true,
+                "message" => "Image is " . $new_name . " upload!",
+            ]);
         } else {
-            return response()->json('image null');
+            return response()->json([
+                "status" => false,
+                "message" => "Image not upload."
+            ]);
         }
+
     }
 
 //    public function more(Request $request)

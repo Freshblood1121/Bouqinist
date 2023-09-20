@@ -144,7 +144,8 @@ class AuthController extends Controller
                 $request->user()->update($request->all());
 
         return response()->json([
-            'message' => 'User updated successfully'
+            'message' => 'User updated successfully',
+            'data' => $request->all(),
         ], 200);
     }
 
