@@ -196,29 +196,12 @@ use App\Http\Controllers\Controller;
  *     ),
  * ),
  *
- * @OA\Post (
+ * @OA\Get (
  *     path="/api/v1/books",
- *     summary="Получить 10 последних добавленных книг из таблицы books.",
+ *     summary="Получить все книги из таблицы books.",
  *     tags={"Books"},
- *     @OA\Parameter (
- *           description="Номер страницы",
- *           in="header",
- *           name="page",
- *           required=false,
- *           example="3"
- *       ),
- *     @OA\RequestBody (
- *         @OA\JsonContent(
- *             allOf={
- *                 @OA\Schema(
- *                     @OA\Property (property="page", type="integer", example="3"),
- *                 ),
- *             }
- *         ),
- *     ),
  *         @OA\Response (
  *             @OA\JsonContent(
- *                 @OA\Property (property="data", type="object",
  *                 @OA\Property(property="id", type="string", example="0285a4e8-f588-3d0c-9e21-734b834f2f00"),
  *                 @OA\Property(property="title", type="string", example="Usher"),
  *                 @OA\Property(property="author", type="string", example="Orie Schmitt"),
@@ -232,7 +215,6 @@ use App\Http\Controllers\Controller;
  *                     @OA\Property(property="id", type="string", example="0285a4e8-f588-3d0c-9e21-734b834f2f00"),
  *                     @OA\Property(property="title", type="string", example="Usher"),
  *                     @OA\Property(property="description", type="string", example="Doloribus iste voluptate facere maxime fugiat. Optio sed eveniet temporibus."),
- *                 ),
  *             ),
  *         ),
  *         description="Ok",
