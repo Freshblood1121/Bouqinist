@@ -200,6 +200,13 @@ use App\Http\Controllers\Controller;
  *     path="/api/v1/books",
  *     summary="Получить 10 последних добавленных книг из таблицы books.",
  *     tags={"Books"},
+ *     @OA\Parameter (
+ *           description="Номер страницы",
+ *           in="header",
+ *           name="page",
+ *           required=false,
+ *           example="3"
+ *       ),
  *     @OA\RequestBody (
  *         @OA\JsonContent(
  *             allOf={

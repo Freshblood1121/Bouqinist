@@ -502,6 +502,15 @@
                     "Books"
                 ],
                 "summary": "Получить 10 последних добавленных книг из таблицы books.",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "header",
+                        "description": "Номер страницы",
+                        "required": false,
+                        "example": "3"
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
