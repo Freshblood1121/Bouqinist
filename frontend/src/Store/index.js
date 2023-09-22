@@ -26,10 +26,12 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { categoriesReducer } from "./categories/reducer";
+import { accountReducer } from "./account/reducer";
 
 const rootReducer = combineReducers({
   books: booksReducer,
   categories: categoriesReducer,
+  account: accountReducer,
 });
 
 const middlewareEnhancer = applyMiddleware(

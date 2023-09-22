@@ -1,4 +1,5 @@
 import * as React from "react";
+import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ru";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -6,16 +7,22 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ruRU } from "@mui/x-date-pickers";
 
 export default function DateInput({ ...props }) {
+  console.log(props);
+
+  const [value, setValue] = React.useState(props.value);
+
   const [error, setError] = React.useState(null);
   const errorMessage = React.useMemo(() => {
     switch (error) {
-      case "maxDate":
+      case "maxDate": {
+        return "Выберите дату не позднее сегодняшнего дня";
+      }
       case "minDate": {
-        return "Please select a date in the first quarter of 2022";
+        return "Выберите дату не ранее 1900 г.";
       }
 
       case "invalidDate": {
-        return "Your date is not valid";
+        return "Указана некорректная дата";
       }
 
       default: {
@@ -33,24 +40,27 @@ export default function DateInput({ ...props }) {
       }
     >
       <DatePicker
-        label="Дата рождения"
-        value={props.value}
+        disableFuture
+        label={props.text}
+        // value={props.value}
+        value={value}
         onError={(newError) => setError(newError)}
-        onChange={(data) => {
-          console.log(data.$d);
-          props.formik.setFieldValue(`${props.name}`, data.$d);
+        onChange={(value, context) => {
+          if (value.$d === null) {
+            console.log(123);
+            setError("invalidDate");
+            props.formik.setFieldValue(`${props.name}`, null);
+          }
+          props.formik.setFieldValue(`${props.name}`, value.$d);
+          setValue(value);
+          console.log(props.formik.values);
         }}
         slotProps={{
           textField: {
             variant: "standard",
             name: props.name,
-            // value: props.value,
             id: props.id,
             helperText: errorMessage,
-            // onChange: (event, value) => {
-            //   console.log(event, value);
-            //   props.formik.setFieldValue(`${props.name}`, event.target.value);
-            // },
           },
         }}
       />

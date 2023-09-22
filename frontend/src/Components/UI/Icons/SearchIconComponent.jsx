@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User } from "@phosphor-icons/react";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import { palette } from "../../../Utils/Constants";
 
 const Account = () => {
@@ -16,7 +16,7 @@ const Account = () => {
   };
 
   return (
-    <User
+    <MagnifyingGlass
       size={25}
       color={color}
       onMouseEnter={handleMouseEnter}

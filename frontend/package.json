@@ -43,6 +43,7 @@
     "@phosphor-icons/react": "^2.0.10",
     "@reduxjs/toolkit": "^1.9.5",
     "@splidejs/react-splide": "^0.7.12",
+    "axios": "^1.5.0",
     "dayjs": "^1.11.9",
     "formik": "^2.4.3",
     "html-loader": "^4.2.0",
@@ -58,7 +59,8 @@
     "react-router-dom": "^6.11.1",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
-    "swiper": "^10.1.0"
+    "swiper": "^10.1.0",
+    "yup": "^1.2.0"
   },
   "nodemonConfig": {
     "ignore": [

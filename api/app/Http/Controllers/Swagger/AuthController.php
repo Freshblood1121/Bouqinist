@@ -196,23 +196,44 @@ use App\Http\Controllers\Controller;
  *     ),
  * ),
  *
- * @OA\Get (
+ * @OA\Post (
  *     path="/api/v1/books",
- *     summary="Получить все книги из таблицы books.",
+ *     summary="Получить 10 последних добавленных книг из таблицы books.",
  *     tags={"Books"},
- *
- *     @OA\Response (
+ *     @OA\Parameter (
+ *           description="Номер страницы",
+ *           in="header",
+ *           name="page",
+ *           required=false,
+ *           example="3"
+ *       ),
+ *     @OA\RequestBody (
  *         @OA\JsonContent(
- *             @OA\Property(property="id", type="string", example="0285a4e8-f588-3d0c-9e21-734b834f2f00"),
- *             @OA\Property(property="title", type="string", example="Usher"),
- *             @OA\Property(property="author", type="string", example="Orie Schmitt"),
- *             @OA\Property(property="company", type="string", example="Dickinson, Quigley and Wintheiser"),
- *             @OA\Property(property="description", type="string", example="Doloribus iste voluptate facere maxime fugiat. Optio sed eveniet temporibus."),
- *             @OA\Property(property="age", type="string", example=1982),
- *             @OA\Property(property="status", type="string", example="Medium"),
- *             @OA\Property(property="image", type="string", example="img\kqjfjkqwnfnjqwasnjkwfqwf"),
- *             @OA\Property(property="price", type="string", example="19627"),
- *             @OA\Property(property="categories", type="collection", example="[]"),
+ *             allOf={
+ *                 @OA\Schema(
+ *                     @OA\Property (property="page", type="integer", example="3"),
+ *                 ),
+ *             }
+ *         ),
+ *     ),
+ *         @OA\Response (
+ *             @OA\JsonContent(
+ *                 @OA\Property (property="data", type="object",
+ *                 @OA\Property(property="id", type="string", example="0285a4e8-f588-3d0c-9e21-734b834f2f00"),
+ *                 @OA\Property(property="title", type="string", example="Usher"),
+ *                 @OA\Property(property="author", type="string", example="Orie Schmitt"),
+ *                 @OA\Property(property="company", type="string", example="Dickinson, Quigley and Wintheiser"),
+ *                 @OA\Property(property="description", type="string", example="Doloribus iste voluptate facere maxime fugiat. Optio sed eveniet temporibus."),
+ *                 @OA\Property(property="age", type="string", example=1982),
+ *                 @OA\Property(property="status", type="string", example="Medium"),
+ *                 @OA\Property(property="image", type="string", example="img\kqjfjkqwnfnjqwasnjkwfqwf"),
+ *                 @OA\Property(property="price", type="string", example="19627"),
+ *                 @OA\Property(property="categories", type="object",
+ *                     @OA\Property(property="id", type="string", example="0285a4e8-f588-3d0c-9e21-734b834f2f00"),
+ *                     @OA\Property(property="title", type="string", example="Usher"),
+ *                     @OA\Property(property="description", type="string", example="Doloribus iste voluptate facere maxime fugiat. Optio sed eveniet temporibus."),
+ *                 ),
+ *             ),
  *         ),
  *         description="Ok",
  *         response=200

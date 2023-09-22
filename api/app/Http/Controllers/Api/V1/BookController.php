@@ -12,6 +12,7 @@ use App\Models\BookHasCategory;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 
 
 class BookController extends Controller
@@ -19,7 +20,10 @@ class BookController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-        return BookHasCategoryResource::collection(Book::with('categories')->get());
+        $book = Book::with('categories')
+            ->latest()
+            ->paginate(10);
+        return BookHasCategoryResource::collection($book);
     }
 
     /**
@@ -71,24 +75,7 @@ class BookController extends Controller
 
     public function delete(BookDeleteRequest $request)
     {
-dd(1);
-
-//        BookHasCategory::query()
-//            ->where('book_id', $request->id)
-//            ->get()
-//            ->first()
-//            ->delete();
-
-//        $category_id = BookHasCategory::query()
-//            ->where('book_id', $request->validated())
-//            ->get()
-//            ->first()
-//            ->id;
-
-//       DB::select('DELETE FROM books WHERE id="fe0362ed-8722-4cfa-a5b0-9167e61a5db5" CASCADE');
-////
         Book::query()->find($request->id)->delete();
-
 
         return response()->json([
             'status' => true,

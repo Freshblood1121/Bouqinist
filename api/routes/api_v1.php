@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Route;
 //Публичные маршруты
 Route::group(['middleware' => ['api']], function () {
 
-    //Получить все книги из таблицы books
-    Route::get('/books/', [BookController::class, 'index']);
+    //Выдача последних добавленных 10ти книг
+    Route::post('/books', [BookController::class, 'index']);
 
     //Получить книгу по id
     Route::get('/books/show/{book_id}', [BookController::class, 'show']);
@@ -27,18 +27,13 @@ Route::group(['middleware' => ['api']], function () {
     //Получить книги принадлежащие категориям(CATEGORY->BOOK)
     Route::get('/categories/has/{category_id}', [CategoryController::class, 'hasBook']);
 
+    //Регистрация
+    Route::get('/register', [AuthController::class, 'createUser']);
+
+    //Авторизация
+    Route::post('/login', [AuthController::class, 'login']);
+
 });
-
-//Регистрация (http://bouqinist:80/api/v1/register)
-Route::post('/register', [AuthController::class, 'register']);
-
-//Регистрация
-//http://bouqinist:80/api/v1/register
-Route::post('/register', [AuthController::class, 'createUser']);
-
-//Авторизация
-//http://bouqinist:80/api/v1/login
-Route::post('/login', [AuthController::class, 'login']);
 
 //Защищёные маршруты
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -62,13 +57,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     //Создать книгу
     //Надо передавать все ключи/поля таблицы books
-    Route::post('/books/create/', [BookController::class, 'create']);
+    Route::post('/books/create', [BookController::class, 'create']);
 
     //Изменить некоторые поля книги
-    Route::put('/books/update/', [BookController::class, 'update']);
+    Route::put('/books/update', [BookController::class, 'update']);
 
     //Удалить книгу
-    Route::post('/books/delete/', [BookController::class, 'delete']);
+    Route::delete('/books/delete', [BookController::class, 'delete']);
+
 
 });
 

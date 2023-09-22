@@ -19,7 +19,7 @@ const theme = createTheme({
         root: {
           height: "48px",
           marginTop: "55px",
-          marginBottom: "35px",
+          marginBottom: "45px",
         },
       },
     },
@@ -29,9 +29,14 @@ const theme = createTheme({
           "--TextField-brandBorderColor": "#3D3C3C",
           "--TextField-brandBorderHoverColor": "#FDBF0F",
           "--TextField-brandBorderFocusedColor": "#3AB8EB",
-          width: "calc(100% - 3px)",
+          "--TextField-brandBorderErrorColor": "#D32F2F",
+          width: "100%",
+          minWidth: "320px",
           "& label.Mui-focused": {
             color: "var(--TextField-brandBorderFocusedColor)",
+          },
+          "& label.Mui-focused.Mui-error": {
+            color: "var(--TextField-brandBorderErrorColor)",
           },
         },
       },
@@ -61,6 +66,12 @@ const theme = createTheme({
             transition:
               "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           },
+          [`&.Mui-error .${outlinedInputClasses.notchedOutline}`]: {
+            borderColor: "var(--TextField-brandBorderErrorColor)",
+            boxShadow: `3px 10px 0px 0px var(--TextField-brandBorderHoverColor)`,
+            transition:
+              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          },
         },
         input: {
           padding: "13px 0 13px 25px",
@@ -69,48 +80,52 @@ const theme = createTheme({
         },
       },
     },
-    MuiInputAdornment: {
+    MuiFormHelperText: {
       styleOverrides: {
         root: {
-          [`& svg`]: {
-            // marginRight: "-6px",
-          },
+          position: "absolute",
+          right: "0",
+          top: "-25px",
+          fontSize: "0.6rem",
+        },
+      },
+    },
+    MuiFormLabel: {
+      styleOverrides: {
+        root: {
+          lineHeight: "normal",
         },
       },
     },
   },
 });
 
-const EmailInput = () => {
+const EmailInput = ({ ...props }) => {
   return (
     <ThemeProvider theme={theme}>
       <TextField
         variant="outlined"
-        placeholder="E-mail"
+        label={props.text}
+        name={props.name}
+        id={props.id}
+        value={props.value}
+        onChange={props.onChange ? props.onChange : null}
+        error={props.error ? true : false}
+        helperText={props.helperText}
         InputProps={{
           inputMode: "text",
           type: "text",
           autoComplete: "off",
           endAdornment: (
             <InputAdornment position="end">
-              {/* <div
-                style={{
-                  display: "flex",
-                  paddingLeft: "10.1px",
-                }}
-              >
-                <User
-                  size={24}
-                  style={{
-                    transition: "fill 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-                  }}
-                />
-              </div> */}
               <IconButton edge="end">
                 <AlternateEmailIcon />
               </IconButton>
             </InputAdornment>
           ),
+          onChange: props.onChange,
+          onBlur: props.onBlur,
+          autoFocus: props.autoFocus ? true : false,
         }}
       />
     </ThemeProvider>

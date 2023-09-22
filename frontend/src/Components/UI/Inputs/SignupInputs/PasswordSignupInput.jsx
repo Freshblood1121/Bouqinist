@@ -9,6 +9,7 @@ import {
   FormControl,
   InputLabel,
   Input,
+  FormHelperText,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import Visibility from "@mui/icons-material/Visibility";
@@ -23,6 +24,7 @@ const theme = createTheme({
     MuiFormControl: {
       styleOverrides: {
         root: {
+          height: "55px",
           width: "100%",
         },
       },
@@ -61,35 +63,17 @@ const PasswordSignupInput = ({ ...props }) => {
   };
   return (
     <ThemeProvider theme={theme}>
-      {/* <TextField
-        variant="standard"
-        label={text}
-        inputProps={{
-          inputMode: "text",
-          type: `${showPassword ? "text" : "password"}`,
-          autoComplete: "off",
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      ></TextField> */}
       <FormControl variant="standard">
-        <InputLabel htmlFor={props.id}>{props.text}</InputLabel>
+        <InputLabel error={props.error ? true : false} htmlFor={props.id}>
+          {props.text}
+        </InputLabel>
         <Input
           id={props.id}
           type={showPassword ? "text" : "password"}
           name={props.name}
           value={props.value}
           autoComplete="off"
+          error={props.error ? true : false}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -102,7 +86,11 @@ const PasswordSignupInput = ({ ...props }) => {
             </InputAdornment>
           }
           onChange={props.onChange}
+          onBlur={props.onBlur}
         />
+        <FormHelperText error={props.error ? true : false}>
+          {props.helperText}
+        </FormHelperText>
       </FormControl>
     </ThemeProvider>
   );
