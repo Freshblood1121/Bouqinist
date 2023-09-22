@@ -35,7 +35,26 @@ class BookController extends Controller
 
     public function create(BookCreateRequest $request): JsonResponse
     {
-        $book = Book::create($request->validated());
+
+        // Загрузка изображения
+        $image = $request->file('image');
+        $destinationPath = 'uploads/img/books/';
+        $nameImage = rand() . '.' . $image->getClientOriginalExtension();
+        $profileImage = $destinationPath . $nameImage;
+        $image->storeAs('storage/images/books', $nameImage);
+        $image->move($destinationPath, $nameImage);
+
+        $request->validated();
+        $book = Book::create([
+            'id' => $request->id,
+            'title' => $request->title,
+            'author' => $request->author,
+            'company' => $request->company,
+            'description' => $request->description,
+            'age' => $request->age,
+            'image' => $profileImage,
+            'price' => $request->price,
+        ]);
 
         BookHasCategory::create([
             'category_id' => $request->categories,
@@ -44,6 +63,7 @@ class BookController extends Controller
 
         return response()->json([
             'status' => true,
+            'info' => $book,
             'message' => 'Book create!',
         ], 200);
     }

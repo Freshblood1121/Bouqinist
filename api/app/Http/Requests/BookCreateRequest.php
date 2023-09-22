@@ -26,11 +26,10 @@ class BookCreateRequest extends FormRequest
             'author' => 'required|string|max:191',
             'company' => 'required|string',
             'description' => 'required|string',
-            'age' => 'required|int',
-            'status' =>  'required|string',
-            'image' => 'required|string',
-            'price' => 'required|int',
-            'categories' => 'required|string',
+            'age' => 'int',
+            'status' =>  'string',
+            'price' => 'int',
+            'categories' => 'string',
         ];
     }
     //@TODO Сделать такую же логику валидации для пользователей

@@ -14,14 +14,14 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title', 191);
-            $table->string('author', 191);
-            $table->text('company');
-            $table->string('description');
-            $table->integer('age');
+            $table->string('title', 191)->nullable();
+            $table->string('author', 191)->nullable();
+            $table->text('company')->nullable();
+            $table->string('description')->nullable();
+            $table->integer('age')->nullable();
             $table->enum('status', BooksStatus::all());
-            $table->text('image');
-            $table->integer('price');
+            $table->text('image')->nullable();
+            $table->integer('price')->nullable();
             $table->timestamps();
         });
     }

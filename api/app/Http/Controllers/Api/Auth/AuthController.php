@@ -14,7 +14,6 @@ use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware("auth:sanctum", ['except' => ["createUser", "login"]]);
@@ -23,18 +22,27 @@ class AuthController extends Controller
     //Регистрация пользователя
     public function createUser(Request $request): JsonResponse
     {
-
+        //Валидация
         $request->validate([
             //'/^[а-яёa-za-яёё]{2,190}$/ui'
             //строка состоит из русских и английских букв, и ее длина находится в диапазоне от 2 до 190 символов.
-            'first_name' => ['required', 'regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
-            'last_name' => ['required', 'regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
-            'email' => ['required', 'email', 'regex:/@/', 'max:191', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::default()],
+            'first_name' => ['required','regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+            'last_name' => ['required','regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+            'email' => ['required','email', 'regex:/@/', 'max:191', 'unique:users'],
+            'password' => ['required','confirmed', Password::default()],
             'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
             'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
         ]);
 
+        // Загрузка изображения
+        $image = $request->file('avatar');
+        $destinationPath = 'uploads/img/avatars/';
+        $nameImage = rand() . '.' . $image->getClientOriginalExtension();
+        $profileImage = $destinationPath . $nameImage;
+        $image->storeAs('storage/images/avatars', $nameImage);
+        $image->move($destinationPath, $nameImage);
+
+        //Создание пользователя
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -43,6 +51,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'country' => $request->country,
             'city' => $request->city,
+            'avatar' => $profileImage,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'password_confirmation' => $request->password,
