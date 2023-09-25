@@ -9,6 +9,7 @@ use App\Http\Requests\BookUpdateRequest;
 use App\Http\Resources\BookHasCategoryResource;
 use App\Models\Book;
 use App\Models\BookHasCategory;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -17,11 +18,12 @@ class BookController extends Controller
 
     public function index(): AnonymousResourceCollection
     {
-//        $book = Book::with('categories')
-//            ->latest()
-//            ->paginate(10);
-//        return BookHasCategoryResource::collection($book);
-        return BookHasCategoryResource::collection(Book::with('categories')->get());
+        //Только опубликованые книги
+        $books = Book::with('categories')
+            ->whereNotIn('status', [false])
+            ->get();
+
+        return BookHasCategoryResource::collection($books);
     }
 
     /**
@@ -33,7 +35,7 @@ class BookController extends Controller
         return new BookHasCategoryResource(Book::with('categories')->findOrFail($id));
     }
 
-    public function create(BookCreateRequest $request): JsonResponse
+    public function create(BookCreateRequest $request, User $user): JsonResponse
     {
 
         // Загрузка изображения
@@ -47,6 +49,7 @@ class BookController extends Controller
         $request->validated();
         $book = Book::create([
             'id' => $request->id,
+            'user_id' => $request->user()->id,
             'title' => $request->title,
             'author' => $request->author,
             'company' => $request->company,
@@ -54,6 +57,7 @@ class BookController extends Controller
             'age' => $request->age,
             'image' => $profileImage,
             'price' => $request->price,
+            'status' => true,
         ]);
 
         BookHasCategory::create([

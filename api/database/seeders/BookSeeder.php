@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\BooksStatus;
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 
@@ -38,10 +39,11 @@ class BookSeeder extends Seeder
                     'id' => fake()->uuid(),
                     'title' => fake()->jobTitle(),
                     'author' => fake()->name(),
+                    'user_id' => User::query()->inRandomOrder()->latest()->get()[0]->id,
                     'company' => fake()->company(),
                     'description'=> fake()->text(100),
                     'age' => fake()->year(),
-                    'status' => BooksStatus::MEDIUM->value,
+                    'status' => true,
                     'image' => $profileImage,
                     'price' => fake()->numberBetween(10, 50000),
                     'created_at' => now(),

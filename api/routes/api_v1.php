@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\EmailVerificationController;
+use App\Http\Controllers\Api\V1\AdsController;
 use App\Http\Controllers\Api\V1\BookController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\Auth\AuthController;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 //Публичные маршруты
 Route::group(['middleware' => ['api']], function () {
 
-    //Выдача последних добавленных 10ти книг
+    //Выдача всех книг
     Route::get('/books', [BookController::class, 'index']);
 
     //Получить книгу по id
@@ -32,8 +33,6 @@ Route::group(['middleware' => ['api']], function () {
 
     //Авторизация
     Route::post('/login', [AuthController::class, 'login']);
-    ///////////////////////////////////////////////////////////////////////////////
-
 });
 
 //Защищёные маршруты
@@ -65,6 +64,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Повторная отправка письма на почту
     Route::get('email-verification', [EmailVerificationController::class, 'sendEmailVerification'])
         ->middleware('throttle:5,1');
+
+    //Мои объявления
+    Route::get('/me/ads/show', [AdsController::class, 'ads']);
 
 });
 
