@@ -1,12 +1,13 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require("path");
+
 // const nodeExternals = require("webpack-node-externals");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV === "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
@@ -19,7 +20,7 @@ const config = {
   },
   devServer: {
     open: true,
-    host: "45.153.69.180",
+    host: "localhost",
     historyApiFallback: true,
     port: 8081,
     client: {

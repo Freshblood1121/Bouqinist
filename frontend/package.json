@@ -2,7 +2,8 @@
   "name": "elder-books-fe",
   "version": "1.0.0",
   "description": "Elder Books front-end project",
-  "main": "index.js",
+  "main": "src/index.jsx",
+  "type": "module",
   "scripts": {
     "test": "test",
     "build": "webpack --mode=production --node-env=production",

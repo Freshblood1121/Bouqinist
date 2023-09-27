@@ -11,7 +11,7 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "start": "nodemon ./server.js"
+    "start": "nodemon ./src/server.jsx"
   },
   "author": "Bouqinist team",
   "license": "ISC",
