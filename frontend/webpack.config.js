@@ -19,7 +19,7 @@ const config = {
   },
   devServer: {
     open: true,
-    host: "localhost",
+    host: "http://45.153.69.180/",
     historyApiFallback: true,
     port: 8081,
     client: {
