@@ -25,21 +25,21 @@ class BookSeeder extends Seeder
         ];
 
         for ($i = 0; $i < count($data); $i++) {
-            $images = File::files(storage_path("app/storage/images/test/Книги/".$data[$i]));
-
+            $images = File::files(storage_path("app/Книги/".$data[$i]));
             foreach ($images as $image) {
-
+                
                 $destinationPath = realpath($image);
                 $path = str_replace(DIRECTORY_SEPARATOR,'/', $destinationPath);
-                $compilation = str_replace('C:/OSPanel/domains/Bouqinist/api/storage/app/', '/', $path);
+                $compilation = str_replace('C:/OSPanel/domains/Bouqinist/api/storage/', '/', $path);
                 $editToOne = substr($compilation, 1);
                 $profileImage = $editToOne;
-
+                // dd(User::query()->inRandomOrder()->latest()->get());
                 Book::create([
                     'id' => fake()->uuid(),
                     'title' => fake()->jobTitle(),
                     'author' => fake()->name(),
                     'user_id' => User::query()->inRandomOrder()->latest()->get()[0]->id,
+                    // 'user_id' => User::query()->inRandomOrder()->latest()->id,
                     'company' => fake()->company(),
                     'description'=> fake()->text(100),
                     'age' => fake()->year(),

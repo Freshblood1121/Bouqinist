@@ -5,10 +5,10 @@ import {
   ThemeProvider,
   createTheme,
   outlinedInputClasses,
+  Slider,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { REQUEST_STATUS, palette } from "../../../Utils/Constants";
-import Slider from "@mui/material/Slider";
 import "./PriceFilter.css";
 import { useDispatch, useSelector } from "react-redux";
 import { booksSelectors } from "../../../Store";

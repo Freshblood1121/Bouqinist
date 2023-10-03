@@ -7,7 +7,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import theme from "../../Theme";
 import "./SignupPage.css";
@@ -15,7 +15,6 @@ import { useFormik, Form, Field } from "formik";
 import BaseSignupInput from "../UI/Inputs/SignupInputs/BaseSignupInput";
 import PasswordSignupInput from "../UI/Inputs/SignupInputs/PasswordSignupInput";
 import SignupNavButton from "../UI/Buttons/SignupNavButton";
-import { MuiTelInput } from "mui-tel-input";
 import CountryInput from "../UI/Inputs/SignupInputs/CountryInput";
 import DateInput from "../UI/Inputs/SignupInputs/DateInput";
 import BaseButton from "../UI/Buttons/BaseButton";
@@ -28,6 +27,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { store } from "../../Store";
 import Verification from "./Verification/Verification";
 import { register } from "../../Store/account/actions";
+
+const MuiTelInput = lazy(() => import("mui-tel-input"));
 
 const SignupPage = () => {
   const [step, setStep] = useState(0);
@@ -170,27 +171,29 @@ const SignupPage = () => {
     } else if (step === 1) {
       return (
         <>
-          <MuiTelInput
-            autoFocus
-            autoComplete="off"
-            id="phone"
-            name="phone"
-            variant="standard"
-            defaultCountry="RU"
-            langOfCountryName="RU"
-            label="Номер телефона (не обязательно)"
-            inputProps={{
-              style: {
-                fontSize: "16px",
-              },
-            }}
-            value={formik.values.phone}
-            // {...formik.getFieldProps(`phone`)}
-            onChange={(event) => {
-              console.log(event);
-              formik.setFieldValue("phone", event);
-            }}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <MuiTelInput
+              autoFocus
+              autoComplete="off"
+              id="phone"
+              name="phone"
+              variant="standard"
+              defaultCountry="RU"
+              langOfCountryName="RU"
+              label="Номер телефона (не обязательно)"
+              inputProps={{
+                style: {
+                  fontSize: "16px",
+                },
+              }}
+              value={formik.values.phone}
+              // {...formik.getFieldProps(`phone`)}
+              onChange={(event) => {
+                console.log(event);
+                formik.setFieldValue("phone", event);
+              }}
+            />
+          </Suspense>
           <CountryInput
             name={"country"}
             id={"country"}

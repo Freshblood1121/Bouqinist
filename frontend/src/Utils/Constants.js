@@ -2,11 +2,14 @@ import { useMediaQuery } from "@mui/material";
 
 export const API_URL = {
   BOOKS: "http://bouqinist/api/v1/books",
+  BOOK: "http://bouqinist/api/v1/books/show/",
+  CREATE_BOOK: "http://bouqinist/api/v1/books/create",
   CATEGORIES: "http://bouqinist/api/v1/categories",
   CATEGORY_BOOKS: "http://bouqinist/api/v1/categories/has",
   REGISTER: "http://bouqinist:80/api/v1/register",
   LOGIN: "http://bouqinist:80/api/v1/login",
-  CHECK_AUTH: "http://bouqinist:80/api/v1/me",
+  USER: "http://bouqinist:80/api/v1/me",
+  SET_USER_DATA: "http://bouqinist:80/api/v1/me/update",
   VERIFICATE: "http://bouqinist:80/api/v1/email-verification",
 };
 
@@ -21,17 +24,22 @@ export const palette = {
   basic: "#3D3C3C",
   light: "#676767",
   lighter: "#C5C5C5",
+  gray500: "#989797",
   gray400: "#B8B6B6",
   gray300: "#DBDADA",
   gray100: "#EBE9E9",
+  gray000: "#F3F3F3",
   hover: "#FDBF0F",
   active: "#3AB8EB",
   activeLight: "#DFF3Fc",
   activeDark: "#008FD7",
   success: "#00A878",
+  green400: "#47C397",
+  green300: "#6DCEA9",
   buttonHover: "#FC9D09",
   categoryBG: "#F9784B",
   warning: "#D32F2F",
+  error300: "#E57373",
 };
 
 export const countries = [

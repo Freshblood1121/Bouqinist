@@ -1,32 +1,7 @@
 import React from "react";
-import { CircularProgress, styled } from "@mui/material";
-import { Button } from "@mui/material";
+import { CircularProgress, styled, Button } from "@mui/material";
 import { keyframes } from "@emotion/react";
 import { palette } from "../../../Utils/Constants";
-
-// const StyledButton = styled(Button)`
-//   background-color: ${palette.active};
-//   height: 42px;
-//   width: 200px;
-//   border-radius: 10px;
-//   padding: 12px 0;
-//   display: flex;
-//   justifycontent: center;
-//   alignitems: center;
-//   color: #fff;
-//   transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-//   text-transform: none;
-//   font-size: 14px;
-//   & > svg > svg: {
-//     transition: stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-//   }
-//   &:hover {
-//     background-color: ${palette.activeDark};
-//   }
-//   &:hover > svg > svg {
-//     stroke: #fff;
-//   }
-// `;
 
 const SimpleButton = (props) => {
   const handleClick = (event) => {
@@ -38,24 +13,27 @@ const SimpleButton = (props) => {
       type={props.type}
       className="base-button"
       sx={{
-        width: `${props.width}`,
-        backgroundColor: `${palette.active}`,
-        height: "42px",
-        width: "200px",
+        width: props.width ? `${props.width}` : "300px",
+        height: props.height ? `${props.height}` : "42px",
+        backgroundColor: props.backgroundColor
+          ? props.backgroundColor
+          : `${palette.gray500}`,
         borderRadius: "10px",
         padding: "12px 0",
         display: "flex",
         justifycontent: "center",
         alignitems: "center",
         color: "#fff",
-        transition: "0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+        transition: "background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
         textTransform: "none",
         fontSize: "14px",
         [`& > svg > svg`]: {
           transition: "stroke 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms",
         },
         [`&:hover`]: {
-          backgroundColor: `${palette.activeDark}`,
+          backgroundColor: props.hoverBackgroundColor
+            ? props.hoverBackgroundColor
+            : `${palette.basic}`,
         },
         [`&:hover > svg > svg`]: {
           stroke: "#fff",

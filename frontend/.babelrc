@@ -1,5 +1,13 @@
 {
-  "plugins": ["@babel/syntax-dynamic-import"],
+  "plugins": [
+    ["@babel/syntax-dynamic-import"],
+    [
+      "babel-plugin-direct-import",
+      {
+        "modules": ["@mui/system", "@mui/material", "@mui/icons-material"]
+      }
+    ]
+  ],
   "presets": [
     [
       "@babel/preset-env",

@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  row-gap: 45px;
-  padding: 0 0 45px;
+  row-gap: 20px;
+  padding: 0 0 20px;
 }
 
 .footer-content {

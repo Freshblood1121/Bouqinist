@@ -16,7 +16,7 @@ const CatalogCard = ({ item }) => {
         }}
       >
         <div className="ctl__card_img_wrap">
-          <img src={item.image} alt="cover of the book" />
+          <img src={`public/${item.image}`} alt="cover of the book" />
         </div>
         <div className="ctl__card_title">{item.title}</div>
       </Link>

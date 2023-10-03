@@ -116,9 +116,10 @@ const GenderSelect = ({
           onChange={(event) => {
             props.formik.setFieldValue(`${props.name}`, event.target.value);
           }}
+          onBlur={props.formik.handleSubmit}
         >
-          <MenuItem value="male">Мужской</MenuItem>
-          <MenuItem value="female">Женский</MenuItem>
+          <MenuItem value="Мужской">Мужской</MenuItem>
+          <MenuItem value="Женский">Женский</MenuItem>
         </TextField>
       </Box>
     </ThemeProvider>

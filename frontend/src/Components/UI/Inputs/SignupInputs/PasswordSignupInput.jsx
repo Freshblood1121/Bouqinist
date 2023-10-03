@@ -12,8 +12,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { palette } from "../../../../Utils/Constants";
 
 const theme = createTheme({

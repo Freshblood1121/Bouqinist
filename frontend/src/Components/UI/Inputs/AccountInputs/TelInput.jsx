@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { MuiTelInput } from "mui-tel-input";
+import React, { Suspense, lazy, useState } from "react";
 import {
   Box,
   CssBaseline,
@@ -116,13 +115,9 @@ const theme = createTheme({
   },
 });
 
+const MulTelInput = lazy(() => import("mui-tel-input"));
+
 const TelInput = (props) => {
-  // const [phone, setPhone] = useState("");
-
-  // const handleChange = (newPhone) => {
-  //   setPhone(newPhone);
-  // };
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -135,32 +130,34 @@ const TelInput = (props) => {
         <Typography variant="inputLabel" sx={{ marginBottom: "8px" }}>
           Номер телефона
         </Typography>
-        <MuiTelInput
-          fullWidth
-          autoComplete="off"
-          id={props.id}
-          name={props.name}
-          variant="outlined"
-          // defaultCountry="RU"
-          // langOfCountryName="RU"
-          label={false}
-          value={props.value}
-          // onChange={props.onChange}
-          onChange={(event) => {
-            console.log(event);
-            props.formik.setFieldValue("phone", event);
-          }}
-          onBlur={props.onBlur}
-          error={props.error ? true : false}
-          helperText={props.helperText}
-          inputProps={{
-            style: {
-              fontSize: "14px",
-              fontFamily: "Golos UI, Roboto, sans-serif",
-            },
-            inputMode: "numeric",
-          }}
-        ></MuiTelInput>
+        <Suspense fallback={<div>Loading...</div>}>
+          <MuiTelInput
+            fullWidth
+            autoComplete="off"
+            id={props.id}
+            name={props.name}
+            variant="outlined"
+            // defaultCountry="RU"
+            // langOfCountryName="RU"
+            label={false}
+            value={props.value}
+            // onChange={props.onChange}
+            onChange={(event) => {
+              console.log(event);
+              props.formik.setFieldValue("phone", event);
+            }}
+            onBlur={props.onBlur}
+            error={props.error ? true : false}
+            helperText={props.helperText}
+            inputProps={{
+              style: {
+                fontSize: "14px",
+                fontFamily: "Golos UI, Roboto, sans-serif",
+              },
+              inputMode: "numeric",
+            }}
+          />
+        </Suspense>
       </Box>
     </ThemeProvider>
   );

@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ru";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ruRU } from "@mui/x-date-pickers";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import { palette } from "../../../../Utils/Constants";
@@ -78,9 +78,18 @@ const theme = createTheme({
   },
 });
 
+const DatePicker = React.lazy(() => import("@mui/x-date-pickers/DatePicker"));
+
 export default function DateInput({ ...props }) {
   const [value, setValue] = React.useState(dayjs(props.value));
-  console.log("birthdate value: ", value);
+
+  React.useEffect(() => {
+    console.log(props.value);
+    console.log(value);
+    if (props.value === undefined) {
+      setValue(null);
+    }
+  }, []);
 
   const [error, setError] = React.useState(null);
   const errorMessage = React.useMemo(() => {
@@ -120,31 +129,34 @@ export default function DateInput({ ...props }) {
             ruRU.components.MuiLocalizationProvider.defaultProps.localeText
           }
         >
-          <DatePicker
-            disableFuture
-            label={props.text}
-            // value={props.value}
-            value={value}
-            // onError={(newError) => setError(newError)}
-            onChange={(value, context) => {
-              if (!value) {
-                console.log("value === null");
-                props.formik.setFieldValue(`${props.name}`, "");
-              } else {
-                props.formik.setFieldValue(`${props.name}`, value.$d);
-                setValue(value);
-              }
-            }}
-            slotProps={{
-              textField: {
-                variant: "outlined",
-                name: props.name,
-                id: props.id,
-                helperText: errorMessage,
-                error: false,
-              },
-            }}
-          />
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <DatePicker
+              disableFuture
+              label={props.text}
+              // value={props.value}
+              value={value}
+              // onError={(newError) => setError(newError)}
+              onClose={props.formik.handleSubmit}
+              onChange={(value, context) => {
+                if (!value) {
+                  props.formik.setFieldValue(`${props.name}`, "");
+                } else {
+                  props.formik.setFieldValue(`${props.name}`, dayjs(value));
+                  setValue(dayjs(value));
+                }
+              }}
+              slotProps={{
+                textField: {
+                  variant: "outlined",
+                  name: props.name,
+                  id: props.id,
+                  helperText: errorMessage,
+                  error: false,
+                  onBlur: props.formik.handleSubmit,
+                },
+              }}
+            />
+          </React.Suspense>
         </LocalizationProvider>
       </Box>
     </ThemeProvider>

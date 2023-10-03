@@ -9,6 +9,8 @@
 .ctl__card_img_wrap {
   max-height: 300px;
   max-width: 200px;
+  min-height: 300px;
+  display: flex;
   border-radius: 10px;
   box-shadow: 10px 12px 10px -6px rgba(61, 60, 60, 0.36);
   background: #ffecb3;

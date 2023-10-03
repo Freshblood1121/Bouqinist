@@ -31,6 +31,7 @@ export const getAllBooksData = (dispatch) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
     },
   })
     .then((response) => {

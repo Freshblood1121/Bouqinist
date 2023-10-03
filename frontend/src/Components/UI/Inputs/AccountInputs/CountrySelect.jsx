@@ -8,16 +8,15 @@ import {
   ThemeProvider,
   Typography,
   createTheme,
+  Autocomplete,
 } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import { palette } from "../../../../Utils/Constants";
 import GolosUI from "../../../../fonts/Golos-UI_Regular.ttf";
 import GolosUiBold from "../../../../fonts/Golos-UI_Bold.ttf";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import Autocomplete from "@mui/material/Autocomplete";
 import { countries } from "../../../../Utils/Constants";
 import { ruRU } from "@mui/material/locale";
-// import TextField from "@mui/material/TextField";
 
 const theme = createTheme(
   {

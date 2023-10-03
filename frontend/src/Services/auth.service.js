@@ -71,7 +71,87 @@ class AuthService {
       },
       { headers: authHeader() }
     );
+    // ToDo: отсутствует цепочка then() для возврата обработанных данных. Сделать: (response) => return response.data
     return response.data;
+  }
+
+  getBookById(id) {
+    return axios
+      .get(
+        `${API_URL.BOOK}/${id}`,
+        {
+          book_id: id,
+        },
+        { headers: authHeader() }
+      )
+      .then((response) => {
+        return response.data;
+      });
+  }
+
+  getBooksDataByCategory(id) {
+    return axios
+      .get(
+        `${API_URL.CATEGORY_BOOKS}/${id}`,
+        {
+          category_id: id,
+        },
+        { headers: authHeader() }
+      )
+      .then((response) => {
+        return response.data;
+      });
+  }
+
+  getUserData() {
+    return axios
+      .get(`${API_URL.USER}`, {
+        headers: authHeader(),
+      })
+      .then((response) => {
+        return response.data;
+      });
+  }
+
+  setUserData(data) {
+    return axios
+      .put(
+        `${API_URL.SET_USER_DATA}`,
+        {
+          ...data,
+        },
+        {
+          headers: authHeader(),
+        }
+      )
+      .then((response) => {
+        return response.data;
+      });
+  }
+
+  createAdvertisment(values) {
+    const user = JSON.parse(localStorage.getItem("user"));
+    // for (var pair of values.image.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+    // const data = {
+    //   ...values,
+    //   company: values.publisher,
+    //   status: "Medium",
+    //   image: values.image,
+    //   cetegories: values.cetegories,
+    // };
+    return axios
+      .post(`${API_URL.CREATE_BOOK}`, values, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      });
   }
 }
 

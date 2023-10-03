@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Ichtrojan\Otp\OtpServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
     ])->toArray(),
 
     /*

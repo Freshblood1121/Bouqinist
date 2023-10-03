@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  styled,
   MenuItem,
   Select,
   createTheme,
@@ -10,7 +9,6 @@ import {
   InputLabel,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import { keyframes } from "@emotion/react";
 import { palette } from "../../Utils/Constants";
 import { CaretDown } from "@phosphor-icons/react";
 import DropdownIcon from "./DropdownIcon";
@@ -45,7 +43,7 @@ const theme = createTheme({
           width: "165px",
           height: "50px",
           borderRadius: "20px",
-          boxShadow: `6px 7px 0px 0px ${palette.warning}`,
+          boxShadow: `6px 7px 0px 0px ${palette.categoryBG}`,
           fontSize: "16px",
           "& .MuiSelect-select": {
             paddingLeft: "30px",

@@ -68,7 +68,6 @@ const LoggedInButton = ({ name }) => {
     }
   };
 
-  const slicedName = name[0];
   return (
     <ThemeProvider theme={theme}>
       <Fab
@@ -77,7 +76,7 @@ const LoggedInButton = ({ name }) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        {slicedName}
+        {name}
       </Fab>
       <Menu
         anchorEl={anchorEl}
@@ -126,6 +125,39 @@ const LoggedInButton = ({ name }) => {
           Профиль
         </MenuItem>
         <Divider />
+        <MenuItem
+          onClick={() => {
+            // handleClose("logout");
+            // handleItemClick("logout");
+          }}
+        >
+          {/* <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon> */}
+          Объявления
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            // handleClose("logout");
+            // handleItemClick("logout");
+          }}
+        >
+          {/* <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon> */}
+          Заказы
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            // handleClose("logout");
+            // handleItemClick("logout");
+          }}
+        >
+          {/* <ListItemIcon>
+            <Logout fontSize="small" />
+          </ListItemIcon> */}
+          Избранное
+        </MenuItem>
         <MenuItem
           onClick={() => {
             handleClose("logout");

@@ -1,21 +1,69 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require("path");
-// const nodeExternals = require("webpack-node-externals");
+const webpack = require("webpack");
+const webpackConfig = require("./webpack.config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const CompressionPlugin = require("compression-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  entry: "./src/index.jsx",
+  entry: {
+    index: "./src/index.jsx",
+    advertisment: "./src/Components/AdvertismentPage/AdvertismentPage.jsx",
+    catalog: "./src/Components/CategoryPage/CategoryPage.jsx",
+    create_adv: "./src/Components/CreateAdvertisment/CreateAdvertisment.jsx",
+    account: "./src/Components/AccountPage/AccountPage.jsx",
+    sign_up: "./src/Components/SignupPage/SignupPage.jsx",
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
+    filename: "[name].[contenthash].js",
+    chunkFilename: "[name].js",
     //
     publicPath: "/",
+    clean: true,
+  },
+  // optimization: {
+  //   splitChunks: {
+  //     chunks: "all",
+  //   },
+  // },
+  optimization: {
+    runtimeChunk: "single",
+    // moduleIds: "hashed",
+    moduleIds: "deterministic",
+    splitChunks: {
+      // chunks: "all",
+      // maxInitialRequests: Infinity,
+      // minSize: 0,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/, ///< put all used node_modules modules in this chunk
+          name: "vendor", ///< name of bundle
+          chunks: "all",
+          //   test: /[\\/]node_modules[\\/]/,
+          //   name(module) {
+          //     // получает имя, то есть node_modules/packageName/not/this/part.js
+          //     // или node_modules/packageName
+          //     const packageName = module.context.match(
+          //       /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+          //     )[1];
+
+          //     // имена npm-пакетов можно, не опасаясь проблем, использовать
+          //     // в URL, но некоторые серверы не любят символы наподобие @
+          //     return `npm.${packageName.replace("@", "")}`;
+          //   },
+        },
+      },
+    },
   },
   devServer: {
     open: true,
@@ -37,6 +85,10 @@ const config = {
         directory: path.join(__dirname, "/src/img"),
         publicPath: "/img",
       },
+      {
+        directory: path.join(__dirname, "../api/public/"),
+        publicPath: "/public",
+      },
     ],
   },
   plugins: [
@@ -46,6 +98,10 @@ const config = {
     }),
     new MiniCssExtractPlugin(),
     new NodePolyfillPlugin(),
+    new BundleAnalyzerPlugin(),
+    new CompressionPlugin({
+      algorithm: "gzip",
+    }),
   ],
   devtool: "eval-source-map",
   module: {
@@ -55,7 +111,7 @@ const config = {
         resolve: {
           extensions: [".js", ".jsx"],
         },
-        loader: "babel-loader",
+        use: ["babel-loader"],
       },
       {
         test: /\.css$/i,

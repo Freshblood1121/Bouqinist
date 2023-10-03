@@ -1,6 +1,5 @@
 import React from "react";
-import { CircularProgress, styled } from "@mui/material";
-import { Button } from "@mui/material";
+import { CircularProgress, styled, Button } from "@mui/material";
 import { keyframes } from "@emotion/react";
 import { palette } from "../../../Utils/Constants";
 

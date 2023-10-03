@@ -30,17 +30,15 @@ class AuthController extends Controller
             'last_name' => ['required','regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
             'email' => ['required','email', 'regex:/@/', 'max:191', 'unique:users'],
             'password' => ['required','confirmed', Password::default()],
-            'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
-            'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
         ]);
 
         // Загрузка изображения
-        $image = $request->file('avatar');
-        $destinationPath = 'uploads/img/avatars/';
-        $nameImage = rand() . '.' . $image->getClientOriginalExtension();
-        $profileImage = $destinationPath . $nameImage;
-        $image->storeAs('storage/images/avatars', $nameImage);
-        $image->move($destinationPath, $nameImage);
+        // $image = $request->file('avatar');
+        // $destinationPath = 'uploads/img/avatars/';
+        // $nameImage = rand() . '.' . $image->getClientOriginalExtension();
+        // $profileImage = $destinationPath . $nameImage;
+        // $image->storeAs('storage/images/avatars', $nameImage);
+        // $image->move($destinationPath, $nameImage);
 
         //Создание пользователя
         $user = User::create([
@@ -51,7 +49,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'country' => $request->country,
             'city' => $request->city,
-            'avatar' => $profileImage,
+            // 'avatar' => $profileImage,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'password_confirmation' => $request->password,
@@ -135,12 +133,12 @@ class AuthController extends Controller
             [
                 'first_name' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
                 'last_name' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
-                'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
-                'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
-                'phone' => ['string', 'min:3', 'max:191'],
-                'country' => ['string', 'min:2', 'max:191'],
-                'city' => ['string', 'min:2', 'max:191'],
-                'avatar' => ['string'],
+                // 'gender' => ['regex:/^[а-яёa-za-яёё]{2,190}$/ui'],
+                // 'yo' => ['regex:/^(0[1-9]|[12][0-9]|3[01]).(0[1-9]|1[012]).(19|20)\d\d$/'],
+                // 'phone' => ['string', 'min:3', 'max:191'],
+                // 'country' => ['string', 'min:2', 'max:191'],
+                // 'city' => ['string', 'min:2', 'max:191'],
+                // 'avatar' => ['string'],
             ]);
 
         if ($validateData->fails()) {

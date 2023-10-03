@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ru";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ruRU } from "@mui/x-date-pickers";
 
 export default function DateInput({ ...props }) {
@@ -31,6 +31,8 @@ export default function DateInput({ ...props }) {
     }
   }, [error]);
 
+  const DatePicker = React.lazy(() => import("@mui/x-date-pickers/DatePicker"));
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -39,31 +41,33 @@ export default function DateInput({ ...props }) {
         ruRU.components.MuiLocalizationProvider.defaultProps.localeText
       }
     >
-      <DatePicker
-        disableFuture
-        label={props.text}
-        // value={props.value}
-        value={value}
-        onError={(newError) => setError(newError)}
-        onChange={(value, context) => {
-          if (value.$d === null) {
-            console.log(123);
-            setError("invalidDate");
-            props.formik.setFieldValue(`${props.name}`, null);
-          }
-          props.formik.setFieldValue(`${props.name}`, value.$d);
-          setValue(value);
-          console.log(props.formik.values);
-        }}
-        slotProps={{
-          textField: {
-            variant: "standard",
-            name: props.name,
-            id: props.id,
-            helperText: errorMessage,
-          },
-        }}
-      />
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <DatePicker
+          disableFuture
+          label={props.text}
+          // value={props.value}
+          value={value}
+          onError={(newError) => setError(newError)}
+          onChange={(value, context) => {
+            if (value.$d === null) {
+              console.log(123);
+              setError("invalidDate");
+              props.formik.setFieldValue(`${props.name}`, null);
+            }
+            props.formik.setFieldValue(`${props.name}`, value.$d);
+            setValue(value);
+            console.log(props.formik.values);
+          }}
+          slotProps={{
+            textField: {
+              variant: "standard",
+              name: props.name,
+              id: props.id,
+              helperText: errorMessage,
+            },
+          }}
+        />
+      </React.Suspense>
     </LocalizationProvider>
   );
 }

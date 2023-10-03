@@ -16,8 +16,6 @@ import { useNavigate } from "react-router-dom";
 
 const HeaderNavigation = () => {
   const dispatch = useDispatch();
-  // const [isModalOpened, setModalOpened] = useState(false);
-  // console.log(isModalOpened);
   const modalIsOpened = useSelector((store) => store.account.modalIsOpened);
   const user = useSelector((store) => store.account.user);
   const isLoggedIn = useSelector((store) => store.account.isLoggedIn);
@@ -25,12 +23,10 @@ const HeaderNavigation = () => {
   const handleOpenModal = () => {
     dispatch(clearMessage());
     dispatch(openModal());
-    // setModalOpened(true);
   };
   const handleCloseModal = () => {
     dispatch(closeModal());
     dispatch(clearMessage());
-    // setModalOpened(false);
   };
   const ref = useRef(null);
 
@@ -56,7 +52,10 @@ const HeaderNavigation = () => {
       )}
       {isLoggedIn ? (
         <li className="header__nav-item">
-          <LoggedInButton name={user.first_name} />
+          <LoggedInButton
+            name={user.first_name ? user.first_name[0] : ""}
+            // name={"Artem"}
+          />
         </li>
       ) : (
         <li className="header__nav-item" onClick={handleOpenModal}>

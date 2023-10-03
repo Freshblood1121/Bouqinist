@@ -9,6 +9,10 @@ export const LOGIN_SUCCESS = "ACCOUNT::LOGIN_SUCCESS";
 export const LOGIN_FAIL = "ACCOUNT::LOGIN_FAIL";
 export const LOGOUT = "ACCOUNT::LOGOUT";
 
+export const USER_DATA_SUCCESS = "ACCOUNT::USER_DATA_SUCCESS";
+export const USER_DATA_REQUEST = "BOOKS::USER_DATA_REQUEST";
+export const USER_DATA_ERROR = "BOOKS::USER_DATA_ERROR";
+
 export const SET_MESSAGE = "ACCOUNT::SET_MESSAGE";
 export const CLEAR_MESSAGE = "ACCOUNT::CLEAR_MESSAGE";
 
@@ -117,4 +121,76 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: LOGOUT,
   });
+};
+
+export const userDataRequest = () => ({
+  type: USER_DATA_REQUEST,
+});
+
+export const userDataSuccess = (data) => {
+  return {
+    type: USER_DATA_SUCCESS,
+    payload: data,
+  };
+};
+export const userDataError = (error) => ({
+  type: USER_DATA_ERROR,
+  payload: error,
+});
+
+export const getUserData = () => (dispatch) => {
+  dispatch(userDataRequest());
+  AuthService.getUserData()
+    .then((data) => {
+      console.log(data);
+      dispatch(userDataSuccess(data.user));
+    })
+    .catch((error) => {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        dispatch(userDataError(error.response.data.message));
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+        dispatch(userDataError("Не удалось получить ответ от сервера."));
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+        dispatch(userDataError(error.message));
+      }
+    });
+};
+
+export const setUserData = (values) => (dispatch) => {
+  dispatch(userDataRequest());
+  return AuthService.setUserData(values)
+    .then((data) => {
+      console.log(data);
+      dispatch(userDataSuccess(data.data));
+      return Promise.resolve();
+    })
+    .catch((error) => {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        dispatch(userDataError(error.response.data.message));
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+        dispatch(userDataError("Не удалось получить ответ от сервера."));
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+        dispatch(userDataError(error.message));
+      }
+      console.log(error);
+      return Promise.reject();
+    });
 };

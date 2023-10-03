@@ -10,8 +10,8 @@ const theme = createTheme(
   {
     palette: {
       primary: {
-        main: "#3ab9eb",
-        light: "#ade1f7",
+        main: `${palette.basic}`,
+        light: `${palette.light}`,
         dark: "#004c8f",
         contrastText: "#fff",
       },
@@ -20,7 +20,11 @@ const theme = createTheme(
         light: "#ffebb3",
         dark: "#fc9d09",
       },
-      success: { main: "#00A878", light: "#9adbc1", dark: "#076446" },
+      success: {
+        main: `${palette.success}`,
+        light: "#9adbc1",
+        dark: "#076446",
+      },
     },
     breakpoints: {
       values: {
@@ -80,13 +84,20 @@ const theme = createTheme(
       },
       subtitle2: {
         fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
-        fontSize: 16,
+        fontSize: "16px",
         color: "black",
+        lineHeight: "normal",
+      },
+      lightSubtitle2: {
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+        fontSize: "16px",
+        color: `${palette.light}`,
+        lineHeight: "normal",
       },
       boldSubtitle1: {
-        fontSize: 20,
         fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(","),
-        color: `${palette.basic}`,
+        fontSize: 20,
+        lineHeight: "normal",
       },
       boldSubtitle2: {
         fontSize: 16,
@@ -130,6 +141,31 @@ const theme = createTheme(
         fontSize: "14px",
         color: `${palette.light}`,
         fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
+      pageTitle: {
+        fontSize: "32px",
+        color: `${palette.basic}`,
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+        fontWeight: "normal",
+      },
+      basicSmallText: {
+        fontSize: "14px",
+        color: `${palette.basic}`,
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
+      basicMediumText: {
+        fontSize: "16px",
+        color: `${palette.basic}`,
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
+      lightHelperText: {
+        fontSize: "14px",
+        color: `${palette.light}`,
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(", "),
         lineHeight: "normal",
       },
     },
@@ -212,9 +248,11 @@ const theme = createTheme(
             color: `${palette.gray400}`,
             textTransform: "none",
             borderRadius: "10px",
-            fontSize: "20px",
             padding: "12px 32px 20px 0",
             fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+            [`&:first-of-type`]: {
+              padding: "12px 32px 20px 0",
+            },
             [`&.Mui-selected`]: {
               color: `${palette.basic}`,
               fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
@@ -240,6 +278,23 @@ const theme = createTheme(
             backgroundColor: `${palette.basic}`,
             height: "3px",
             zIndex: "3",
+          },
+        },
+      },
+      MuiStepLabel: {
+        styleOverrides: {
+          label: {
+            transition: "color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+            [`&.MuiStepLabel-alternativeLabel`]: { marginTop: 0 },
+            [`&.MuiStepLabel-alternativeLabel.Mui-disabled`]: {
+              color: `${palette.gray300}`,
+            },
+            [`&.MuiStepLabel-alternativeLabel.Mui-disabled`]: {
+              color: `${palette.gray300}`,
+            },
+          },
+          iconContainer: {
+            transition: "color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
           },
         },
       },

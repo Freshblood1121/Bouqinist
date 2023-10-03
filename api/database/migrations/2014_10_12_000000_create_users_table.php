@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('country',191)->nullable();
             $table->string('city',191)->nullable();
-            $table->string('avatar')->nullable();
+            // $table->string('avatar')->nullable();
             $table->string('email',191)->unique()->nullable();
             $table->string('email_verified_at')->nullable();
             $table->string('password')->nullable();

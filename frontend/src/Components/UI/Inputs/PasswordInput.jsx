@@ -8,8 +8,7 @@ import {
   IconButton,
 } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const theme = createTheme({
   components: {
