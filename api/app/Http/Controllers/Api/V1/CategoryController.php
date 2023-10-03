@@ -3,38 +3,35 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Book;
+use App\Http\Resources\CategoryHasBookResource;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryController extends Controller
 {
-
     /**
-     * @return string
+     * @return AnonymousResourceCollection
      */
-    public function index(): string
+    public function index(): AnonymousResourceCollection
     {
-        return Category::all()->toJson();
+        return CategoryResource::collection(Category::with('books')->get());
     }
+
 
     /**
      * @param $id
-     * @return void
+     * @return CategoryHasBookResource
      */
-    public function oneCategory($id) {
-        $category = Book::query()
-            ->where('category_id', $id)
-            ->get()
-            ->toJson();
+    public function show($id): CategoryHasBookResource
+    {
+        return new CategoryHasBookResource(Category::with('books')->findOrFail($id));
+    }
 
-        // public function oneCategory(09e83531-1428-3025-8c51-49f6e12503f3) {
-        //        $category = CategoryHasBooks::query()
-        //                       ->where('category_id', 09e83531-1428-3025-8c51-49f6e12503f3)
-        //                       ->get()
-        //                       ->toJson();
-
-        dd($category);
+    public function hasBook($categoryId)
+    {
+        $category = Category::find($categoryId);
+        return $category->books;
     }
 
 }

@@ -6,7 +6,7 @@ import {
   compose,
 } from "@reduxjs/toolkit";
 import { booksReducer } from "./books/reducer";
-// import { messagesReducer } from "./messages/reducer";
+// import { messagesReducer } from "./messages.php/reducer";
 // import { profileReducer } from "./profile/reducer";
 // Логгер для отслеживания отправленных action'ов и измененного ими state'а
 import logger from "./middleWare/logger";
@@ -25,11 +25,13 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { categoriesReducer } from "./categories/reducer";
+import { accountReducer } from "./account/reducer";
 
 const rootReducer = combineReducers({
   books: booksReducer,
-  // messages: messagesReducer,
-  // profile: profileReducer,
+  categories: categoriesReducer,
+  account: accountReducer,
 });
 
 const middlewareEnhancer = applyMiddleware(
@@ -58,3 +60,4 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+export * as booksSelectors from "./selectors";

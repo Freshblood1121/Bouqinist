@@ -1,30 +1,27 @@
 import React, { useEffect } from "react";
 import "./Catalog.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getBooksData } from "../../../Store/books/actions";
+import { getAllBooksData } from "../../../Store/books/actions";
 import CatalogSection from "./CatalogSection/CatalogSection";
 
 const Catalog = () => {
-  const items = useSelector((store) => store.books.books);
-  const dispatch = useDispatch();
+  // const items = useSelector((store) => store.books.books);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    getBooksData(dispatch);
-  }, []);
+  // useEffect(() => {
+  //   getAllBooksData(dispatch);
+  // }, []);
 
-  const categories = [
-    "Художественные",
-    "Научно-популярные",
-    "Научные",
-    "Справочные",
-    "Учебные",
-    "Полиграфия",
-  ];
+  const categories = useSelector((store) => store.categories.categories);
 
   return (
     <div className="ctl">
       {categories.map((category, index) => (
-        <CatalogSection key={index} books={items} category={category} />
+        <CatalogSection
+          key={index}
+          // books={items}
+          category={category}
+        />
       ))}
     </div>
   );

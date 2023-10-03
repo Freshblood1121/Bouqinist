@@ -1,68 +1,177 @@
 import { createTheme } from "@mui/material/styles";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 import GolosUI from "./fonts/Golos-UI_Regular.ttf";
+import GolosUiBold from "./fonts/Golos-UI_Bold.ttf";
+import UnicaOne from "./fonts/UnicaOne-Regular.ttf";
 import { palette } from "./Utils/Constants";
+import { ruRU } from "@mui/material/locale";
 
-const golosUI = {
-  fontFamily: "Golos UI",
-  fontStyle: "normal",
-  fontDisplay: "swap",
-  fontWeight: "400",
-  src: `
-    local("Golos UI"),
-    url(${GolosUI}) format("truetype")
-  `,
-};
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#3ab9eb",
-      light: "#ade1f7",
-      dark: "#004c8f",
-      contrastText: "#fff",
+const theme = createTheme(
+  {
+    palette: {
+      primary: {
+        main: `${palette.basic}`,
+        light: `${palette.light}`,
+        dark: "#004c8f",
+        contrastText: "#fff",
+      },
+      secondary: {
+        main: "#fdbe0f",
+        light: "#ffebb3",
+        dark: "#fc9d09",
+      },
+      success: {
+        main: `${palette.success}`,
+        light: "#9adbc1",
+        dark: "#076446",
+      },
     },
-    secondary: {
-      main: "#fdbe0f",
-      light: "#ffebb3",
-      dark: "#fc9d09",
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1300,
+      },
     },
-    success: { main: "#00A878", light: "#9adbc1", dark: "#076446" },
-  },
-  typography: {
-    fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
-    fontSize: 16,
-    h1: {
-      fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
-      fontSize: 69,
-      "@media (max-width:599px)": {
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 600,
+        md: 900,
+        lg: 1200,
+        xl: 1300,
+      },
+    },
+    typography: {
+      fontFamily: ["Golos UI", "Unica One", "Roboto", "sans-serif"].join(","),
+      fontSize: 16,
+      h1: {
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+        fontSize: 69,
+        "@media (max-width:599px)": {
+          fontSize: 36,
+        },
+        "@media (min-width:600px) and (max-width: 900px)": {
+          fontSize: 52,
+        },
+        fontFamily: ["Golos UI", "sans-serif"].join(","),
+      },
+      h2: {
+        fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
         fontSize: 36,
+        color: `${palette.basic}`,
       },
-      "@media (min-width:600px) and (max-width: 900px)": {
-        fontSize: 52,
+      h3: {
+        fontSize: 24,
+        color: `${palette.basic}`,
+        height: "auto",
+        marginBottom: 15,
       },
-      fontFamily: ["Golos UI", "sans-serif"].join(","),
+      h4: {
+        fontSize: 16,
+        color: `${palette.basic}`,
+      },
+      title: {
+        fontSize: 24,
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(","),
+        color: `${palette.basic}`,
+      },
+      subtitle1: {
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+        fontSize: 20,
+      },
+      subtitle2: {
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+        fontSize: "16px",
+        color: "black",
+        lineHeight: "normal",
+      },
+      lightSubtitle2: {
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
+        fontSize: "16px",
+        color: `${palette.light}`,
+        lineHeight: "normal",
+      },
+      boldSubtitle1: {
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(","),
+        fontSize: 20,
+        lineHeight: "normal",
+      },
+      boldSubtitle2: {
+        fontSize: 16,
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(","),
+        color: `${palette.basic}`,
+        lineHeight: "normal",
+      },
+      sidebarItem: {
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(","),
+        fontSize: 20,
+        color: `${palette.basic}`,
+      },
+      logoBig: {
+        fontFamily: ["Unica One", "Roboto", "cursive"].join(" ,"),
+        fontSize: 64,
+        color: `${palette.basic}`,
+      },
+      signupTitle: {
+        fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
+        fontSize: 32,
+        color: `${palette.basic}`,
+      },
+      signupSubtitle: {
+        fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
+        fontSize: 24,
+        color: `${palette.basic}`,
+      },
+      itemProp: {
+        fontSize: "0.875rem",
+        color: "rgb(99, 115, 129)",
+      },
+      itemValue: {
+        fontWeight: "500",
+      },
+      errorTitle: {
+        fontSize: "14px",
+        color: `${palette.warning}`,
+        textAlign: "center",
+      },
+      inputLabel: {
+        fontSize: "14px",
+        color: `${palette.light}`,
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
+      pageTitle: {
+        fontSize: "32px",
+        color: `${palette.basic}`,
+        fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+        fontWeight: "normal",
+      },
+      basicSmallText: {
+        fontSize: "14px",
+        color: `${palette.basic}`,
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
+      basicMediumText: {
+        fontSize: "16px",
+        color: `${palette.basic}`,
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
+      lightHelperText: {
+        fontSize: "14px",
+        color: `${palette.light}`,
+        fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(", "),
+        lineHeight: "normal",
+      },
     },
-    h2: {
-      fontFamily: ["Doloman Pavljenko", "Roboto", "sans-serif"].join(","),
-      fontSize: 36,
-      color: `${palette.basic}`,
-    },
-    subtitle1: {
-      fontFamily: ["Golos UI", "Roboto", "sans-serif"].join(","),
-      fontSize: 20,
-    },
-    itemProp: {
-      fontSize: "0.875rem",
-      color: "rgb(99, 115, 129)",
-    },
-    itemValue: {
-      fontWeight: "500",
-    },
-  },
-  components: {
-    MuiCssBaseline: {
-      styleOverrides: `
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: `
       @font-face {
         font-family: 'Golos UI';
         font-style: normal;
@@ -72,61 +181,126 @@ const theme = createTheme({
         unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, 0400—04FF;
       }
       * {box-sizing: border-box}
+      @font-face {
+        font-family: 'Unica One';
+        font-style: normal;
+        font-display: swap;
+        font-weight: 400;
+        src: local('Unica One'), 
+        url(${UnicaOne})
+        /* url('https://fonts.googleapis.com/css2?family=Unica+One&display=swap') */
+         format('truetype');
+        unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, 0400—04FF;
+      }
+      * {box-sizing: border-box}
+      :root {
+        --basic: ${palette.basic};
+      }
+      @font-face {
+        font-family: 'Golos UI Bold';
+        font-style: normal;
+        font-weight: normal;
+        font-display: swap;
+        src: local('Golos UI Bold'), 
+        url(${GolosUiBold})
+         format('truetype');
+        unicodeRange: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, 0400—04FF;
+      }
+      * {box-sizing: border-box}
+      :root {
+        --basic: ${palette.basic};
+      }
       `,
-    },
-    MuiFormControl: {
-      styleOverrides: {
-        root: {
-          height: "48px",
-        },
       },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          "--TextField-brandBorderColor": "#3D3C3C",
-          "--TextField-brandBorderHoverColor": "#FDBF0F",
-          "--TextField-brandBorderFocusedColor": "#3AB8EB",
-          "& label.Mui-focused": {
-            color: "var(--TextField-brandBorderFocusedColor)",
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            fontSize: "16px",
           },
         },
       },
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        notchedOutline: {
-          borderRadius: "20px",
-          border: "2px solid var(--TextField-brandBorderColor)",
-          boxShadow: "3px 15px 0px 0px #FDBF0F",
-          height: "57px",
-          transition:
-            "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-        },
-        root: {
-          [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderHoverColor)",
-            boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderHoverColor)",
-            transition:
-              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-          },
-          [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: "var(--TextField-brandBorderFocusedColor)",
-            boxShadow:
-              "3px 15px 0px 0px var(--TextField-brandBorderFocusedColor)",
-            transition:
-              "border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+      MuiInputBase: {
+        styleOverrides: {
+          root: {
+            color: `${palette.basic}`,
           },
         },
-        input: {
-          padding: "13px 0 13px 25px",
-          fontSize: "16px",
-          color: "#3D3C3C",
+      },
+      MuiListItemText: {
+        styleOverrides: {
+          root: {
+            [`& span`]: {
+              fontSize: "16px",
+            },
+          },
+        },
+      },
+      MuiAutocomplete: {
+        styleOverrides: {
+          noOptions: {
+            fontSize: "16px",
+          },
+        },
+      },
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            color: `${palette.gray400}`,
+            textTransform: "none",
+            borderRadius: "10px",
+            padding: "12px 32px 20px 0",
+            fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+            [`&:first-of-type`]: {
+              padding: "12px 32px 20px 0",
+            },
+            [`&.Mui-selected`]: {
+              color: `${palette.basic}`,
+              fontFamily: ["Golos UI Bold", "Roboto", "sans-serif"].join(", "),
+            },
+          },
+        },
+      },
+      MuiTabs: {
+        styleOverrides: {
+          root: {
+            position: "relative",
+            [`&::before`]: {
+              display: "block",
+              width: "100%",
+              height: "3px",
+              position: "absolute",
+              bottom: "-3px",
+              zIndex: "2",
+              backgroundColor: `${palette.gray300}`,
+            },
+          },
+          indicator: {
+            backgroundColor: `${palette.basic}`,
+            height: "3px",
+            zIndex: "3",
+          },
+        },
+      },
+      MuiStepLabel: {
+        styleOverrides: {
+          label: {
+            transition: "color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+            [`&.MuiStepLabel-alternativeLabel`]: { marginTop: 0 },
+            [`&.MuiStepLabel-alternativeLabel.Mui-disabled`]: {
+              color: `${palette.gray300}`,
+            },
+            [`&.MuiStepLabel-alternativeLabel.Mui-disabled`]: {
+              color: `${palette.gray300}`,
+            },
+          },
+          iconContainer: {
+            transition: "color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
+          },
         },
       },
     },
   },
-});
+  ruRU
+);
 
 export default theme;

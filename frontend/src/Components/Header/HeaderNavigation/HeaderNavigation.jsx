@@ -1,27 +1,71 @@
-import React from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import "./HeaderNavigation.css";
-import Fav from "../../UI/Account";
-import Favourite from "../../UI/Favourite";
-import Account from "../../UI/Account";
-import Cart from "../../UI/Cart";
+import Favourite from "../../UI/Icons/Favourite";
+import Account from "../../UI/Icons/Account";
+import Cart from "../../UI/Icons/Cart";
+import Login from "../../Login/Login";
+import { Modal } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  clearMessage,
+  closeModal,
+  openModal,
+} from "../../../Store/account/actions";
+import LoggedInButton from "../../UI/Buttons/LoggedInButton";
+import { useNavigate } from "react-router-dom";
 
 const HeaderNavigation = () => {
+  const dispatch = useDispatch();
+  const modalIsOpened = useSelector((store) => store.account.modalIsOpened);
+  const user = useSelector((store) => store.account.user);
+  const isLoggedIn = useSelector((store) => store.account.isLoggedIn);
+
+  const handleOpenModal = () => {
+    dispatch(clearMessage());
+    dispatch(openModal());
+  };
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+    dispatch(clearMessage());
+  };
+  const ref = useRef(null);
+
+  // Настройки меню аккаунта
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
   return (
     <div className="header__nav nav">
+      {!isLoggedIn && (
+        <Modal
+          open={modalIsOpened}
+          // open={isModalOpened}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          className="modal"
+        >
+          <>
+            <Login ref={ref} />
+          </>
+        </Modal>
+      )}
+      {isLoggedIn ? (
+        <li className="header__nav-item">
+          <LoggedInButton
+            name={user.first_name ? user.first_name[0] : ""}
+            // name={"Artem"}
+          />
+        </li>
+      ) : (
+        <li className="header__nav-item" onClick={handleOpenModal}>
+          <Account />
+        </li>
+      )}
       <li className="header__nav-item">
-        {/* <img className="nav__user_img" src="/img/user1.svg" alt="user" /> */}
-        <Account />
-      </li>
-      <li className="header__nav-item">
-        {/* <img
-          className="nav__bookopen_img"
-          src="/img/book_mark.svg"
-          alt="BookMark"
-        /> */}
         <Favourite />
       </li>
       <li className="header__nav-item">
-        {/* <img className="nav__cart_img" src="/img/cart1.svg" alt="Cart" /> */}
         <Cart />
       </li>
     </div>
