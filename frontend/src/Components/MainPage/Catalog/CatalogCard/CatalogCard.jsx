@@ -5,6 +5,8 @@ import { Button, IconButton, SvgIcon } from "@mui/material";
 import CartButton from "../../../UI/Buttons/CartButton";
 import FavourButton from "../../../UI/Buttons/FavourButton";
 
+const isProduction = process.env.NODE_ENV == "production";
+
 const CatalogCard = ({ item }) => {
   return (
     <div className="ctl__card">
@@ -16,7 +18,10 @@ const CatalogCard = ({ item }) => {
         }}
       >
         <div className="ctl__card_img_wrap">
-          <img src={`public/${item.image}`} alt="cover of the book" />
+          <img
+            src={isProduction ? `/${item.image}` : `public/${item.image}`}
+            alt="cover of the book"
+          />
         </div>
         <div className="ctl__card_title">{item.title}</div>
       </Link>

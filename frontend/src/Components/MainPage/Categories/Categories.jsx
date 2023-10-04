@@ -8,6 +8,7 @@ import {
   selectCategory,
 } from "../../../Store/categories/actions";
 import { Link } from "react-router-dom";
+import folderImg from "../../../img/folder_no.svg";
 
 const Categories = () => {
   const categories = useSelector((store) => store.categories.categories);
@@ -15,7 +16,11 @@ const Categories = () => {
   return (
     <div className="ctgs">
       <div className="ctgs__title">
-        <img src="./img/folder_no.svg" alt="folder" />
+        <img
+          // src="./img/folder_no.svg"
+          src={folderImg}
+          alt="folder"
+        />
         <h3 className="ctgs__h3">Категории</h3>
       </div>
 

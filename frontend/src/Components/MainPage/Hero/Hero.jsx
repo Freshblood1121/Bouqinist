@@ -11,6 +11,8 @@ import {
   Button,
 } from "@mui/material";
 import Search from "../../../img/search.svg";
+import bookImg from "../../../img/book_gif.png";
+import bannerImg from "../../../img/banner_img.jpg";
 import SearchIconComponent from "../../UI/Icons/SearchIconComponent";
 import FindIconComponent from "../../UI/Icons/FindIconComponent";
 import SearchField from "../../UI/SearchField";
@@ -48,7 +50,8 @@ const Hero = () => {
                 <p className="hero_left_text1">Найдите книгу себе по душе</p>
                 <img
                   className="hero_title_img"
-                  src="/img/book_gif.png"
+                  // src="/img/book_gif.png"
+                  src={bookImg}
                   alt="book"
                 />
               </div>
@@ -86,7 +89,8 @@ const Hero = () => {
             <div className="hero_right">
               <img
                 className="hero_right_img"
-                src="/img/banner_img.jpg"
+                // src="/img/banner_img.jpg"
+                src={bannerImg}
                 alt="banner"
               />
             </div>

@@ -14,6 +14,8 @@ const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
+const ASSET_PATH = isProduction ? "/" : "/";
+
 const config = {
   entry: {
     index: "./src/index.jsx",
@@ -28,7 +30,7 @@ const config = {
     filename: "[name].[contenthash].js",
     chunkFilename: "[name].js",
     //
-    publicPath: "/",
+    publicPath: ASSET_PATH,
     clean: true,
   },
   // optimization: {
@@ -43,7 +45,7 @@ const config = {
     splitChunks: {
       // chunks: "all",
       // maxInitialRequests: Infinity,
-      // minSize: 0,
+      maxSize: 200000,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/, ///< put all used node_modules modules in this chunk
@@ -102,6 +104,9 @@ const config = {
     new CompressionPlugin({
       algorithm: "gzip",
     }),
+    new webpack.DefinePlugin({
+      "process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
+    }),
   ],
   devtool: "eval-source-map",
   module: {
@@ -118,12 +123,12 @@ const config = {
         use: [stylesHandler, "css-loader"],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|otf|png|jpg|gif)$/i,
+        test: /\.(eot|ttf|woff|woff2|otf)$/i,
         type: "asset",
       },
       { test: /\.md$/i, use: ["html-loader", "markdown-loader"] },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
         type: "asset/resource",
       },
     ],

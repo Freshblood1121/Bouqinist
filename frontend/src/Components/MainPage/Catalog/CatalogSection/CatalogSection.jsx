@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBooksDataByCategory } from "../../../../Store/books/actions";
 import { REQUEST_STATUS } from "../../../../Utils/Constants";
 import AuthService from "../../../../Services/auth.service";
+import pathImg from "../../../../img/path.svg";
 
 const CatalogSection = ({ category }) => {
   const ref = useRef();
@@ -41,7 +42,11 @@ const CatalogSection = ({ category }) => {
       {requestStatus === REQUEST_STATUS.SUCCESS && (
         <div className="ctl__categ">
           <div className="ctl__categ_title">
-            <img src="./img/path.svg" alt="path" />
+            <img
+              // src="./img/path.svg"
+              src={pathImg}
+              alt="path"
+            />
             <span>{category.title}</span>
           </div>
           <div className="ctl__cards">

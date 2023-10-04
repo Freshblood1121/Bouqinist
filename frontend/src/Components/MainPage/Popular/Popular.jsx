@@ -3,16 +3,21 @@ import "./Popular.css";
 
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
+import image1 from "../../../img/popular/cb1_1.jpg";
+import image2 from "../../../img/popular/cb1_2.jpg";
+import image3 from "../../../img/popular/cb1_3.jpg";
+import image4 from "../../../img/popular/cb1_4.jpg";
+import image5 from "../../../img/popular/cb1_5.jpg";
 
 const Popular = () => {
   const swiperRef = useRef();
 
   const popularItems = [
-    { img: "./img/popular/cb1_1.jpg" },
-    { img: "./img/popular/cb1_2.jpg" },
-    { img: "./img/popular/cb1_3.jpg" },
-    { img: "./img/popular/cb1_4.jpg" },
-    { img: "./img/popular/cb1_5.jpg" },
+    { img: image1 },
+    { img: image2 },
+    { img: image3 },
+    { img: image4 },
+    { img: image5 },
   ];
 
   const ref = useRef();
@@ -61,7 +66,7 @@ const Popular = () => {
                   <img
                     className="popular_cover"
                     src={`${item.img}`}
-                    alt="cover_book1"
+                    alt={`cover_book${index}`}
                   />
                 </div>
               </SplideSlide>

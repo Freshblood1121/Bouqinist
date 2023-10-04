@@ -7,6 +7,7 @@ import BaseButton from "../../UI/Buttons/BaseButton";
 import BaseTextButton from "../../UI/Buttons/BaseTextButton";
 import { useDispatch } from "react-redux";
 import { verificate } from "../../../Store/account/actions";
+import successImg from "../../../img/account/success-anim.svg";
 
 const Verification = ({ email }) => {
   // const token = localStorage.getItem("token");
@@ -73,7 +74,8 @@ const Verification = ({ email }) => {
             <Grid container justifyContent={"center"} alignItems={"center"}>
               <Grid item>
                 <img
-                  src="/img/account/success-anim.svg"
+                  // src="/img/account/success-anim.svg"
+                  src={successImg}
                   alt="Успешное подтверждение электронной почты"
                 />
                 <Typography variant="h2" marginBottom={"30px"}>

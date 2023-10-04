@@ -1,0 +1,199 @@
+.hero {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.hero_title {
+  margin: 0;
+  display: grid;
+  grid-template-areas:
+    "title img"
+    "subtitle img";
+}
+
+@media screen and (min-width: 900px) {
+  .hero_title {
+    display: grid;
+    grid-template-areas:
+      "title img"
+      "subtitle img";
+  }
+}
+
+.hero_title_h1 {
+  font-family: "Golos UI", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 10px;
+  width: 227px;
+  font-size: 36px;
+  color: var(--gray-800);
+
+  grid-area: title;
+}
+
+@media screen and (min-width: 900px) {
+  .hero_title_h1 {
+    grid-area: title;
+  }
+}
+
+.hero_title_img {
+  margin: 0;
+  width: 60px;
+  height: 60px;
+  grid-area: img;
+  align-self: center;
+  justify-self: center;
+}
+
+@media screen and (min-width: 720px) {
+  .hero_title_img {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+.hero_left {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.hero_left_text1 {
+  color: #676767;
+  font-family: "Golos UI", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  grid-area: subtitle;
+}
+
+@media screen and (min-width: 900px) {
+  .hero_left_text1 {
+    grid-area: subtitle;
+  }
+}
+
+.hero_right {
+  background: #fff;
+  display: none;
+}
+
+@media screen and (min-width: 1200px) {
+  .hero_right {
+    display: block;
+  }
+}
+
+.hero_right_img {
+  height: 100%;
+  display: block;
+}
+
+/*--------------*/
+
+.hero_search {
+  background: #fff;
+}
+
+.hero_search_form {
+  background: #fff;
+}
+
+.hero_search_wrap {
+  height: 52px;
+  border-radius: 20px;
+  border: 2px solid var(--gray-800, #3d3c3c);
+  background: var(--white, #fff);
+  -webkit-box-shadow: 3px 15px 0px 0px #fdbf0f;
+  box-shadow: 3px 15px 0px 0px #fdbf0f;
+  margin-bottom: 37px;
+  display: flex;
+  padding: 0 30px 0 20px;
+  position: relative;
+  width: calc(100% - 3px);
+}
+
+.hero_search_wrap:hover {
+  border-color: #fdbf0f;
+}
+
+.hero_search_inp {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  color: var(--gray-800, #3d3c3c);
+  font-family: "Golos UI", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 100%;
+}
+
+.hero_search_btn {
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 13px;
+  right: 20px;
+  bottom: 1px;
+  left: auto;
+  margin: 0;
+}
+
+/*----------------------*/
+
+.hero_explorer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 22px;
+}
+
+@media screen and (min-width: 600px) {
+  .hero_explorer {
+    flex-direction: row;
+    column-gap: 24px;
+  }
+
+  .divider {
+    align-self: center;
+  }
+}
+
+.hero_explorer_btn_wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  border-radius: 20px;
+  border: 2px solid var(--gray-800, #3d3c3c);
+  background: var(--yellow-500, #fdbf0f);
+  padding: 16px 27px;
+  align-items: center;
+}
+
+.hero_explorer_btn {
+  flex-shrink: 0;
+  background: var(--yellow-500, #fdbf0f);
+  border: none;
+  outline: none;
+
+  color: var(--gray-800, #3d3c3c);
+  font-family: "Golos UI", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-right: 30px;
+}
+

@@ -1,0 +1,60 @@
+.ctgs {
+  width: 100%;
+  padding: 150px 0 160px;
+}
+
+.ctgs__title {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.ctgs__h3 {
+  color: var(--gray-800, #3d3c3c);
+  font-family: "Doloman Pavljenko", "Golos UI", sans-serif;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  margin-left: 10px;
+}
+
+/* .ctgs__btns {
+  display: grid;
+  grid-auto-flow: row;
+  align-content: stretch;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "ctgs_btn1"
+    "ctgs_btn2"
+    "ctgs_btn3"
+    "ctgs_btn4"
+    "ctgs_btn5"
+    "ctgs_btn6";
+  row-gap: 40px;
+}
+
+.ctgs__btn1 {
+  grid-area: ctgs_btn1;
+}
+
+.ctgs__btn2 {
+  grid-area: ctgs_btn2;
+}
+
+.ctgs__btn3 {
+  grid-area: ctgs_btn3;
+}
+
+.ctgs__btn4 {
+  grid-area: ctgs_btn4;
+}
+
+.ctgs__btn5 {
+  grid-area: ctgs_btn5;
+}
+
+.ctgs__btn6 {
+  grid-area: ctgs_btn6;
+} */
+
