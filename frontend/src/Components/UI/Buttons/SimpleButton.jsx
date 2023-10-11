@@ -38,6 +38,7 @@ const SimpleButton = (props) => {
         [`&:hover > svg > svg`]: {
           stroke: "#fff",
         },
+        ...props.sx,
       }}
       onClick={props.handleClick}
     >

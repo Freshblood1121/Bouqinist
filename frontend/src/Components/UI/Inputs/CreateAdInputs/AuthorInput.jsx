@@ -13,10 +13,11 @@ import {
   createTheme,
   outlinedInputClasses,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { palette } from "../../../../Utils/Constants";
 import GolosUI from "../../../../fonts/Golos-UI_Regular.ttf";
 import SimpleButton from "../../Buttons/SimpleButton";
+import { TransitionGroup } from "react-transition-group";
 
 const theme = createTheme({
   palette: {
@@ -153,6 +154,15 @@ const AuthorInput = (props) => {
   // const defaultAuthor = { value: "" };
   const [authors, setAuthors] = useState([{ value: "" }]);
   // const [authorValue, setAuthorValue] = useState({ value: "" });
+
+  const [checked, setChecked] = useState(props.formik.values.author.unknown);
+
+  useEffect(() => {
+    if (checked) {
+      setAuthors([]);
+    }
+  }, []);
+
   const handleChange = (event, index) => {
     setAuthors([
       ...authors.slice(0, index),
@@ -178,12 +188,8 @@ const AuthorInput = (props) => {
       },
       [""]
     );
-    props.formik.setFieldValue("author", joinedAuthors);
-    // props.formik.setFieldValue("author", authors);
-    console.log(props.formik.values);
+    props.formik.setFieldValue("author.authors", joinedAuthors);
   };
-
-  console.log(authors);
 
   const handleAddAuthor = () => {
     setAuthors([...authors, { value: "" }]);
@@ -193,11 +199,22 @@ const AuthorInput = (props) => {
     setAuthors([...authors.slice(0, index), ...authors.slice(index + 1)]);
   };
 
-  const [checked, setChecked] = useState(false);
   const handleCheckChange = (event) => {
-    setChecked(event.target.checked);
-    setAuthors([{ value: "" }]);
+    if (event.target.checked) {
+      props.formik.setFieldValue("author.authors", "Автор неизвестен");
+      props.formik.setFieldValue("author.unknown", true);
+      setChecked(event.target.checked);
+      setAuthors([]);
+    } else {
+      props.formik.setFieldTouched("author", false, false);
+      setAuthors([{ value: "" }]);
+      props.formik.setFieldValue("author.authors", "");
+      props.formik.setFieldValue("author.unknown", false);
+      setChecked(event.target.checked);
+    }
   };
+
+  console.log("checked: ,", checked);
 
   return (
     <ThemeProvider theme={theme}>
@@ -230,80 +247,95 @@ const AuthorInput = (props) => {
             sx={{ mb: "31px" }}
           />
           <Stack direction={"column"} rowGap={"40px"}>
-            {authors.map((author, index) => {
-              if (index === 0) {
-                return (
-                  <Fade
-                    key={index}
-                    in={!checked}
-                    mountOnEnter
-                    unmountOnExit
-                    {...{ timeout: 250 }}
-                  >
-                    <Stack direction={"row"} columnGap={"20px"}>
-                      <FormControl fullWidth sx={{ maxWidth: "320px" }}>
-                        <FormHelperText>
-                          {props.error ? props.helperText : null}
-                        </FormHelperText>
-                        <OutlinedInput
-                          id={props.id}
-                          name={props.name}
-                          value={authors[index].value}
-                          // onChange={props.onChange}
-                          onChange={(event) => handleChange(event, index)}
-                          onBlur={props.onBlur}
-                          error={props.error ? true : false}
-                          sx={{ maxWidth: "320px" }}
+            <TransitionGroup
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: "40px",
+              }}
+            >
+              {authors.map((author, index) => {
+                if (index === 0) {
+                  return (
+                    <Fade
+                      key={author}
+                      in={!checked}
+                      {...{ timeout: 250 }}
+                      mountOnEnter
+                      unmountOnExit
+                    >
+                      <Stack direction={"row"} columnGap={"20px"}>
+                        <FormControl fullWidth sx={{ maxWidth: "320px" }}>
+                          <FormHelperText>
+                            {props.formik.touched.author &&
+                            Boolean(props.formik.errors.author)
+                              ? props.formik.touched.author &&
+                                props.formik.errors.author.authors
+                              : null}
+                          </FormHelperText>
+                          <OutlinedInput
+                            id={props.id}
+                            name={props.name}
+                            value={authors[index].value}
+                            // onChange={props.onChange}
+                            onChange={(event) => handleChange(event, index)}
+                            onBlur={props.onBlur}
+                            error={
+                              props.formik.touched.author &&
+                              Boolean(props.formik.errors.author)
+                                ? true
+                                : false
+                            }
+                            sx={{ maxWidth: "320px" }}
+                          />
+                        </FormControl>
+                        <SimpleButton
+                          text={"Добавить автора"}
+                          width={"150px"}
+                          handleClick={handleAddAuthor}
                         />
-                      </FormControl>
-                      <SimpleButton
-                        text={"Добавить автора"}
-                        width={"150px"}
-                        handleClick={handleAddAuthor}
-                      />
-                    </Stack>
-                  </Fade>
-                );
-              } else {
-                return (
-                  <Fade
-                    key={index}
-                    in={!authors.includes(index)}
-                    mountOnEnter
-                    unmountOnExit
-                    {...{ timeout: 250 }}
-                  >
-                    <Stack direction={"row"} columnGap={"20px"}>
-                      <FormControl fullWidth sx={{ maxWidth: "320px" }}>
-                        <FormHelperText>
-                          {props.error ? props.helperText : null}
-                        </FormHelperText>
-                        <OutlinedInput
-                          id={props.id}
-                          name={props.name}
-                          value={authors[index].value}
-                          // onChange={props.onChange}
-                          onChange={(event) => handleChange(event, index)}
-                          onBlur={props.onBlur}
-                          error={props.error ? true : false}
-                          sx={{ maxWidth: "320px" }}
+                      </Stack>
+                    </Fade>
+                  );
+                } else {
+                  return (
+                    <Fade
+                      key={index}
+                      in={!authors.includes(index) && !checked}
+                      {...{ timeout: 250 }}
+                    >
+                      <Stack direction={"row"} columnGap={"20px"}>
+                        <FormControl fullWidth sx={{ maxWidth: "320px" }}>
+                          <FormHelperText>
+                            {props.error ? props.helperText : null}
+                          </FormHelperText>
+                          <OutlinedInput
+                            id={props.id}
+                            name={props.name}
+                            value={authors[index].value}
+                            // onChange={props.onChange}
+                            onChange={(event) => handleChange(event, index)}
+                            onBlur={props.onBlur}
+                            error={props.error ? true : false}
+                            sx={{ maxWidth: "320px" }}
+                          />
+                        </FormControl>
+                        <SimpleButton
+                          text={"Удалить автора"}
+                          width={"150px"}
+                          handleClick={(event) => {
+                            console.log(index);
+                            handleDeleteAuthor(index);
+                          }}
+                          backgroundColor={palette.error300}
+                          hoverBackgroundColor={palette.warning}
                         />
-                      </FormControl>
-                      <SimpleButton
-                        text={"Удалить автора"}
-                        width={"150px"}
-                        handleClick={(event) => {
-                          console.log(index);
-                          handleDeleteAuthor(index);
-                        }}
-                        backgroundColor={palette.error300}
-                        hoverBackgroundColor={palette.warning}
-                      />
-                    </Stack>
-                  </Fade>
-                );
-              }
-            })}
+                      </Stack>
+                    </Fade>
+                  );
+                }
+              })}
+            </TransitionGroup>
           </Stack>
         </Box>
       </Box>

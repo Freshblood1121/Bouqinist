@@ -6,13 +6,15 @@ import "./Header.css";
 import { Container, Link } from "@mui/material";
 import SimpleButton from "../UI/Buttons/SimpleButton";
 import { palette } from "../../Utils/Constants";
-import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../Store/account/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const isLoggedIn = useSelector((store) => store.account.isLoggedIn);
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const dispatch = useDispatch()
 
   const handleClick = () => {
     if (isLoggedIn) {
@@ -33,6 +35,12 @@ const Header = () => {
           height={"32px"}
           width={"200px"}
           handleClick={handleClick}
+          sx={{
+            display: {
+              xs: "none",
+              sm: "flex",
+            },
+          }}
         />
         <HeaderNavigation />
       </header>

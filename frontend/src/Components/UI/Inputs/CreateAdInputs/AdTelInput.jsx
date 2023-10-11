@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   CssBaseline,
   FormControl,
   FormHelperText,
@@ -17,7 +18,7 @@ import GolosUiBold from "../../../../fonts/Golos-UI_Bold.ttf";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 // import { MuiTelInput } from "mui-tel-input";
 
-const MuiTelInput = lazy(() => import("mui-tel-input"));
+const MuiTelInput = lazy(() => import("../../MuiTelInput"));
 
 const theme = createTheme({
   typography: {
@@ -174,7 +175,7 @@ const AdTelInput = (props) => {
             error={props.error ? true : false}
             sx={{ maxWidth: "320px" }}
           /> */}
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<CircularProgress />}>
             <MuiTelInput
               fullWidth
               defaultCountry="RU"

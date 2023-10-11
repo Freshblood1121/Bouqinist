@@ -1,26 +1,17 @@
 import {
   Box,
+  CircularProgress,
   Container,
   Grid,
-  Tab,
-  Tabs,
   Typography,
   createTheme,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { redirect, useNavigate } from "react-router-dom";
 import { palette } from "../../Utils/Constants";
-import EmailInput from "../UI/Inputs/AccountInputs/EmailInput";
-import TelInput from "../UI/Inputs/AccountInputs/TelInput";
-import BaseInput from "../UI/Inputs/AccountInputs/BaseInput";
-import CountrySelect from "../UI/Inputs/AccountInputs/CountrySelect";
-import GenderSelect from "../UI/Inputs/AccountInputs/GenderSelect";
-import DateInput from "../UI/Inputs/AccountInputs/DateInput";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import BasicData from "./BasicData";
-import ChangePassword from "./ChangePassword";
 
 const AccountPage = () => {
   const isLoggedIn = useSelector((store) => store.account.isLoggedIn);
@@ -52,6 +43,11 @@ const AccountPage = () => {
       "aria-controls": `account-tabpanel-${index}`,
     };
   };
+
+  const Tabs = lazy(() => import("@mui/material/Tabs"));
+  const Tab = lazy(() => import("@mui/material/Tab"));
+  const BasicData = lazy(() => import("./BasicData"));
+  const ChangePassword = lazy(() => import("./ChangePassword"));
 
   return (
     <>
@@ -110,50 +106,47 @@ const AccountPage = () => {
                   },
                 }}
               >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  // variant="scrollable"
-                  // scrollButtons
-                  // allowScrollButtonsMobile
-                >
-                  <Tab
-                    disableRipple
-                    label="Основные сведения"
-                    {...sectionProps(0)}
-                    sx={{
-                      fontSize: {
-                        xs: "16px",
-                        lg: "20px",
-                      },
-                    }}
-                  />
-                  <Tab
-                    disableRipple
-                    label="Смена пароля"
-                    {...sectionProps(1)}
-                    sx={{
-                      fontSize: {
-                        xs: "16px",
-                        lg: "20px",
-                      },
-                    }}
-                  />
-                  {/* <Tab
-                    disableRipple
-                    label="Подтверждение почты"
-                    {...sectionProps(2)}
-                    sx={{
-                      fontSize: {
-                        xs: "16px",
-                        lg: "20px",
-                      },
-                    }}
-                  /> */}
-                </Tabs>
+                <Suspense fallback={<CircularProgress />}>
+                  <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    // variant="scrollable"
+                    // scrollButtons
+                    // allowScrollButtonsMobile
+                  >
+                    <Suspense fallback={<CircularProgress />}>
+                      <Tab
+                        disableRipple
+                        label="Основные сведения"
+                        {...sectionProps(0)}
+                        sx={{
+                          fontSize: {
+                            xs: "16px",
+                            lg: "20px",
+                          },
+                        }}
+                      />
+                      <Tab
+                        disableRipple
+                        label="Смена пароля"
+                        {...sectionProps(1)}
+                        sx={{
+                          fontSize: {
+                            xs: "16px",
+                            lg: "20px",
+                          },
+                        }}
+                      />
+                    </Suspense>
+                  </Tabs>
+                </Suspense>
               </Box>
-              <BasicData value={value} index={0} />
-              <ChangePassword value={value} index={1} />
+              <Suspense fallback={<CircularProgress />}>
+                <BasicData value={value} index={0} />
+              </Suspense>
+              <Suspense fallback={<CircularProgress />}>
+                <ChangePassword value={value} index={1} />
+              </Suspense>
             </Grid>
           </Grid>
         </Container>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import {
@@ -13,6 +13,7 @@ import {
   Typography,
   styled,
   Container,
+  CircularProgress,
 } from "@mui/material";
 import { palette } from "../../Utils/Constants";
 import SimpleButton from "../UI/Buttons/SimpleButton";
@@ -24,11 +25,12 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 import PayType from "../UI/Inputs/CreateAdInputs/PayType";
-import DeliveryStep from "./DeliveryStep";
-import BasicData from "./BasicData";
-import PaymentStep from "./PaymentStep";
-import SummaryStep from "./SummaryStep";
 import AuthService from "../../Services/auth.service";
+
+const BasicData = lazy(() => import("./BasicData"));
+const DeliveryStep = lazy(() => import("./DeliveryStep"));
+const PaymentStep = lazy(() => import("./PaymentStep"));
+const SummaryStep = lazy(() => import("./SummaryStep"));
 
 const CreateAdvertisment = () => {
   const isLoggedIn = useSelector((store) => store.account.isLoggedIn);
@@ -137,12 +139,23 @@ const CreateAdvertisment = () => {
   };
 
   const basicDataValidationSchema = yup.object({
-    title: yup
-      .string()
-      .min(2, "Поле должно содержать не менее двух символов")
-      .required("Название обязательно к заполнению"),
+    title: yup.string().required("Название обязательно к заполнению"),
     // category: yup.string().required("Укажите категорию"),
-    author: yup.string(),
+    author: yup.object({
+      authors: yup
+        .string()
+        .test("is-unknown", "Укажите автора", function (authors) {
+          const unknown = this.parent.unknown;
+          console.log(unknown);
+          if (unknown === false && authors === undefined) {
+            return false;
+          } else {
+            return true;
+          }
+        }),
+      // .required("Укажите автора"),
+      unknown: yup.boolean(),
+    }),
     publisher: yup.string(),
     age: yup.string(),
     images: yup
@@ -158,10 +171,12 @@ const CreateAdvertisment = () => {
         "Загрузите хотя бы одну фотографию",
         (images) => images.length > 0
       ),
-    description: yup
-      .string()
-      .required("Поле обязательно к заполнению")
-      .max(1000, "Описание должно состоять не более, чем из 1000 символов"),
+    description: yup.object({
+      text: yup.string().required("Поле обязательно к заполнению"),
+      charNumber: yup
+        .number()
+        .max(1000, "Описание должно состоять не более, чем из 1000 символов"),
+    }),
   });
 
   const paymentSchema = yup.object({
@@ -238,26 +253,17 @@ const CreateAdvertisment = () => {
     initialValues: {
       title: "",
       category: { title: "", id: "" },
-      author: "",
+      author: { authors: "", unknown: false },
       publisher: "",
       age: "",
       images: [],
-      description: "",
+      description: { text: "", charNumber: 0 },
     },
     validationSchema: basicDataValidationSchema,
     onSubmit: (values) => {
       handleNext();
     },
   });
-
-  useEffect(() => {
-    console.log(
-      "formikBasicData.authors",
-      formikBasicData.values.author,
-      "formikBasicData.title",
-      formikBasicData.values.title
-    );
-  }, [formikBasicData.values]);
 
   const formikPayment = useFormik({
     initialValues: {
@@ -310,9 +316,9 @@ const CreateAdvertisment = () => {
     category: formikBasicData.values.category,
     publisher: formikBasicData.values.publisher,
     age: formikBasicData.values.age,
-    author: formikBasicData.values.author,
+    author: formikBasicData.values.author.authors,
     images: formikBasicData.values.images,
-    description: formikBasicData.values.description,
+    description: formikBasicData.values.description.text,
     price: formikPayment.values.price,
     payType: formikPayment.values.payType,
     country: formikDelivery.values.country,
@@ -329,8 +335,8 @@ const CreateAdvertisment = () => {
     values.append("categories", formikBasicData.values.category.id);
     values.append("company", formikBasicData.values.publisher);
     values.append("age", formikBasicData.values.age);
-    values.append("author", formikBasicData.values.author);
-    values.append("description", formikBasicData.values.description);
+    values.append("author", formikBasicData.values.author.authors);
+    values.append("description", formikBasicData.values.description.text);
     values.append("price", formikPayment.values.price);
     values.append("payType", formikPayment.values.payType);
     values.append("country", formikDelivery.values.country);
@@ -371,8 +377,6 @@ const CreateAdvertisment = () => {
               </StepLabel>
             </Step>
           );
-
-          // console.log(`is step № ${index} failed? `, isStepFailed(index));
         })}
       </Stepper>
       <Box
@@ -397,10 +401,26 @@ const CreateAdvertisment = () => {
               rowGap: "20px",
             }}
           >
-            {step === 0 && <BasicData step={step} formik={formikBasicData} />}
-            {step === 1 && <PaymentStep step={step} formik={formikPayment} />}
-            {step === 2 && <DeliveryStep step={step} formik={formikDelivery} />}
-            {step === 3 && <SummaryStep step={step} data={data} />}
+            {step === 0 && (
+              <Suspense fallback={<CircularProgress />}>
+                <BasicData step={step} formik={formikBasicData} />
+              </Suspense>
+            )}
+            {step === 1 && (
+              <Suspense fallback={<CircularProgress />}>
+                <PaymentStep step={step} formik={formikPayment} />
+              </Suspense>
+            )}
+            {step === 2 && (
+              <Suspense fallback={<CircularProgress />}>
+                <DeliveryStep step={step} formik={formikDelivery} />
+              </Suspense>
+            )}
+            {step === 3 && (
+              <Suspense fallback={<CircularProgress />}>
+                <SummaryStep step={step} data={data} />
+              </Suspense>
+            )}
             {step === steps.length && (
               <div>
                 <Typography>
@@ -421,13 +441,6 @@ const CreateAdvertisment = () => {
               <SimpleButton handleClick={handleSubmit} text={"Далее"} />
             )}
           </Box>
-          {/* <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <SimpleButton handleClick={hideError} text={"Спрятать ошибку"} />
-            <SimpleButton
-              handleClick={() => setError(step)}
-              text={"Отобразить ошибку"}
-            />
-          </Box> */}
         </Box>
       </Box>
     </Container>

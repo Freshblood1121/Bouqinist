@@ -1,13 +1,13 @@
 import {
+  CircularProgress,
   FormControl,
   OutlinedInput,
   TextField,
   ThemeProvider,
   createTheme,
   outlinedInputClasses,
-  Slider,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { REQUEST_STATUS, palette } from "../../../Utils/Constants";
 import "./PriceFilter.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -139,6 +139,8 @@ const PriceFilter = () => {
     return `${value} ₽`;
   };
 
+  const Slider = lazy(() => import("@mui/material/Slider"));
+
   return (
     <ThemeProvider theme={theme}>
       <div className="price-filter">
@@ -168,18 +170,20 @@ const PriceFilter = () => {
             onBlur={handleBlur}
           />
         </FormControl>
-        <Slider
-          className="price-slider"
-          getAriaLabel={() => "Price range"}
-          value={values}
-          onChange={handlePriceChange}
-          onChangeCommitted={handleChangeCommitted}
-          valueLabelDisplay="off"
-          getAriaValueText={valuetext}
-          color={"primary"}
-          min={minPrice}
-          max={maxPrice}
-        />
+        <Suspense fallback={<CircularProgress />}>
+          <Slider
+            className="price-slider"
+            getAriaLabel={() => "Price range"}
+            value={values}
+            onChange={handlePriceChange}
+            onChangeCommitted={handleChangeCommitted}
+            valueLabelDisplay="off"
+            getAriaValueText={valuetext}
+            color={"primary"}
+            min={minPrice}
+            max={maxPrice}
+          />
+        </Suspense>
       </div>
     </ThemeProvider>
   );

@@ -1,0 +1,1 @@
+export { MuiTelInput as default } from "mui-tel-input";

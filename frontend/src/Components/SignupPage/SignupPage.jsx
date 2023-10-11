@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   Container,
   CssBaseline,
   Grow,
@@ -11,14 +12,7 @@ import React, { Suspense, lazy, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import theme from "../../Theme";
 import "./SignupPage.css";
-import { useFormik, Form, Field } from "formik";
-import BaseSignupInput from "../UI/Inputs/SignupInputs/BaseSignupInput";
-import PasswordSignupInput from "../UI/Inputs/SignupInputs/PasswordSignupInput";
-import SignupNavButton from "../UI/Buttons/SignupNavButton";
-import CountryInput from "../UI/Inputs/SignupInputs/CountryInput";
-import DateInput from "../UI/Inputs/SignupInputs/DateInput";
-import BaseButton from "../UI/Buttons/BaseButton";
-import GenderSelect from "../UI/Inputs/SignupInputs/GenderSelect";
+import { useFormik } from "formik";
 import { API_URL } from "../../Utils/Constants";
 import * as yup from "yup";
 import dayjs from "dayjs";
@@ -29,6 +23,21 @@ import Verification from "./Verification/Verification";
 import { register } from "../../Store/account/actions";
 
 const MuiTelInput = lazy(() => import("mui-tel-input"));
+const DateInput = lazy(() => import("../UI/Inputs/SignupInputs/DateInput"));
+const BaseSignupInput = lazy(() =>
+  import("../UI/Inputs/SignupInputs/BaseSignupInput")
+);
+const PasswordSignupInput = lazy(() =>
+  import("../UI/Inputs/SignupInputs/PasswordSignupInput")
+);
+const SignupNavButton = lazy(() => import("../UI/Buttons/SignupNavButton"));
+const CountryInput = lazy(() =>
+  import("../UI/Inputs/SignupInputs/CountryInput")
+);
+const BaseButton = lazy(() => import("../UI/Buttons/BaseButton"));
+const GenderSelect = lazy(() =>
+  import("../UI/Inputs/SignupInputs/GenderSelect")
+);
 
 const SignupPage = () => {
   const [step, setStep] = useState(0);
@@ -103,63 +112,75 @@ const SignupPage = () => {
     if (step === 0) {
       return (
         <>
-          <BaseSignupInput
-            name={"email"}
-            text={"E-mail"}
-            id={"email"}
-            {...formik.getFieldProps(`email`)}
-            autoFocus
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
-          />
-          <BaseSignupInput
-            name={"firstName"}
-            text={"Имя"}
-            id={"firstName"}
-            {...formik.getFieldProps(`firstName`)}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-            helperText={formik.touched.firstName && formik.errors.firstName}
-          />
-          <BaseSignupInput
-            name={"lastName"}
-            text={"Фамилия"}
-            id={"lastName"}
-            {...formik.getFieldProps(`lastName`)}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-            helperText={formik.touched.lastName && formik.errors.lastName}
-          />
-          <PasswordSignupInput
-            name={"password"}
-            text={"Пароль"}
-            id={"password"}
-            {...formik.getFieldProps(`password`)}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <PasswordSignupInput
-            text={"Повторите пароль"}
-            id={"confirmedPassword"}
-            name={"confirmedPassword"}
-            {...formik.getFieldProps(`confirmedPassword`)}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={
-              formik.touched.confirmedPassword &&
-              Boolean(formik.errors.confirmedPassword)
-            }
-            helperText={
-              formik.touched.confirmedPassword &&
-              formik.errors.confirmedPassword
-            }
-          />
+          <Suspense fallback={<CircularProgress />}>
+            <BaseSignupInput
+              name={"email"}
+              text={"E-mail"}
+              id={"email"}
+              {...formik.getFieldProps(`email`)}
+              autoFocus
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <BaseSignupInput
+              name={"firstName"}
+              text={"Имя"}
+              id={"firstName"}
+              {...formik.getFieldProps(`firstName`)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
+              helperText={formik.touched.firstName && formik.errors.firstName}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <BaseSignupInput
+              name={"lastName"}
+              text={"Фамилия"}
+              id={"lastName"}
+              {...formik.getFieldProps(`lastName`)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <PasswordSignupInput
+              name={"password"}
+              text={"Пароль"}
+              id={"password"}
+              {...formik.getFieldProps(`password`)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <PasswordSignupInput
+              text={"Повторите пароль"}
+              id={"confirmedPassword"}
+              name={"confirmedPassword"}
+              {...formik.getFieldProps(`confirmedPassword`)}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.confirmedPassword &&
+                Boolean(formik.errors.confirmedPassword)
+              }
+              helperText={
+                formik.touched.confirmedPassword &&
+                formik.errors.confirmedPassword
+              }
+            />
+          </Suspense>
           <SignupNavButton
             handleClick={handleNext}
             text={"Далее"}
@@ -194,42 +215,54 @@ const SignupPage = () => {
               }}
             />
           </Suspense>
-          <CountryInput
-            name={"country"}
-            id={"country"}
-            text={"Страна (не обязательно)"}
-            {...formik.getFieldProps(`country`)}
-            formik={formik}
-          />
-          <BaseSignupInput
-            text={"Город (не обязательно)"}
-            name={"city"}
-            id={"city"}
-            {...formik.getFieldProps(`city`)}
-          />
-          <GenderSelect
-            text={"Пол (не обязательно)"}
-            id={"gender"}
-            name={"gender"}
-            {...formik.getFieldProps(`gender`)}
-            formik={formik}
-          />
-          <DateInput
-            name={"birthdate"}
-            id={"birthdate"}
-            text={"Дата рождения (не обязательно)"}
-            {...formik.getFieldProps(`birthdate`)}
-            formik={formik}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.birthdate && Boolean(formik.errors.birthdate)}
-            helperText={formik.touched.birthdate && formik.errors.birthdate}
-          />
-          <SignupNavButton
-            handleClick={handleBack}
-            text={"Назад"}
-            className={`step-back ${step == 1 ? "visible" : "hidden"}`}
-          />
+          <Suspense fallback={<CircularProgress />}>
+            <CountryInput
+              name={"country"}
+              id={"country"}
+              text={"Страна (не обязательно)"}
+              {...formik.getFieldProps(`country`)}
+              formik={formik}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <BaseSignupInput
+              text={"Город (не обязательно)"}
+              name={"city"}
+              id={"city"}
+              {...formik.getFieldProps(`city`)}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <GenderSelect
+              text={"Пол (не обязательно)"}
+              id={"gender"}
+              name={"gender"}
+              {...formik.getFieldProps(`gender`)}
+              formik={formik}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <DateInput
+              name={"birthdate"}
+              id={"birthdate"}
+              text={"Дата рождения (не обязательно)"}
+              {...formik.getFieldProps(`birthdate`)}
+              formik={formik}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.birthdate && Boolean(formik.errors.birthdate)
+              }
+              helperText={formik.touched.birthdate && formik.errors.birthdate}
+            />
+          </Suspense>
+          <Suspense fallback={<CircularProgress />}>
+            <SignupNavButton
+              handleClick={handleBack}
+              text={"Назад"}
+              className={`step-back ${step == 1 ? "visible" : "hidden"}`}
+            />
+          </Suspense>
         </>
       );
     }

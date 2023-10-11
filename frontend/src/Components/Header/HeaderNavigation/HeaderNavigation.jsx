@@ -1,10 +1,9 @@
-import React, { forwardRef, useRef, useState } from "react";
+import React, { Suspense, forwardRef, lazy, useRef, useState } from "react";
 import "./HeaderNavigation.css";
 import Favourite from "../../UI/Icons/Favourite";
 import Account from "../../UI/Icons/Account";
 import Cart from "../../UI/Icons/Cart";
-import Login from "../../Login/Login";
-import { Modal } from "@mui/material";
+import { CircularProgress, Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   clearMessage,
@@ -13,6 +12,8 @@ import {
 } from "../../../Store/account/actions";
 import LoggedInButton from "../../UI/Buttons/LoggedInButton";
 import { useNavigate } from "react-router-dom";
+
+const Login = lazy(() => import("../../Login/Login"));
 
 const HeaderNavigation = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,9 @@ const HeaderNavigation = () => {
           className="modal"
         >
           <>
-            <Login ref={ref} />
+            <Suspense fallback={<CircularProgress />}>
+              <Login ref={ref} />
+            </Suspense>
           </>
         </Modal>
       )}

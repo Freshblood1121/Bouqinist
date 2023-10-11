@@ -1,5 +1,6 @@
 import {
   Box,
+  CircularProgress,
   CssBaseline,
   FormControl,
   InputLabel,
@@ -8,9 +9,8 @@ import {
   ThemeProvider,
   Typography,
   createTheme,
-  Autocomplete,
 } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { Suspense, useMemo, useState } from "react";
 import { palette } from "../../../../Utils/Constants";
 import GolosUI from "../../../../fonts/Golos-UI_Regular.ttf";
 import GolosUiBold from "../../../../fonts/Golos-UI_Bold.ttf";
@@ -120,8 +120,9 @@ const theme = createTheme(
   ruRU
 );
 
+const AutoComplete = lazy(() => import("@mui/material/Autocomplete"));
+
 const CountrySelect = ({ ...ParentProps }) => {
-  // console.log(ParentProps);
   const transformedValue = countries.find(
     (country) => country.label === ParentProps.value
   );
@@ -143,59 +144,63 @@ const CountrySelect = ({ ...ParentProps }) => {
         <Typography variant="inputLabel" sx={{ marginBottom: "8px" }}>
           {ParentProps.label}
         </Typography>
-        <Autocomplete
-          // id="country-select"
-          id={ParentProps.id}
-          options={countries}
-          autoHighlight
-          getOptionLabel={(option) => option.label}
-          isOptionEqualToValue={(option, value) => option.value === value.value}
-          // value={ParentProps.value}
-          value={transformedValue}
-          // onChange={ParentProps.onChange}
-          onChange={(event, newValue) => {
-            ParentProps.formik.setFieldValue(`${ParentProps.name}`, newValue);
-          }}
-          inputValue={inputValue}
-          onInputChange={(event, newInputValue) => {
-            console.log(
-              "input change event:",
-              event,
-              "new input value: ",
-              newInputValue
-            );
-            setInputValue(newInputValue);
-          }}
-          renderOption={(props, option) => (
-            <Box
-              component="li"
-              sx={{ "& > img": { mr: 2, flexShrink: 0 }, fontSize: "16px" }}
-              {...props}
-            >
-              <img
-                loading="lazy"
-                width="20"
-                src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                alt=""
+        <Suspense fallback={<CircularProgress />}>
+          <Autocomplete
+            // id="country-select"
+            id={ParentProps.id}
+            options={countries}
+            autoHighlight
+            getOptionLabel={(option) => option.label}
+            isOptionEqualToValue={(option, value) =>
+              option.value === value.value
+            }
+            // value={ParentProps.value}
+            value={transformedValue}
+            // onChange={ParentProps.onChange}
+            onChange={(event, newValue) => {
+              ParentProps.formik.setFieldValue(`${ParentProps.name}`, newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              console.log(
+                "input change event:",
+                event,
+                "new input value: ",
+                newInputValue
+              );
+              setInputValue(newInputValue);
+            }}
+            renderOption={(props, option) => (
+              <Box
+                component="li"
+                sx={{ "& > img": { mr: 2, flexShrink: 0 }, fontSize: "16px" }}
+                {...props}
+              >
+                <img
+                  loading="lazy"
+                  width="20"
+                  src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                  srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                  alt=""
+                />
+                {option.label} ({option.code}) +{option.phone}
+              </Box>
+            )}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                sx={{ fontSize: "16px" }}
+                variant="outlined"
+                id={ParentProps.id}
+                name={ParentProps.name}
+                inputProps={{
+                  ...params.inputProps,
+                  autoComplete: "new-password", // disable autocomplete and autofill
+                }}
               />
-              {option.label} ({option.code}) +{option.phone}
-            </Box>
-          )}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              sx={{ fontSize: "16px" }}
-              variant="outlined"
-              id={ParentProps.id}
-              name={ParentProps.name}
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: "new-password", // disable autocomplete and autofill
-              }}
-            />
-          )}
-        />
+            )}
+          />
+        </Suspense>
         <div style={{ marginTop: "50px" }}>{`value: ${
           ParentProps.value !== null ? `'${ParentProps.value}'` : "null"
         }`}</div>

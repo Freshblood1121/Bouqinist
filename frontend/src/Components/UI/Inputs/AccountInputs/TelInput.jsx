@@ -115,7 +115,7 @@ const theme = createTheme({
   },
 });
 
-const MulTelInput = lazy(() => import("mui-tel-input"));
+const MulTelInput = lazy(() => import("../../MuiTelInput"));
 
 const TelInput = (props) => {
   return (

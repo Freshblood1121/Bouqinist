@@ -131,21 +131,20 @@ const theme = createTheme({
 });
 
 const MultiLineInput = (props) => {
-  // const [value, setValue] = useState("");
-  const [length, setLength] = useState(0);
-  console.log(length);
+  const [length, setLength] = useState(props.value.charNumber);
 
   const handleChange = (e) => {
-    console.log(e);
     setLength(e.target.value.length);
-    props.formik.setFieldValue("description", e.target.value);
-    console.log(props.value);
+    props.formik.setFieldValue("description.text", e.target.value);
+    props.formik.setFieldValue("description.charNumber", e.target.value.length);
   };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <FormControl variant="outlined" fullWidth>
-        <FormHelperText>{props.error ? props.helperText : null}</FormHelperText>
+        <FormHelperText>
+          {props.error ? props.helperText.text : null}
+        </FormHelperText>
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -158,7 +157,7 @@ const MultiLineInput = (props) => {
           <OutlinedInput
             id={props.id}
             name={props.name}
-            value={props.value}
+            value={props.value.text}
             // onChange={props.onChange}
             onChange={handleChange}
             onBlur={props.onBlur}

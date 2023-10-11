@@ -151,11 +151,9 @@ const FileUploader = ({ ...props }) => {
     onDrop: (acceptedFiles) => {
       Promise.all(acceptedFiles.map(validateDimensions))
         .then(() => {
-          console.log(acceptedFiles);
           handleDrop(acceptedFiles, []);
         })
         .catch((errors) => {
-          console.log(errors);
           props.formik.setFieldError("images", errors);
         });
     },

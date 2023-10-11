@@ -4,7 +4,6 @@ import TelInput from "../UI/Inputs/AccountInputs/TelInput";
 import BaseInput from "../UI/Inputs/AccountInputs/BaseInput";
 import CountrySelect from "../UI/Inputs/AccountInputs/CountrySelect";
 import GenderSelect from "../UI/Inputs/AccountInputs/GenderSelect";
-// import DateInput from "../UI/Inputs/AccountInputs/DateInput";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";

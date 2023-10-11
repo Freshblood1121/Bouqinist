@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import CategorySelect from "../UI/CategorySelect";
+import React, { Suspense, lazy, useEffect } from "react";
 import ColumnButton from "../UI/CardsView/ColumnButton";
 import RowButton from "../UI/CardsView/RowButton";
-import SortSelect from "../UI/SortSelect";
 import Divider from "../Divider/Divider";
-import { Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import CategoryFilters from "./CategoryFilters/CategoryFilters";
 import "./CategoryPage.css";
 import { Outlet, useParams } from "react-router-dom";
@@ -15,6 +13,9 @@ import {
   getAllBooksData,
   getBooksDataByCategory,
 } from "../../Store/books/actions";
+
+const SortSelect = lazy(() => import("../UI/SortSelect"));
+const CategorySelect = lazy(() => import("../UI/CategorySelect"));
 
 const CategoryPage = () => {
   const dispatch = useDispatch();
@@ -54,8 +55,12 @@ const CategoryPage = () => {
         </Grid> */}
         <Grid item>
           <div className="controls__select-box">
-            <CategorySelect />
-            <SortSelect />
+            <Suspense fallback={<CircularProgress />}>
+              <CategorySelect />
+            </Suspense>
+            <Suspense fallback={<CircularProgress />}>
+              <SortSelect />
+            </Suspense>
           </div>
         </Grid>
       </Grid>

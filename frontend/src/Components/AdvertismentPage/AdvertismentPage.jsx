@@ -34,7 +34,7 @@ const BookPage = () => {
         <Grid
           className="books-item"
           container
-          marginBottom={1}
+          marginBottom={"100px"}
           justifyContent="center"
           columnGap="10%"
         >

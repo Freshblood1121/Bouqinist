@@ -19,11 +19,6 @@ const ASSET_PATH = isProduction ? "/" : "/";
 const config = {
   entry: {
     index: "./src/index.jsx",
-    advertisment: "./src/Components/AdvertismentPage/AdvertismentPage.jsx",
-    catalog: "./src/Components/CategoryPage/CategoryPage.jsx",
-    create_adv: "./src/Components/CreateAdvertisment/CreateAdvertisment.jsx",
-    account: "./src/Components/AccountPage/AccountPage.jsx",
-    sign_up: "./src/Components/SignupPage/SignupPage.jsx",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -33,36 +28,16 @@ const config = {
     publicPath: ASSET_PATH,
     clean: true,
   },
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: "all",
-  //   },
-  // },
   optimization: {
     runtimeChunk: "single",
-    // moduleIds: "hashed",
     moduleIds: "deterministic",
     splitChunks: {
-      // chunks: "all",
-      // maxInitialRequests: Infinity,
       maxSize: 200000,
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/]/, ///< put all used node_modules modules in this chunk
-          name: "vendor", ///< name of bundle
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendor",
           chunks: "all",
-          //   test: /[\\/]node_modules[\\/]/,
-          //   name(module) {
-          //     // получает имя, то есть node_modules/packageName/not/this/part.js
-          //     // или node_modules/packageName
-          //     const packageName = module.context.match(
-          //       /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-          //     )[1];
-
-          //     // имена npm-пакетов можно, не опасаясь проблем, использовать
-          //     // в URL, но некоторые серверы не любят символы наподобие @
-          //     return `npm.${packageName.replace("@", "")}`;
-          //   },
         },
       },
     },

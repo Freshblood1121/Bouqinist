@@ -1,8 +1,9 @@
-import React from "react";
-import { TextField, Typography } from "@mui/material";
+import React, { Suspense, lazy } from "react";
+import { CircularProgress, Typography } from "@mui/material";
 import "./CategoryFilters.css";
-import PeriodFilter from "../../UI/PeriodFilter/PeriodFilter";
-import PriceFilter from "../../UI/PriceFilter/PriceFilter";
+
+const PeriodFilter = lazy(() => import("../../UI/PeriodFilter/PeriodFilter"));
+const PriceFilter = lazy(() => import("../../UI/PriceFilter/PriceFilter"));
 
 const CategoryFilters = () => {
   return (
@@ -10,15 +11,17 @@ const CategoryFilters = () => {
       <div className="filters__publish-period">
         <Typography variant="subtitle2">Год издания</Typography>
         <div className="publish-period__inputs">
-          <PeriodFilter />
+          <Suspense fallback={<CircularProgress />}>
+            <PeriodFilter />
+          </Suspense>
         </div>
       </div>
       <div className="filters__price">
         <Typography variant="subtitle2">Цена, &#x20bd;</Typography>
         <div className="price__inputs">
-          {/* <TextField variant="outlined" sx={{ width: 150 }} />
-          <TextField variant="outlined" /> */}
-          <PriceFilter />
+          <Suspense fallback={<CircularProgress />}>
+            <PriceFilter />
+          </Suspense>
         </div>
       </div>
     </div>
