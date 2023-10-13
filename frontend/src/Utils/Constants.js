@@ -14,11 +14,11 @@ import { useMediaQuery } from "@mui/material";
 // };
 
 export const API_URL = {
-  BOOKS: "http://bouqinist.tw1.ru/api/v1/books",
-  BOOK: "http://bouqinist.tw1.ru/api/v1/books/show/",
-  CREATE_BOOK: "http://bouqinist.tw1.ru/api/v1/books/create",
-  CATEGORIES: "http://bouqinist.tw1.ru/api/v1/categories",
-  CATEGORY_BOOKS: "http://bouqinist.tw1.ru/api/v1/categories/has",
+  BOOKS: "http://127.0.0.1:8000/api/v1/books",
+  BOOK: "http://127.0.0.1:8000/api/v1/books/show/",
+  CREATE_BOOK: "http://127.0.0.1:8000/api/v1/books/create",
+  CATEGORIES: "http://127.0.0.1:8000/api/v1/categories",
+  CATEGORY_BOOKS: "http://127.0.0.1:8000/api/v1/categories/has",
   REGISTER: "http://bouqinist.tw1.ru:80/api/v1/register",
   LOGIN: "http://bouqinist.tw1.ru:80/api/v1/login",
   USER: "http://bouqinist.tw1.ru:80/api/v1/me",
