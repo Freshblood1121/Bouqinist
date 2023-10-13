@@ -37,6 +37,7 @@ export const categoriesReducer = (state = initialState, action) => {
       };
     }
     case DATA_ERROR: {
+      console.log("dispatching DATA_ERROR");
       return {
         ...state,
         requestStatus: {

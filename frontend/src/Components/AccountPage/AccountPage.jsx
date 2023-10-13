@@ -5,6 +5,8 @@ import {
   Grid,
   Typography,
   createTheme,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +14,9 @@ import { redirect, useNavigate } from "react-router-dom";
 import { palette } from "../../Utils/Constants";
 import { useFormik } from "formik";
 import * as yup from "yup";
+
+const BasicData = lazy(() => import("./BasicData"));
+const ChangePassword = lazy(() => import("./ChangePassword"));
 
 const AccountPage = () => {
   const isLoggedIn = useSelector((store) => store.account.isLoggedIn);
@@ -44,10 +49,8 @@ const AccountPage = () => {
     };
   };
 
-  const Tabs = lazy(() => import("@mui/material/Tabs"));
-  const Tab = lazy(() => import("@mui/material/Tab"));
-  const BasicData = lazy(() => import("./BasicData"));
-  const ChangePassword = lazy(() => import("./ChangePassword"));
+  // const Tabs = lazy(() => import("@mui/material/Tabs"));
+  // const Tab = lazy(() => import("@mui/material/Tab"));
 
   return (
     <>
@@ -106,40 +109,40 @@ const AccountPage = () => {
                   },
                 }}
               >
-                <Suspense fallback={<CircularProgress />}>
-                  <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    // variant="scrollable"
-                    // scrollButtons
-                    // allowScrollButtonsMobile
-                  >
-                    <Suspense fallback={<CircularProgress />}>
-                      <Tab
-                        disableRipple
-                        label="Основные сведения"
-                        {...sectionProps(0)}
-                        sx={{
-                          fontSize: {
-                            xs: "16px",
-                            lg: "20px",
-                          },
-                        }}
-                      />
-                      <Tab
-                        disableRipple
-                        label="Смена пароля"
-                        {...sectionProps(1)}
-                        sx={{
-                          fontSize: {
-                            xs: "16px",
-                            lg: "20px",
-                          },
-                        }}
-                      />
-                    </Suspense>
-                  </Tabs>
-                </Suspense>
+                {/* <Suspense fallback={<CircularProgress />}> */}
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  // variant="scrollable"
+                  // scrollButtons
+                  // allowScrollButtonsMobile
+                >
+                  {/* <Suspense fallback={<CircularProgress />}> */}
+                  <Tab
+                    disableRipple
+                    label="Основные сведения"
+                    {...sectionProps(0)}
+                    sx={{
+                      fontSize: {
+                        xs: "16px",
+                        lg: "20px",
+                      },
+                    }}
+                  />
+                  <Tab
+                    disableRipple
+                    label="Смена пароля"
+                    {...sectionProps(1)}
+                    sx={{
+                      fontSize: {
+                        xs: "16px",
+                        lg: "20px",
+                      },
+                    }}
+                  />
+                  {/* </Suspense> */}
+                </Tabs>
+                {/* </Suspense> */}
               </Box>
               <Suspense fallback={<CircularProgress />}>
                 <BasicData value={value} index={0} />

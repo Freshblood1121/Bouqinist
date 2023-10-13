@@ -214,8 +214,6 @@ const AuthorInput = (props) => {
     }
   };
 
-  console.log("checked: ,", checked);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

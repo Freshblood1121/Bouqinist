@@ -1,4 +1,5 @@
-import * as React from "react";
+// import * as React from "react";
+import React, { Suspense, lazy, useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ru";
@@ -78,33 +79,30 @@ const theme = createTheme({
   },
 });
 
-const DatePicker = React.lazy(() => import("@mui/x-date-pickers/DatePicker"));
+const DatePicker = lazy(() => import("./Datepicker"));
 
 export default function DateInput({ ...props }) {
-  const [value, setValue] = React.useState(dayjs(props.value));
 
-  React.useEffect(() => {
-    console.log(props.value);
-    console.log(value);
-    if (props.value === undefined) {
-      setValue(null);
+  const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    if (dayjs(props.value).isValid()) {
+      setValue(dayjs(props.value));
     }
   }, []);
 
-  const [error, setError] = React.useState(null);
-  const errorMessage = React.useMemo(() => {
+  const [error, setError] = useState(null);
+  const errorMessage = useMemo(() => {
     switch (error) {
       case "maxDate": {
         return "Выберите дату не позднее сегодняшнего дня";
       }
       case "minDate": {
-        return "Выберите дату не ранее 1920 г.";
+        return "Выберите дату не ранее 1900 г.";
       }
-
       case "invalidDate": {
         return "Указана некорректная дата";
       }
-
       default: {
         return "";
       }
@@ -129,19 +127,22 @@ export default function DateInput({ ...props }) {
             ruRU.components.MuiLocalizationProvider.defaultProps.localeText
           }
         >
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<div>Loading...</div>}>
             <DatePicker
               disableFuture
               label={props.text}
               // value={props.value}
               value={value}
-              // onError={(newError) => setError(newError)}
+              onError={(newError) => setError(newError)}
               onClose={props.formik.handleSubmit}
               onChange={(value, context) => {
+                console.log(value);
                 if (!value) {
                   props.formik.setFieldValue(`${props.name}`, "");
+                  console.log(value);
                 } else {
                   props.formik.setFieldValue(`${props.name}`, dayjs(value));
+                  console.log(value);
                   setValue(dayjs(value));
                 }
               }}
@@ -151,12 +152,12 @@ export default function DateInput({ ...props }) {
                   name: props.name,
                   id: props.id,
                   helperText: errorMessage,
-                  error: false,
+                  error: error ? true : false,
                   onBlur: props.formik.handleSubmit,
                 },
               }}
             />
-          </React.Suspense>
+          </Suspense>
         </LocalizationProvider>
       </Box>
     </ThemeProvider>

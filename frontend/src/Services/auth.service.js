@@ -75,6 +75,41 @@ class AuthService {
     return response.data;
   }
 
+  getCategoriesList() {
+    return axios
+      .get(API_URL.CATEGORIES, {
+        headers: authHeader(),
+      })
+      // .then((response) => {
+      //   return response.data;
+      // })
+      // .catch((error) => {
+      //   return error;
+      // });
+  }
+
+  // fetch(API_URL.CATEGORIES, {
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  // })
+  //   .then((response) => {
+  //     console.log(response);
+  //     if (!response.ok) {
+  //       throw new Error(`Ошибка ` + response.status);
+  //     }
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     console.log(data);
+  //     dispatch(categoriesDataSuccess(data));
+  //   })
+  //   .catch((error) => {
+  //     dispatch(categoriesDataError(error.message));
+  //     console.log(error);
+  //   });
+
   getBookById(id) {
     return axios
       .get(
@@ -131,16 +166,6 @@ class AuthService {
 
   createAdvertisment(values) {
     const user = JSON.parse(localStorage.getItem("user"));
-    // for (var pair of values.image.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
-    // const data = {
-    //   ...values,
-    //   company: values.publisher,
-    //   status: "Medium",
-    //   image: values.image,
-    //   cetegories: values.cetegories,
-    // };
     return axios
       .post(`${API_URL.CREATE_BOOK}`, values, {
         headers: {

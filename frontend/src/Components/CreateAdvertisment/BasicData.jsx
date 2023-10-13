@@ -1,22 +1,31 @@
-import { Box, Fade, Stack, Typography } from "@mui/material";
+import { Alert, Box, Fade, Snackbar, Stack, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import BaseAdInput from "../UI/Inputs/CreateAdInputs/BaseAdInput";
 import AdCategorySelect from "../UI/Inputs/CreateAdInputs/AdCategorySelect";
 import AuthorInput from "../UI/Inputs/CreateAdInputs/AuthorInput";
 import MultiLineInput from "../UI/Inputs/CreateAdInputs/MultiLineInput";
 import FileUploader from "../UI/Inputs/CreateAdInputs/FileUploader";
-import { palette } from "../../Utils/Constants";
+import { REQUEST_STATUS, palette } from "../../Utils/Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../Store/categories/actions";
+import { Modal } from "@mui/base";
+import { useNavigate } from "react-router-dom";
 
 const BasicData = (props) => {
   const categories = useSelector((store) => store.categories.categories);
+  const requestStatus = useSelector((store) => store.categories.requestStatus)
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     getCategories(dispatch);
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate("/");
+  };
 
   return (
     <>
@@ -189,6 +198,18 @@ const BasicData = (props) => {
           />
         </Box>
       </Fade>
+      {requestStatus.status == REQUEST_STATUS.FAILURE && (
+        <Snackbar open={true} autoHideDuration={6000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="error"
+            sx={{ width: "100%" }}
+            variant="filled"
+          >
+            {`${requestStatus.error}. Вы будете переведены на главную страницу`}
+          </Alert>
+        </Snackbar>
+      )}
     </>
   );
 };

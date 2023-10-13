@@ -7,12 +7,8 @@
     "test": "test",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
-<<<<<<< Updated upstream
     "build:prod": "webpack --mode=production --node-env=production --stats-error-details",
     "build:prod_stats": "webpack --mode=production --node-env=production --profile --json > stats.json",
-=======
-    "build:prod": "webpack --mode=production --node-env=production",
->>>>>>> Stashed changes
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "start": "nodemon ./server.js"

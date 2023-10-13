@@ -10,7 +10,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import React, { Suspense, useMemo, useState } from "react";
+import React, { Suspense, lazy, useMemo, useState } from "react";
 import { palette } from "../../../../Utils/Constants";
 import GolosUI from "../../../../fonts/Golos-UI_Regular.ttf";
 import GolosUiBold from "../../../../fonts/Golos-UI_Bold.ttf";

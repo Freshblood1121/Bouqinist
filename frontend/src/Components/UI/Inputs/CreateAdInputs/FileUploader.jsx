@@ -171,8 +171,6 @@ const FileUploader = ({ ...props }) => {
 
   const [files, setFiles] = useState([]);
 
-  console.log(files);
-
   function handleDrop(acceptedFiles) {
     console.log(acceptedFiles);
     setFiles(

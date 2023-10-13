@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import {
   Box,
   CssBaseline,
@@ -118,6 +118,8 @@ const theme = createTheme({
 const MulTelInput = lazy(() => import("../../MuiTelInput"));
 
 const TelInput = (props) => {
+  const [value, setValue] = useState(props.value);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -131,20 +133,21 @@ const TelInput = (props) => {
           Номер телефона
         </Typography>
         <Suspense fallback={<div>Loading...</div>}>
-          <MuiTelInput
+          <MulTelInput
             fullWidth
             autoComplete="off"
             id={props.id}
             name={props.name}
             variant="outlined"
             // defaultCountry="RU"
-            // langOfCountryName="RU"
+            langOfCountryName="RU"
             label={false}
-            value={props.value}
+            // value={props.value}
+            value={value}
             // onChange={props.onChange}
-            onChange={(event) => {
-              console.log(event);
-              props.formik.setFieldValue("phone", event);
+            onChange={(value) => {
+              props.formik.setFieldValue("phone", value);
+              setValue(value);
             }}
             onBlur={props.onBlur}
             error={props.error ? true : false}

@@ -1,3 +1,4 @@
+import authService from "../../Services/auth.service";
 import { API_URL } from "../../Utils/Constants";
 
 export const DATA_REQUEST = "CATEGORIES::DATA_REQUEST";
@@ -9,12 +10,11 @@ export const categoriesDataRequest = () => ({
   type: DATA_REQUEST,
 });
 
-export const categoriesDataSuccess = (data) => {
-  return {
-    type: DATA_SUCCESS,
-    data,
-  };
-};
+export const categoriesDataSuccess = (data) => ({
+  type: DATA_SUCCESS,
+  data,
+});
+
 export const categoriesDataError = (error) => ({
   type: DATA_ERROR,
   error,
@@ -22,27 +22,24 @@ export const categoriesDataError = (error) => ({
 
 export const getCategories = (dispatch) => {
   dispatch(categoriesDataRequest());
-  fetch(API_URL.CATEGORIES, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+  authService
+    .getCategoriesList()
     .then((response) => {
       console.log(response);
-      if (!response.ok) {
-        // Свойство "ok" полученного объекта response становится true, если HTTP-статус находится в диапазоне 200-299
-        throw new Error(`Ошибка ` + response.status);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-      dispatch(categoriesDataSuccess(data));
+      dispatch(categoriesDataSuccess(response.data));
     })
     .catch((error) => {
-      dispatch(categoriesDataError(error.message));
-      console.log(error);
+      if (error.response) {
+        dispatch(categoriesDataError(error.response.data));
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        dispatch(categoriesDataError("Не удалось получить ответ от сервера"));
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        dispatch(categoriesDataError("Возникла непредвиденная ошибка"));
+      }
     });
 };
 

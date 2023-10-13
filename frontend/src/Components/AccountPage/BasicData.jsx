@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect, useState } from "react";
 import EmailInput from "../UI/Inputs/AccountInputs/EmailInput";
 import TelInput from "../UI/Inputs/AccountInputs/TelInput";
 import BaseInput from "../UI/Inputs/AccountInputs/BaseInput";
+import DateInput from "../UI/Inputs/AccountInputs/DateInput";
 import CountrySelect from "../UI/Inputs/AccountInputs/CountrySelect";
 import GenderSelect from "../UI/Inputs/AccountInputs/GenderSelect";
 import { useFormik } from "formik";
@@ -12,7 +13,7 @@ import { REQUEST_STATUS, palette } from "../../Utils/Constants";
 import { getUserData, setUserData } from "../../Store/account/actions";
 import dayjs from "dayjs";
 
-const DateInput = lazy(() => import("../UI/Inputs/AccountInputs/DateInput"));
+// const DateInput = lazy(() => import("../UI/Inputs/AccountInputs/DateInput"));
 
 const BasicData = (props) => {
   const dispatch = useDispatch();
@@ -250,24 +251,23 @@ const BasicData = (props) => {
                     formik.touched.first_name && formik.errors.first_name
                   }
                 />
-                <Suspense fallback={<div>Loading...</div>}>
-                  <DateInput
-                    label={"Дата рождения"}
-                    id={"birthdate"}
-                    name="birthdate"
-                    {...formik.getFieldProps(`birthdate`)}
-                    formik={formik}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleSubmit}
-                    error={
-                      formik.touched.birthdate &&
-                      Boolean(formik.errors.birthdate)
-                    }
-                    helperText={
-                      formik.touched.birthdate && formik.errors.birthdate
-                    }
-                  />
-                </Suspense>
+                {/* <Suspense fallback={<div>Loading...</div>}> */}
+                <DateInput
+                  label={"Дата рождения"}
+                  id={"birthdate"}
+                  name="birthdate"
+                  {...formik.getFieldProps(`birthdate`)}
+                  formik={formik}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleSubmit}
+                  error={
+                    formik.touched.birthdate && Boolean(formik.errors.birthdate)
+                  }
+                  helperText={
+                    formik.touched.birthdate && formik.errors.birthdate
+                  }
+                />
+                {/* </Suspense> */}
               </Box>
             </Box>
             <Box>

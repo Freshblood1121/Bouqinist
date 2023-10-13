@@ -146,7 +146,6 @@ const CreateAdvertisment = () => {
         .string()
         .test("is-unknown", "Укажите автора", function (authors) {
           const unknown = this.parent.unknown;
-          console.log(unknown);
           if (unknown === false && authors === undefined) {
             return false;
           } else {
@@ -189,7 +188,6 @@ const CreateAdvertisment = () => {
           "Выберите хотя бы один способ оплаты",
           function (cash) {
             const spb = this.parent.sbp;
-            console.log(cash, this.parent.sbp);
             if (cash === false && spb === false) {
               return false;
             } else {
@@ -225,7 +223,6 @@ const CreateAdvertisment = () => {
         "Укажите хотя бы один способ связи",
         function (email) {
           const { phone } = this.parent;
-          console.log("phone: ", phone, "email: ", email);
           if (email == undefined && phone == undefined) {
             return false;
           } else {
@@ -293,7 +290,6 @@ const CreateAdvertisment = () => {
   });
 
   const handleSubmit = () => {
-    console.log("submitted! step: ", step);
     switch (step) {
       case 0:
         formikBasicData.handleSubmit();
@@ -345,7 +341,6 @@ const CreateAdvertisment = () => {
     values.append("phone", formikDelivery.values.phone);
 
     AuthService.createAdvertisment(values).then((response) => {
-      console.log(response);
       navigate("/");
     });
   };
