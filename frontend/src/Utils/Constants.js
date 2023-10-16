@@ -19,11 +19,11 @@ export const API_URL = {
   CREATE_BOOK: "http://127.0.0.1:8000/api/v1/books/create",
   CATEGORIES: "http://127.0.0.1:8000/api/v1/categories",
   CATEGORY_BOOKS: "http://127.0.0.1:8000/api/v1/categories/has",
-  REGISTER: "http://bouqinist.tw1.ru:80/api/v1/register",
-  LOGIN: "http://bouqinist.tw1.ru:80/api/v1/login",
-  USER: "http://bouqinist.tw1.ru:80/api/v1/me",
-  SET_USER_DATA: "http://bouqinist.tw1.ru:80/api/v1/me/update",
-  VERIFICATE: "http://bouqinist.tw1.ru:80/api/v1/email-verification",
+  REGISTER: "http://bouqinist.tw1.ru/api/v1/register",
+  LOGIN: "http://bouqinist.tw1.ru/api/v1/login",
+  USER: "http://bouqinist.tw1.ru/api/v1/me",
+  SET_USER_DATA: "http://bouqinist.tw1.ru/api/v1/me/update",
+  VERIFICATE: "http://bouqinist.tw1.ru/api/v1/email-verification",
 };
 
 export const REQUEST_STATUS = {
