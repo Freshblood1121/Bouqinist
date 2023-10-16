@@ -79,7 +79,7 @@ const theme = createTheme({
   },
 });
 
-const DatePicker = lazy(() => import("./Datepicker"));
+const DatePicker = lazy(() => import("../Datepicker"));
 
 export default function DateInput({ ...props }) {
 

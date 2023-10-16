@@ -6,6 +6,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ruRU } from "@mui/x-date-pickers";
 
+const DatePicker = lazy(() => import("../Datepicker"));
+
 export default function DateInput({ ...props }) {
   console.log(props);
 
@@ -30,8 +32,6 @@ export default function DateInput({ ...props }) {
       }
     }
   }, [error]);
-
-  const DatePicker = React.lazy(() => import("@mui/x-date-pickers/DatePicker"));
 
   return (
     <LocalizationProvider
