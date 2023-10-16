@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { lazy, useMemo, useState } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "dayjs/locale/ru";
@@ -11,10 +11,10 @@ const DatePicker = lazy(() => import("../Datepicker"));
 export default function DateInput({ ...props }) {
   console.log(props);
 
-  const [value, setValue] = React.useState(props.value);
+  const [value, setValue] = useState(props.value);
 
-  const [error, setError] = React.useState(null);
-  const errorMessage = React.useMemo(() => {
+  const [error, setError] = useState(null);
+  const errorMessage = useMemo(() => {
     switch (error) {
       case "maxDate": {
         return "Выберите дату не позднее сегодняшнего дня";

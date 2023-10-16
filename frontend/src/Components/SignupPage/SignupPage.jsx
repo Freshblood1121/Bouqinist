@@ -21,8 +21,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { store } from "../../Store";
 import Verification from "./Verification/Verification";
 import { register } from "../../Store/account/actions";
+// import BaseSignupInput from "../UI/Inputs/SignupInputs/BaseSignupInput";
+// import PasswordSignupInput from "../UI/Inputs/SignupInputs/PasswordSignupInput";
+// import CountryInput from "../UI/Inputs/SignupInputs/CountryInput";
+// import BaseButton from "../UI/Buttons/BaseButton";
+// import GenderSelect from "../UI/Inputs/SignupInputs/GenderSelect";
 
-const MuiTelInput = lazy(() => import("mui-tel-input"));
+const MuiTelInput = lazy(() => import("../UI/MuiTelInput"));
 const DateInput = lazy(() => import("../UI/Inputs/SignupInputs/DateInput"));
 const BaseSignupInput = lazy(() =>
   import("../UI/Inputs/SignupInputs/BaseSignupInput")
@@ -181,12 +186,14 @@ const SignupPage = () => {
               }
             />
           </Suspense>
-          <SignupNavButton
-            handleClick={handleNext}
-            text={"Далее"}
-            className={`step-forward ${step == 0 ? "visible" : "hidden"}`}
-            disabled={formik.dirty && formik.isValid ? false : true}
-          />
+          <Suspense fallback={<CircularProgress />}>
+            <SignupNavButton
+              handleClick={handleNext}
+              text={"Далее"}
+              className={`step-forward ${step == 0 ? "visible" : "hidden"}`}
+              disabled={formik.dirty && formik.isValid ? false : true}
+            />
+          </Suspense>
         </>
       );
     } else if (step === 1) {
@@ -336,12 +343,14 @@ const SignupPage = () => {
 
                     <form className="form" onSubmit={formik.handleSubmit}>
                       {CurrentPage(formik)}
-                      <BaseButton
-                        text={"Отправить заявку"}
-                        width={"200px"}
-                        type={"submit"}
-                        isLoading={loading}
-                      />
+                      <Suspense fallback={<CircularProgress />}>
+                        <BaseButton
+                          text={"Отправить заявку"}
+                          width={"200px"}
+                          type={"submit"}
+                          isLoading={loading}
+                        />
+                      </Suspense>
                     </form>
                   </>
                 )}
