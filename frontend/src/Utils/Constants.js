@@ -14,16 +14,16 @@ import { useMediaQuery } from "@mui/material";
 // };
 
 export const API_URL = {
-  BOOKS: "books",
-  BOOK: "books/show/",
-  CREATE_BOOK: "books/create",
-  CATEGORIES: "categories",
-  CATEGORY_BOOKS: "categories/has",
-  REGISTER: "register",
-  LOGIN: "login",
-  USER: "me",
-  SET_USER_DATA: "me/update",
-  VERIFICATE: "email-verification",
+  BOOKS: "api/v1/books",
+  BOOK: "api/v1/books/show/",
+  CREATE_BOOK: "api/v1/books/create",
+  CATEGORIES: "api/v1/categories",
+  CATEGORY_BOOKS: "api/v1/categories/has",
+  REGISTER: "api/v1/register",
+  LOGIN: "api/v1/login",
+  USER: "api/v1/me",
+  SET_USER_DATA: "api/v1/me/update",
+  VERIFICATE: "api/v1/email-verification",
 };
 
 export const REQUEST_STATUS = {
