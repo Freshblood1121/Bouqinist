@@ -14,16 +14,16 @@ import { useMediaQuery } from "@mui/material";
 // };
 
 export const API_URL = {
-  BOOKS: "bouqinist.tw1.ru/api/v1/books",
-  BOOK: "bouqinist.tw1.ru/api/v1/books/show/",
-  CREATE_BOOK: "bouqinist.tw1.ru/api/v1/books/create",
-  CATEGORIES: "bouqinist.tw1.ru/api/v1/categories",
-  CATEGORY_BOOKS: "bouqinist.tw1.ru/api/v1/categories/has",
-  REGISTER: "bouqinist.tw1.ru/api/v1/register",
-  LOGIN: "bouqinist.tw1.ru/api/v1/login",
-  USER: "bouqinist.tw1.ru/api/v1/me",
-  SET_USER_DATA: "bouqinist.tw1.ru/api/v1/me/update",
-  VERIFICATE: "bouqinist.tw1.ru/api/v1/email-verification",
+  BOOKS: "books",
+  BOOK: "books/show/",
+  CREATE_BOOK: "books/create",
+  CATEGORIES: "categories",
+  CATEGORY_BOOKS: "categories/has",
+  REGISTER: "register",
+  LOGIN: "login",
+  USER: "me",
+  SET_USER_DATA: "me/update",
+  VERIFICATE: "email-verification",
 };
 
 export const REQUEST_STATUS = {
