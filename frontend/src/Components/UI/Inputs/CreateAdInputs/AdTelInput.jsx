@@ -142,7 +142,6 @@ const AdTelInput = (props) => {
   const [phone, setPhone] = useState("");
 
   const handleChange = (value) => {
-    console.log(event);
     setPhone(value);
     props.formik.setFieldValue("phone", value);
   };

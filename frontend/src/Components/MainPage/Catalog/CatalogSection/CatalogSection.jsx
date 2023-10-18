@@ -8,6 +8,8 @@ import { getBooksDataByCategory } from "../../../../Store/books/actions";
 import { REQUEST_STATUS } from "../../../../Utils/Constants";
 import AuthService from "../../../../Services/auth.service";
 import pathImg from "../../../../img/path.svg";
+import { Link } from "react-router-dom";
+import { Skeleton } from "@mui/material";
 
 const CatalogSection = ({ category }) => {
   const ref = useRef();
@@ -38,7 +40,9 @@ const CatalogSection = ({ category }) => {
 
   return (
     <>
-      {requestStatus === REQUEST_STATUS.PENDING && <div>Loading</div>}
+      {requestStatus === REQUEST_STATUS.PENDING && (
+        <Skeleton variant="rounded" width={"100%"} height={480} />
+      )}
       {requestStatus === REQUEST_STATUS.SUCCESS && (
         <div className="ctl__categ">
           <div className="ctl__categ_title">
@@ -47,7 +51,7 @@ const CatalogSection = ({ category }) => {
               src={pathImg}
               alt="path"
             />
-            <span>{category.title}</span>
+            <Link to={`/categories/${category.id}`}>{category.title}</Link>
           </div>
           <div className="ctl__cards">
             <Splide

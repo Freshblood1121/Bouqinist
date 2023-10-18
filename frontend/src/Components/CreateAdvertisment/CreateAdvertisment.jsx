@@ -15,7 +15,7 @@ import {
   Container,
   CircularProgress,
 } from "@mui/material";
-import { palette } from "../../Utils/Constants";
+import { API_URL, palette } from "../../Utils/Constants";
 import SimpleButton from "../UI/Buttons/SimpleButton";
 import { Info, Wallet, Package, Check } from "@phosphor-icons/react";
 import StepConnector, {
@@ -341,7 +341,15 @@ const CreateAdvertisment = () => {
     values.append("phone", formikDelivery.values.phone);
 
     AuthService.createAdvertisment(values).then((response) => {
-      navigate("/");
+      console.log(response);
+      // if (response.status === true) {
+      //   console.log(response)
+      //   console.log(`/items/${response.info.id}`)
+      navigate(`/items/${response.info.id}`);
+      // } else {
+      //   navigate("/");
+      //   console.log(response);
+      // }
     });
   };
 

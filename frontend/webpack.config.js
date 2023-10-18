@@ -14,8 +14,6 @@ const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
-const ASSET_PATH = isProduction ? "/" : "/";
-
 const config = {
   entry: {
     index: "./src/index.jsx",
@@ -24,8 +22,7 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[contenthash].js",
     chunkFilename: "[name].js",
-    //
-    publicPath: ASSET_PATH,
+    publicPath: "/",
     clean: true,
   },
   optimization: {
@@ -51,9 +48,9 @@ const config = {
       progress: true,
     },
     static: [
-      {
-        directory: path.join(__dirname, "dist"),
-      },
+      // {
+      //   directory: path.join(__dirname, "dist"),
+      // },
       // {
       //   directory: path.join(__dirname, "/sw"),
       //   publicPath: "/sw",
@@ -79,9 +76,9 @@ const config = {
     new CompressionPlugin({
       algorithm: "gzip",
     }),
-    new webpack.DefinePlugin({
-      "process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
-    }),
+    // new webpack.DefinePlugin({
+    //   "process.env.ASSET_PATH": JSON.stringify(ASSET_PATH),
+    // }),
   ],
   devtool: "eval-source-map",
   module: {

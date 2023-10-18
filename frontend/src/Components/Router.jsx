@@ -17,6 +17,9 @@ import ScrollToTop from "./ScrollToTop";
 import SignupPage from "./SignupPage/SignupPage";
 import AccountPage from "./AccountPage/AccountPage";
 import CreateAdvertisment from "./CreateAdvertisment/CreateAdvertisment";
+import FavouritePage from "./FavouritePage/FavouritePage";
+import MyAdvertismentsPage from "./MyAdvertismentsPage/MyAdvertismentsPage";
+import OrdersPage from "./Orders/OrdersPage";
 
 const Router = createBrowserRouter([
   {
@@ -40,8 +43,20 @@ const Router = createBrowserRouter([
         element: <AccountPage />,
       },
       {
+        path: "/favourite",
+        element: <FavouritePage />,
+      },
+      {
+        path: "/advertisments",
+        element: <MyAdvertismentsPage />
+      },
+      {
         path: "/items/:itemId?",
         element: <AdvertismentPage />,
+      },
+      {
+        path: "/orders",
+        element: <OrdersPage />,
       },
       {
         path: "/categories/",

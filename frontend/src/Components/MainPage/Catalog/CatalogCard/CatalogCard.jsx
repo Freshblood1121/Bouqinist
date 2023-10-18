@@ -19,7 +19,7 @@ const CatalogCard = ({ item }) => {
       >
         <div className="ctl__card_img_wrap">
           <img
-            src={isProduction ? `/${item.image}` : `public/${item.image}`}
+            src={isProduction ? `${item.image}` : `public/${item.image}`}
             alt="cover of the book"
           />
         </div>

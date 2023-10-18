@@ -14,6 +14,7 @@ import { redirect, useNavigate } from "react-router-dom";
 import { palette } from "../../Utils/Constants";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { Link } from "react-router-dom";
 
 const BasicData = lazy(() => import("./BasicData"));
 const ChangePassword = lazy(() => import("./ChangePassword"));
@@ -75,10 +76,18 @@ const AccountPage = () => {
                 },
               }}
             >
-              <Typography variant="sidebarItem">Объявления</Typography>
-              <Typography variant="sidebarItem">Заказы</Typography>
-              <Typography variant="sidebarItem">Избранное</Typography>
-              <Typography variant="sidebarItem">Настройки</Typography>
+              <Link to={"/advertisments"}>
+                <Typography variant="sidebarItem">Объявления</Typography>
+              </Link>
+              <Link to={"/orders"}>
+                <Typography variant="sidebarItem">Заказы</Typography>
+              </Link>
+              <Link to={"/favourite"}>
+                <Typography variant="sidebarItem">Избранное</Typography>
+              </Link>
+              <Link to={"/account"}>
+                <Typography variant="sidebarItem">Настройки</Typography>
+              </Link>
             </Grid>
             <Grid
               md={7}

@@ -161,7 +161,6 @@ const theme = createTheme({
 });
 
 const PayType = (props) => {
-  console.log(props.value);
   const [cashChecked, setCashChecked] = useState(props.value.cash);
 
   const handleCashChange = (e) => {
