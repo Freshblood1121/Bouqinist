@@ -4,7 +4,7 @@ import React from "react";
 const OrdersPage = () => {
   return (
     <Container maxWidth="lg">
-      <div>OrdersPage</div>
+      <div>Раздел находится в стадии разработки</div>
     </Container>
   );
 };

@@ -2,7 +2,7 @@ import { useMediaQuery } from "@mui/material";
 
 // export const API_URL = {
 //   BOOKS: "http://bouqinist/api/v1/books",
-//   BOOK: "http://bouqinist/api/v1/books/show/",
+//   BOOK: "http://bouqinist/api/v1/books/show",
 //   CREATE_BOOK: "http://bouqinist/api/v1/books/create",
 //   CATEGORIES: "http://bouqinist/api/v1/categories",
 //   CATEGORY_BOOKS: "http://bouqinist/api/v1/categories/has",
@@ -15,7 +15,7 @@ import { useMediaQuery } from "@mui/material";
 
 export const API_URL = {
   BOOKS: "api/v1/books",
-  BOOK: "api/v1/books/show/",
+  BOOK: "api/v1/books/show",
   CREATE_BOOK: "api/v1/books/create",
   CATEGORIES: "api/v1/categories",
   CATEGORY_BOOKS: "api/v1/categories/has",

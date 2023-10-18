@@ -19,7 +19,7 @@ import AccountPage from "./AccountPage/AccountPage";
 import CreateAdvertisment from "./CreateAdvertisment/CreateAdvertisment";
 import FavouritePage from "./FavouritePage/FavouritePage";
 import MyAdvertismentsPage from "./MyAdvertismentsPage/MyAdvertismentsPage";
-import OrdersPage from "./Orders/OrdersPage";
+import OrdersPage from "./OrdersPage/OrdersPage";
 
 const Router = createBrowserRouter([
   {
@@ -48,7 +48,7 @@ const Router = createBrowserRouter([
       },
       {
         path: "/advertisments",
-        element: <MyAdvertismentsPage />
+        element: <MyAdvertismentsPage />,
       },
       {
         path: "/items/:itemId?",

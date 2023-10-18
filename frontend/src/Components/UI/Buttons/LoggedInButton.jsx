@@ -60,6 +60,15 @@ const LoggedInButton = ({ name }) => {
       case "account":
         navigate("/account");
         return;
+      case "orders":
+        navigate("/orders");
+        return;
+      case "advertisments":
+        navigate("/advertisments");
+        return;
+      case "favourite":
+        navigate("/favourite");
+        return;
       case "logout":
         dispatch(logout());
         return;
@@ -127,8 +136,8 @@ const LoggedInButton = ({ name }) => {
         <Divider />
         <MenuItem
           onClick={() => {
-            // handleClose("logout");
-            // handleItemClick("logout");
+            handleClose();
+            handleItemClick("advertisments");
           }}
         >
           {/* <ListItemIcon>
@@ -138,8 +147,8 @@ const LoggedInButton = ({ name }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            // handleClose("logout");
-            // handleItemClick("logout");
+            handleClose();
+            handleItemClick("orders");
           }}
         >
           {/* <ListItemIcon>
@@ -149,8 +158,8 @@ const LoggedInButton = ({ name }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            // handleClose("logout");
-            // handleItemClick("logout");
+            handleClose();
+            handleItemClick("favourite");
           }}
         >
           {/* <ListItemIcon>
