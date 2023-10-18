@@ -1,30 +1,30 @@
 import { useMediaQuery } from "@mui/material";
 
-export const API_URL = {
-  BOOKS: "http://bouqinist/api/v1/books",
-  BOOK: "http://bouqinist/api/v1/books/show/",
-  CREATE_BOOK: "http://bouqinist/api/v1/books/create",
-  CATEGORIES: "http://bouqinist/api/v1/categories",
-  CATEGORY_BOOKS: "http://bouqinist/api/v1/categories/has",
-  REGISTER: "http://bouqinist:80/api/v1/register",
-  LOGIN: "http://bouqinist:80/api/v1/login",
-  USER: "http://bouqinist:80/api/v1/me",
-  SET_USER_DATA: "http://bouqinist:80/api/v1/me/update",
-  VERIFICATE: "http://bouqinist:80/api/v1/email-verification",
-};
-
 // export const API_URL = {
-//   BOOKS: "api/v1/books",
-//   BOOK: "api/v1/books/show/",
-//   CREATE_BOOK: "api/v1/books/create",
-//   CATEGORIES: "api/v1/categories",
-//   CATEGORY_BOOKS: "api/v1/categories/has",
-//   REGISTER: "api/v1/register",
-//   LOGIN: "api/v1/login",
-//   USER: "api/v1/me",
-//   SET_USER_DATA: "api/v1/me/update",
-//   VERIFICATE: "api/v1/email-verification",
+//   BOOKS: "http://bouqinist/api/v1/books",
+//   BOOK: "http://bouqinist/api/v1/books/show/",
+//   CREATE_BOOK: "http://bouqinist/api/v1/books/create",
+//   CATEGORIES: "http://bouqinist/api/v1/categories",
+//   CATEGORY_BOOKS: "http://bouqinist/api/v1/categories/has",
+//   REGISTER: "http://bouqinist:80/api/v1/register",
+//   LOGIN: "http://bouqinist:80/api/v1/login",
+//   USER: "http://bouqinist:80/api/v1/me",
+//   SET_USER_DATA: "http://bouqinist:80/api/v1/me/update",
+//   VERIFICATE: "http://bouqinist:80/api/v1/email-verification",
 // };
+
+export const API_URL = {
+  BOOKS: "api/v1/books",
+  BOOK: "api/v1/books/show/",
+  CREATE_BOOK: "api/v1/books/create",
+  CATEGORIES: "api/v1/categories",
+  CATEGORY_BOOKS: "api/v1/categories/has",
+  REGISTER: "api/v1/register",
+  LOGIN: "api/v1/login",
+  USER: "api/v1/me",
+  SET_USER_DATA: "api/v1/me/update",
+  VERIFICATE: "api/v1/email-verification",
+};
 
 export const REQUEST_STATUS = {
   IDLE: 1,
